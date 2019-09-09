@@ -65,15 +65,6 @@ main() {
           isValidWebhookSignature(
               signature, body, signingSecret, timeTolerance),
           isFalse);
-      signature = getStripeSignature(
-          DateTime.now().add(Duration(minutes: 6)).millisecondsSinceEpoch ~/
-              1000,
-          body,
-          signingSecret);
-      expect(
-          isValidWebhookSignature(
-              signature, body, signingSecret, timeTolerance),
-          isFalse);
     });
 
     test('should return true if everthing is correct', () async {
@@ -86,4 +77,4 @@ main() {
 }
 
 String getStripeSignature(int timestamp, String body, String signingSecret) =>
-    '[t=$timestamp,v1=${createSignedHash(timestamp, body, signingSecret)},v0=0]';
+    '[t=$timestamp,v1=${createSignatureHash(timestamp, body, signingSecret)},v0=0]';

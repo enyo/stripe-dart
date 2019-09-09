@@ -15,7 +15,7 @@ bool isValidWebhookIpAddress(String ipAddress) {
   ].contains(ipAddress);
 }
 
-/// Returns wether the signature is correctyl signed and within the
+/// Returns wether the signature is correctly signed and within the
 /// tolerated time window.
 bool isValidWebhookSignature(String signature, String body,
     String signingSecret, Duration timeTolerance) {
@@ -26,21 +26,20 @@ bool isValidWebhookSignature(String signature, String body,
   if (match == null) return false;
   final timestamp = int.parse(match.group(1));
   var time = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-  final signatureHash = createSignedHash(timestamp, body, signingSecret);
+  final signatureHash = createSignatureHash(timestamp, body, signingSecret);
   // Test for valid signature signing.
-  final testSignature = match.group(2);
-  if (signatureHash != testSignature) {
+  final providedSignature = match.group(2);
+  if (signatureHash != providedSignature) {
     return false;
-  } else {
-    // Test for valid signature timestamp.
-    final difference = time.difference(DateTime.now()).abs();
-    final compare = difference.compareTo(timeTolerance);
-    if (compare > 0) return false;
+  }
+  // Test for valid signature timestamp.
+  if (time.add(timeTolerance).isBefore(DateTime.now())) {
+    return false;
   }
   return true;
 }
 
-String createSignedHash(int timestamp, String body, String signingSecret) {
+String createSignatureHash(int timestamp, String body, String signingSecret) {
   final message = '$timestamp.$body';
   final key = utf8.encode(signingSecret);
   final hmacSha256 = Hmac(sha256, key);
