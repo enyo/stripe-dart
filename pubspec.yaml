@@ -7,10 +7,13 @@ description: Stripe API wrapper
 homepage: https://gitlab.com/exitlive/stripe-dart
 documentation: https://gitlab.com/exitlive/stripe-dart/blob/master/README.md
 environment:
-  sdk: ^2.0.0
+  sdk: ">=2.0.0 <3.0.0"
 dependencies:
   crypto: ">=1.0.0 <3.0.0"
   http: '>=0.11.1 <0.13.0'
+  json_annotation: ^2.3.0
+  meta: ^1.1.7
+  logging: ^0.11.3
   json_serializable: ^2.0.0
 dev_dependencies:
   grinder: ^0.8.1
