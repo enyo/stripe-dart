@@ -1,3 +1,9 @@
+## 2.0.1 (2019-09-10)
+
+Fixes:
+
+  - Properly import IOClient
+
 ## 2.0.0 (2019-08-12)
 
 Features:
