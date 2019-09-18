@@ -28,3 +28,10 @@ class InvalidResourceException extends StripeException {
   @override
   String toString() => 'Invalid resource: $message.';
 }
+
+class InvalidSignatureException extends StripeException {
+  InvalidSignatureException(String message) : super(message);
+
+  @override
+  String toString() => 'Invalid signature: $message.';
+}

@@ -1,3 +1,4 @@
+import 'package:stripe/src/resources/signature.dart';
 import 'package:stripe/src/webhook.dart';
 import 'package:test/test.dart';
 
@@ -72,9 +73,26 @@ main() {
           isValidWebhookSignature(
               signature, body, signingSecret, timeTolerance),
           isTrue);
+      signature = getTestStripeSignature(timestamp, body, signingSecret);
+      expect(
+          isValidWebhookSignature(
+              signature, body, signingSecret, timeTolerance),
+          isTrue);
+      signature = getShuffledSignature(timestamp, body, signingSecret);
+      expect(
+          isValidWebhookSignature(
+              signature, body, signingSecret, timeTolerance),
+          isTrue);
     });
   });
 }
 
 String getStripeSignature(int timestamp, String body, String signingSecret) =>
+    '[t=$timestamp,v1=${createSignatureHash(timestamp, body, signingSecret)}]';
+
+String getTestStripeSignature(
+        int timestamp, String body, String signingSecret) =>
     '[t=$timestamp,v1=${createSignatureHash(timestamp, body, signingSecret)},v0=0]';
+
+String getShuffledSignature(int timestamp, String body, String signingSecret) =>
+    '[v1=${createSignatureHash(timestamp, body, signingSecret)},t=$timestamp]';

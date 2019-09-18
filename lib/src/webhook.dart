@@ -1,6 +1,7 @@
-import 'dart:convert';
+import 'package:logging/logging.dart';
+import 'package:stripe/src/resources/signature.dart';
 
-import 'package:crypto/crypto.dart';
+final log = Logger('DeleteGcloudVersions');
 
 /// Returns true if the provided ip address is of of the white listed
 /// Stripe webhook ip addresses.
@@ -19,30 +20,22 @@ bool isValidWebhookIpAddress(String ipAddress) {
 /// tolerated time window.
 bool isValidWebhookSignature(String signature, String body,
     String signingSecret, Duration timeTolerance) {
-  if (signature == null) return false;
-  final regexp = RegExp(r'\[t=(\d+),v1=(.+),v0=(.+)\]');
-  final match = regexp.firstMatch(signature);
-  // Test for signature syntax.
-  if (match == null) return false;
-  final timestamp = int.parse(match.group(1));
-  var time = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-  final signatureHash = createSignatureHash(timestamp, body, signingSecret);
+  Signature sig;
+  try {
+    sig = Signature(signature);
+  } catch (e) {
+    log.severe(e);
+    return false;
+  }
   // Test for valid signature signing.
-  final providedSignature = match.group(2);
-  if (signatureHash != providedSignature) {
+  if (!sig.isCorrectlySigned(body, signingSecret)) {
+    log.severe('The signature is not correctly signed.');
     return false;
   }
   // Test for valid signature timestamp.
-  if (time.add(timeTolerance).isBefore(DateTime.now())) {
+  if (!sig.isValidSignatureTimestamp(timeTolerance)) {
+    log.severe('The signature is not inside the time tolerance.');
     return false;
   }
   return true;
-}
-
-String createSignatureHash(int timestamp, String body, String signingSecret) {
-  final message = '$timestamp.$body';
-  final key = utf8.encode(signingSecret);
-  final hmacSha256 = Hmac(sha256, key);
-  final digest = hmacSha256.convert(utf8.encode(message));
-  return digest.toString();
 }

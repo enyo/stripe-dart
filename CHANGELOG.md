@@ -1,3 +1,9 @@
+## 2.0.2 (2019-09-18)
+
+Fixes:
+
+  - Make `v0` part of the webhook signature optional
+
 ## 2.0.1 (2019-09-10)
 
 Fixes:
