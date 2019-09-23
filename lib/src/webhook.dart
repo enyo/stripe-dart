@@ -1,7 +1,7 @@
 import 'package:logging/logging.dart';
 import 'package:stripe/src/resources/signature.dart';
 
-final log = Logger('DeleteGcloudVersions');
+final log = Logger('Stripe Webhook');
 
 /// Returns true if the provided ip address is of of the white listed
 /// Stripe webhook ip addresses.

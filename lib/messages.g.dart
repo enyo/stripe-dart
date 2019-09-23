@@ -41,6 +41,7 @@ Map<String, dynamic> _$ChargeToJson(Charge instance) => <String, dynamic>{
 PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) {
   return PaymentIntent(
       id: json['id'] as String,
+      status: json['status'] as String,
       charges: (json['charges'] as List)
           .map((e) => Charge.fromJson(e as Map<String, dynamic>))
           .toList());
@@ -49,6 +50,7 @@ PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PaymentIntentToJson(PaymentIntent instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'status': instance.status,
       'charges': instance.charges.map((e) => e.toJson()).toList()
     };
 
@@ -70,8 +72,14 @@ Map<String, dynamic> _$RefundToJson(Refund instance) =>
     <String, dynamic>{'id': instance.id};
 
 Session _$SessionFromJson(Map<String, dynamic> json) {
-  return Session(id: json['id'] as String);
+  return Session(
+      id: json['id'] as String,
+      customer: json['customer'] as String,
+      paymentIntent: json['payment_intent'] as String);
 }
 
-Map<String, dynamic> _$SessionToJson(Session instance) =>
-    <String, dynamic>{'id': instance.id};
+Map<String, dynamic> _$SessionToJson(Session instance) => <String, dynamic>{
+      'id': instance.id,
+      'customer': instance.customer,
+      'payment_intent': instance.paymentIntent
+    };

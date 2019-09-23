@@ -4,10 +4,12 @@ part of '../../messages.dart';
     nullable: false, disallowUnrecognizedKeys: false, explicitToJson: true)
 class PaymentIntent {
   final String id;
+  final String status;
   final List<Charge> charges;
 
   PaymentIntent({
     @required this.id,
+    @required this.status,
     @required this.charges,
   });
   factory PaymentIntent.fromJson(Map<String, dynamic> json) {

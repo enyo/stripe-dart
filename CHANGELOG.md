@@ -1,5 +1,12 @@
 ## 2.0.2 (2019-09-18)
 
+Features:
+
+  - Add call to retrieve a checkout session session
+  - Add call to cancel a payment intent
+ 
+## 2.0.2 (2019-09-18)
+
 Fixes:
 
   - Make `v0` part of the webhook signature optional
