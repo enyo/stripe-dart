@@ -1,3 +1,7 @@
+## 2.0.4 (2020-05-04)
+
+- Upgrade `json_serializable` & `json_annotation` dependencies to 3.x.x
+
 ## 2.0.2 (2019-09-18)
 
 Features:
