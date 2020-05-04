@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-export PATH="$PATH":"~/.pub-cache/bin"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 pub get
 pub global activate grinder
 grind test

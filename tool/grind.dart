@@ -13,13 +13,13 @@ Iterable<String> _getFormatDirectories() {
       .map((e) => e.path);
 }
 
-main(List<String> args) {
+void main(List<String> args) {
   Logger.root.onRecord.listen((record) => log(record.message));
   grind(args);
 }
 
 @Task()
-analyze() async {
+void analyze() async {
   try {
     await runAsync('dartanalyzer',
         arguments: [
@@ -79,21 +79,21 @@ analyze() async {
 }
 
 @Task()
-checkFormat() async {
-  final result = await runAsync('dartfmt',
-      arguments: ['-n']..addAll(_getFormatDirectories()));
+void checkFormat() async {
+  final result =
+      await runAsync('dartfmt', arguments: ['-n', ..._getFormatDirectories()]);
   if (result.isNotEmpty) {
     fail('Code is not properly formatted. Run `grind format`');
   }
 }
 
 @Task()
-format() =>
-    runAsync('dartfmt', arguments: ['-w']..addAll(_getFormatDirectories()));
+void format() =>
+    runAsync('dartfmt', arguments: ['-w', ..._getFormatDirectories()]);
 
 @Task()
 @Depends(checkFormat, analyze, testUnit)
-test() => true;
+void test() => true;
 
 @Task()
-testUnit() => runAsync('pub', arguments: ['run', 'test']);
+void testUnit() => runAsync('pub', arguments: ['run', 'test']);

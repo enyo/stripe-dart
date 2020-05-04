@@ -2,7 +2,7 @@ import 'package:stripe/src/resources/signature.dart';
 import 'package:stripe/src/webhook.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   group('isValidWebhookIpAddress()', () {
     test('should return false for any invalid ip address', () async {
       expect(isValidWebhookIpAddress('127.0.0.1'), isFalse);
