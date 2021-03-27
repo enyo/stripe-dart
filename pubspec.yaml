@@ -1,8 +1,5 @@
 name: stripe
 version: 3.0.0
-authors:
-  - Matias Meno <m@tias.me>
-  - Martin Flucka <martin.flucka@gmail.com>
 description: Stripe API wrapper
 homepage: https://gitlab.com/exitlive/stripe-dart
 documentation: https://gitlab.com/exitlive/stripe-dart/blob/master/README.md
