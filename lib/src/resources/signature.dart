@@ -4,12 +4,12 @@ import 'package:crypto/crypto.dart';
 import 'package:stripe/src/exceptions.dart';
 
 class Signature {
-  int timestamp;
+  late int _timestamp;
 
-  String v1;
+  late String _v1;
 
   Signature(String input) {
-    if (input == null) {
+    if (input.isEmpty) {
       throw InvalidSignatureException('Signature was null.');
     }
     input = input.replaceAll('[', '').replaceAll(']', '');
@@ -25,34 +25,34 @@ class Signature {
       switch (key) {
         case 't':
           try {
-            timestamp = int.parse(value);
+            _timestamp = int.parse(value);
           } catch (e) {
             throw InvalidSignatureException('Unable to parse timestamp: $part');
           }
           break;
         case 'v1':
-          v1 = value;
+          _v1 = value;
           break;
       }
     }
-    if (timestamp == null) {
+    if (_timestamp == 0) {
       throw InvalidSignatureException('Missing timestamp: $input');
     }
-    if (v1 == null) {
+    if (_v1.isEmpty) {
       throw InvalidSignatureException('Missing v1 signature: $input');
     }
   }
 
   bool isCorrectlySigned(String body, String signingSecret) {
     final signatureHash = _createSignatureHash(body, signingSecret);
-    return signatureHash == v1;
+    return signatureHash == _v1;
   }
 
   String _createSignatureHash(String body, String signingSecret) =>
-      createSignatureHash(timestamp, body, signingSecret);
+      createSignatureHash(_timestamp, body, signingSecret);
 
   bool isValidSignatureTimestamp(Duration timeTolerance) {
-    var time = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+    var time = DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000);
     if (time.add(timeTolerance).isBefore(DateTime.now())) {
       return false;
     }

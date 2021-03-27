@@ -13,11 +13,11 @@ void main() {
   });
 
   group('isValidWebhookSignature()', () {
-    int timestamp;
-    String body;
-    String signingSecret;
-    String signature;
-    Duration timeTolerance;
+    late int timestamp;
+    late String body;
+    late String signingSecret;
+    late String signature;
+    late Duration timeTolerance;
 
     setUp(() {
       timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
@@ -27,8 +27,8 @@ void main() {
       timeTolerance = Duration(minutes: 5);
     });
 
-    test('should return false if the signature is null', () async {
-      expect(isValidWebhookSignature(null, body, signingSecret, timeTolerance),
+    test('should return false if the signature is empty', () async {
+      expect(isValidWebhookSignature('', body, signingSecret, timeTolerance),
           isFalse);
     });
     test('should return false if the signature can not be parsed', () async {

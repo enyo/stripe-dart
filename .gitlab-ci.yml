@@ -1,4 +1,4 @@
-image: google/dart:2.3.0
+image: google/dart:2.12.0
 
 stages:
   - test

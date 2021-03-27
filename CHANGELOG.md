@@ -1,3 +1,7 @@
+## 3.0.0 (2021-03-27)
+
+- Null safety
+
 ## 2.0.4 (2020-05-04)
 
 - Upgrade `json_serializable` & `json_annotation` dependencies to 3.x.x

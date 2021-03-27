@@ -1,19 +1,18 @@
 part of '../../messages.dart';
 
-@JsonSerializable(
-    nullable: false, disallowUnrecognizedKeys: false, explicitToJson: true)
+@JsonSerializable(disallowUnrecognizedKeys: false, explicitToJson: true)
 class PaymentIntent {
   final String id;
   final String status;
   final List<Charge> charges;
 
   PaymentIntent({
-    @required this.id,
-    @required this.status,
-    @required this.charges,
+    required this.id,
+    required this.status,
+    required this.charges,
   });
   factory PaymentIntent.fromJson(Map<String, dynamic> json) {
-    if (json == null || json['object'] != 'payment_intent') {
+    if (json['object'] != 'payment_intent') {
       throw InvalidResourceException(
           'The resource object should be "payment_intent": $json ');
     }

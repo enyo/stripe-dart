@@ -1,7 +1,6 @@
 part of '../../messages.dart';
 
-@JsonSerializable(
-    nullable: false, disallowUnrecognizedKeys: false, explicitToJson: true)
+@JsonSerializable(disallowUnrecognizedKeys: false, explicitToJson: true)
 class Charge {
   final String id;
 
@@ -13,13 +12,13 @@ class Charge {
   final bool livemode;
 
   Charge({
-    @required this.id,
-    @required this.balanceTransaction,
-    @required this.paymentMethodDetails,
-    @required this.livemode,
+    required this.id,
+    required this.balanceTransaction,
+    required this.paymentMethodDetails,
+    required this.livemode,
   });
   factory Charge.fromJson(Map<String, dynamic> json) {
-    if (json == null || json['object'] != 'charge') {
+    if (json['object'] != 'charge') {
       throw InvalidResourceException(
           'The resource object should be "source": $json ');
     }
