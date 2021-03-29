@@ -1,3 +1,7 @@
+## 4.0.1 (2021-03-29)
+
+- Properly expose the new customer resource.
+
 ## 4.0.0 (2021-03-27)
 
 - Upgrade to Stripe API `2020-08-27`. Decided to do this in a separate step so

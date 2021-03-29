@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'src/client.dart';
 import 'src/resources/balance_transaction.dart';
 import 'src/resources/charge.dart';
+import 'src/resources/customer.dart';
 import 'src/resources/payment_intent.dart';
 import 'src/resources/refund.dart';
 import 'src/resources/session.dart';
@@ -29,6 +30,9 @@ class Stripe {
   /// https://stripe.com/docs/api/checkout/sessions
   final SessionResource session;
 
+  /// https://stripe.com/docs/api/customers
+  final CustomerResource customer;
+
   /// https://stripe.com/docs/api/refunds
   final RefundResource refund;
 
@@ -49,6 +53,7 @@ class Stripe {
   @visibleForTesting
   Stripe.withClient(this.client)
       : session = SessionResource(client),
+        customer = CustomerResource(client),
         refund = RefundResource(client),
         paymentIntent = PaymentIntentResource(client),
         charge = ChargeResource(client),
