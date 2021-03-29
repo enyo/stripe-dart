@@ -1,3 +1,8 @@
+## 4.1.0 (2021-03-29)
+
+- Add subscription resource and a way to list them.
+- Fix minor problems with other resources.
+
 ## 4.0.1 (2021-03-29)
 
 - Properly expose the new customer resource.

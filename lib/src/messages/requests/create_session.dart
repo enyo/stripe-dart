@@ -1,5 +1,16 @@
 part of '../../../messages.dart';
 
+enum SessionMode {
+  /// Accept one-time payments for cards, iDEAL, and more.
+  payment,
+
+  /// Save payment details to charge your customers later.
+  setup,
+
+  /// Use Stripe Billing to set up fixed-price subscriptions.
+  subscription,
+}
+
 /// https://stripe.com/docs/api/checkout/sessions/create
 @JsonSerializable()
 class CreateSessionRequest {
@@ -11,6 +22,11 @@ class CreateSessionRequest {
   /// The URL the customer will be directed to if they decide to cancel payment
   /// and return to your website.
   final String cancelUrl;
+
+  /// The mode of the Checkout Session. Required when using prices or setup
+  /// mode. Pass subscription if the Checkout Session includes at least one
+  /// recurring item.
+  final SessionMode? mode;
 
   /// A list of the types of payment methods (e.g., card) this Checkout Session
   /// can accept.
@@ -50,6 +66,7 @@ class CreateSessionRequest {
     required this.successUrl,
     required this.cancelUrl,
     required this.paymentMethodTypes,
+    this.mode,
     this.customerEmail,
     this.customer,
     this.lineItems,
@@ -62,20 +79,19 @@ class CreateSessionRequest {
 
 @JsonSerializable()
 class LineItem {
-  final int? amount;
-  final String? currency;
   final List<String>? images;
   final int? quantity;
-  final String? name;
   final String? description;
 
+  /// The ID of the Price or Plan object. One of price, price_data or amount is
+  /// required.
+  final String? price;
+
   LineItem({
-    this.amount,
-    this.currency,
     this.images,
     this.quantity,
-    this.name,
     this.description,
+    this.price,
   });
 
   factory LineItem.fromJson(Map<String, dynamic> json) =>

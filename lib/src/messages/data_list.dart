@@ -3,24 +3,24 @@ part of '../../messages.dart';
 enum _SubListObject { list }
 
 @JsonSerializable()
-class SubList<T> {
+class DataList<T> {
   final _SubListObject object;
 
   final List<T> data;
   final bool hasMore;
   final String url;
 
-  SubList({
+  DataList({
     required this.object,
     required this.data,
     required this.hasMore,
     required this.url,
   });
 
-  factory SubList.fromJson(
+  factory DataList.fromJson(
           Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
-      _$SubListFromJson<T>(json, fromJsonT);
+      _$DataListFromJson<T>(json, fromJsonT);
 
   Map<String, dynamic> toJson(Object Function(T value) toJsonT) =>
-      _$SubListToJson(this, toJsonT);
+      _$DataListToJson(this, toJsonT);
 }

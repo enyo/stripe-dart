@@ -23,15 +23,15 @@ class Session {
   final String object;
   final String id;
   final String? customer;
-  final String paymentIntent;
+  final String? paymentIntent;
   final List<PaymentMethodType> paymentMethodTypes;
 
   Session({
     required this.object,
     required this.id,
-    this.customer,
-    required this.paymentIntent,
     required this.paymentMethodTypes,
+    this.customer,
+    this.paymentIntent,
   });
 
   factory Session.fromJson(Map<String, dynamic> json) =>

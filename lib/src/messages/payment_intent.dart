@@ -9,7 +9,7 @@ class PaymentIntent {
 
   final String id;
   final String status;
-  final SubList<Charge> charges;
+  final DataList<Charge> charges;
 
   PaymentIntent({
     required this.object,

@@ -28,9 +28,7 @@ void main() {
           customer: 'cus_JBeWftkPvAhbsN',
           lineItems: [
             LineItem(
-              name: 'Test',
-              amount: 1000,
-              currency: 'USD',
+              price: 'price_2234234',
               quantity: 1,
               images: ['http://imagefoobar'],
             )
