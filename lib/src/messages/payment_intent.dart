@@ -1,27 +1,24 @@
 part of '../../messages.dart';
 
-@JsonSerializable(disallowUnrecognizedKeys: false, explicitToJson: true)
+enum _PaymentIntentObject { payment_intent }
+
+/// https://stripe.com/docs/api/payment_intents/object
+@JsonSerializable()
 class PaymentIntent {
+  final _PaymentIntentObject object;
+
   final String id;
   final String status;
-  final List<Charge> charges;
+  final SubList<Charge> charges;
 
   PaymentIntent({
+    required this.object,
     required this.id,
     required this.status,
     required this.charges,
   });
-  factory PaymentIntent.fromJson(Map<String, dynamic> json) {
-    if (json['object'] != 'payment_intent') {
-      throw InvalidResourceException(
-          'The resource object should be "payment_intent": $json ');
-    }
+  factory PaymentIntent.fromJson(Map<String, dynamic> json) =>
+      _$PaymentIntentFromJson(json);
 
-    /// Ugly workaround to handle Stripe list objects.
-    json['charges'] = json['charges']['data'];
-    return _$PaymentIntentFromJson(json);
-  }
   Map<String, dynamic> toJson() => _$PaymentIntentToJson(this);
-
-  String getFirstChargeId() => charges.first.id;
 }

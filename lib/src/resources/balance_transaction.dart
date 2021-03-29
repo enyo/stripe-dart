@@ -9,14 +9,7 @@ class BalanceTransactionResource {
   BalanceTransactionResource(this._client);
 
   Future<BalanceTransaction> retrieve(String balanceTransactionId) async {
-    final map =
-        await _client.get(['balance_transactions', balanceTransactionId]);
-
-    return BalanceTransaction(
-      id: balanceTransactionId,
-      amount: map['amount'] as int,
-      net: map['net'] as int,
-      currency: map['currency'] as String,
-    );
+    final map = await _client.get('balance_transactions/$balanceTransactionId');
+    return BalanceTransaction.fromJson(map);
   }
 }

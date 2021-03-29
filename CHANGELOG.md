@@ -1,3 +1,16 @@
+## 4.0.0 (2021-03-27)
+
+- Upgrade to Stripe API `2020-08-27`. Decided to do this in a separate step so
+  people are not force to upgrade API if they want null safety.
+- Add the customer resource.
+
+### Breaking Changes
+
+- Change the way sessions are created (now an object is passed instead of
+  individual arguments).
+- Change the way refunds are created (now an object is passed instead of
+  individual arguments).
+
 ## 3.0.0 (2021-03-27)
 
 - Null safety

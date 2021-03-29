@@ -1,4 +1,4 @@
-import 'package:stripe/src/resources/signature.dart';
+import 'package:stripe/src/signature.dart';
 import 'package:stripe/src/webhook.dart';
 import 'package:test/test.dart';
 

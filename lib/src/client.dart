@@ -1,87 +1,101 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:http/http.dart';
-import 'package:http/io_client.dart';
+import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:stripe/src/exceptions.dart';
 
-class Client {
-  final String _host;
-  final String _version;
-  final String _apiKey;
+const _defaultUrl = 'https://api.stripe.com/v1/';
+const _defaultVersion = '2020-08-27';
 
-  Client(this._host, this._version, this._apiKey);
+/// The http client implementation that will make requests to the stripe API.
+///
+/// Internally this uses a [Dio] http client.
+class Client {
+  final String version;
+  final String apiKey;
+
+  /// Creates a [Dio] client that will make requests to [baseUrl].
+  factory Client({
+    required String apiKey,
+    String baseUrl = _defaultUrl,
+    String version = _defaultVersion,
+  }) =>
+      Client.withDio(Dio(), baseUrl: baseUrl, version: version, apiKey: apiKey);
 
   @visibleForTesting
-  Client.withIOClient(
-    this._host,
-    this._version,
-    this._apiKey,
-    this._ioClientCache,
-  );
+  Client.withDio(
+    this.dio, {
+    required this.apiKey,
+    String baseUrl = _defaultUrl,
+    this.version = _defaultVersion,
+  }) {
+    dio.transformer = FormDataTransformer();
+    dio.options
+      ..baseUrl = baseUrl
+      ..responseType = ResponseType.json
+      ..contentType = 'application/x-www-form-urlencoded'
+      ..headers = {
+        'Authorization': 'Basic ${base64Encode(utf8.encode('$apiKey:'))}',
+        'Stripe-Version': version,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      };
+  }
 
-  IOClient? _ioClientCache;
-
-  IOClient get _ioClient => _ioClientCache ??= IOClient();
+  /// The actual [Dio] instance that makes the request. You shouldn't need to
+  /// access this.
+  @visibleForTesting
+  final Dio dio;
 
   /// Makes a post request to the Stripe API
   Future<Map<String, dynamic>> post(
-    final List<String> pathSegements, {
+    final String path, {
     final Map<String, dynamic>? data,
     final String? idempotencyKey,
   }) async {
-    final response = await _ioClient.post(
-      createUri(pathSegements),
-      body: data,
-      headers: createHeader(idempotencyKey: idempotencyKey),
-    );
-    return processResponse(response);
+    try {
+      final response = await dio.post<Map<String, dynamic>>(path,
+          data: data,
+          options: _createRequestOptions(idempotencyKey: idempotencyKey));
+      return processResponse(response);
+    } on DioError catch (e) {
+      var message = e.message;
+      if (e.response?.data != null) {
+        message += '${e.response!.data}';
+      }
+      throw InvalidRequestException(message);
+    }
   }
 
   /// Makes a get request to the Stripe API
   Future<Map<String, dynamic>> get(
-    final List<String> pathSegements, {
+    final String path, {
     String? idempotencyKey,
   }) async {
-    final response = await _ioClient.get(
-      createUri(pathSegements),
-      headers: createHeader(idempotencyKey: idempotencyKey),
+    final response = await dio.get<Map<String, dynamic>>(
+      path,
+      options: _createRequestOptions(idempotencyKey: idempotencyKey),
     );
     return processResponse(response);
   }
 
-  Uri createUri(List<String> pathSegements) {
-    pathSegements.insert(0, 'v1');
-    final uri = Uri(
-        scheme: 'https',
-        host: _host,
-        pathSegments: pathSegements,
-        userInfo: '$_apiKey:');
-    return uri;
-  }
+  Options? _createRequestOptions({String? idempotencyKey}) =>
+      idempotencyKey == null
+          ? null
+          : Options(headers: {'Idempotency-Key': idempotencyKey});
 
-  Map<String, String> createHeader({String? idempotencyKey}) => {
-        'Stripe-Version': _version,
-        'Content-Type': 'application/x-www-form-urlencoded',
-        if (idempotencyKey != null) 'Idempotency-Key': idempotencyKey,
-      };
-
-  Map<String, dynamic> processResponse(Response response) {
+  Map<String, dynamic> processResponse(
+      Response<Map<String, dynamic>> response) {
     final responseStatusCode = response.statusCode;
 
-    Map<String, dynamic>? map;
-    try {
-      map = jsonDecode(response.body) as Map<String, dynamic>;
-    } catch (e) {
-      // Throwing later.
-    }
+    final data = response.data;
+
     if (responseStatusCode != 200) {
-      if (map == null || map['error'] == null) {
+      if (data == null || data['error'] == null) {
         throw InvalidRequestException(
             'The status code returned was $responseStatusCode but no error was provided.');
       }
-      final error = map['error'] as Map;
+      final error = data['error'] as Map;
       switch (error['type'].toString()) {
         case 'invalid_request_error':
           throw InvalidRequestException(error['message'].toString());
@@ -90,10 +104,42 @@ class Client {
               'The status code returned was $responseStatusCode but the error type is unknown.');
       }
     }
-    if (map == null) {
+    if (data == null) {
       throw InvalidRequestException(
-          'The JSON returned was unparsable (${response.body}).');
+          'The JSON returned was unparsable (${response.data}).');
     }
-    return map;
+    return data;
+  }
+}
+
+/// This converter is usd by Dio to convert [List] objects to [Map] so they
+/// are encoded properly for Stripe.
+///
+/// Stripe expects array to be submited like this: `some_field[0]=value` and not
+/// `some_field=[value]`.
+class FormDataTransformer extends DefaultTransformer {
+  void fixMap(Map object) {
+    if (object is Map) {
+      for (final key in object.keys) {
+        var value = object[key];
+        if (value is List) {
+          object[key] = Map.fromIterables(
+              List.generate(value.length, (index) => '$index'), value);
+        }
+
+        var newValue = object[key];
+        if (newValue is Map) {
+          fixMap(newValue);
+        }
+      }
+    }
+  }
+
+  @override
+  Future<String> transformRequest(RequestOptions options) async {
+    if (options.data is Map) {
+      fixMap(options.data);
+    }
+    return super.transformRequest(options);
   }
 }
