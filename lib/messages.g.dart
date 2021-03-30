@@ -457,8 +457,8 @@ Map<String, dynamic> _$ListPricesRequestToJson(ListPricesRequest instance) {
   return val;
 }
 
-Session _$SessionFromJson(Map<String, dynamic> json) {
-  return Session(
+CheckoutSession _$CheckoutSessionFromJson(Map<String, dynamic> json) {
+  return CheckoutSession(
     object: json['object'] as String,
     id: json['id'] as String,
     paymentMethodTypes: (json['payment_method_types'] as List<dynamic>)
@@ -469,7 +469,7 @@ Session _$SessionFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$SessionToJson(Session instance) {
+Map<String, dynamic> _$CheckoutSessionToJson(CheckoutSession instance) {
   final val = <String, dynamic>{
     'object': instance.object,
     'id': instance.id,

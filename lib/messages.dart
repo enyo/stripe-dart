@@ -13,7 +13,7 @@ part 'src/messages/requests/create_session.dart';
 part 'src/messages/requests/list_subscriptions.dart';
 part 'src/messages/requests/list_products.dart';
 part 'src/messages/requests/list_prices.dart';
-part 'src/messages/session.dart';
+part 'src/messages/checkout_session.dart';
 part 'src/messages/data_list.dart';
 part 'src/messages/product.dart';
 part 'src/messages/subscription.dart';

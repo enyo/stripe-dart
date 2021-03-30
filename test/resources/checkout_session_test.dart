@@ -4,19 +4,19 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:stripe/messages.dart';
 import 'package:stripe/src/client.dart';
-import 'package:stripe/src/resources/session.dart';
+import 'package:stripe/src/resources/checkout_session.dart';
 import 'package:test/test.dart';
 
 void main() {
   late Client client;
-  late SessionResource sessionResource;
+  late CheckoutSessionResource checkoutSessionResource;
   setUp(() {
     // We set the baseUrl to something unreachable, because we define
     // interceptors in the tests.
     client = Client(apiKey: 'sk_foobar', baseUrl: 'http://void/');
-    sessionResource = SessionResource(client);
+    checkoutSessionResource = CheckoutSessionResource(client);
   });
-  group('SessionResource', () {
+  group('CheckoutSessionResource', () {
     test('properly decodes all values', () async {
       final request = CreateSessionRequest(
           successUrl: 'https://success',
@@ -50,7 +50,7 @@ void main() {
         },
       ));
 
-      final response = await sessionResource.create(request);
+      final response = await checkoutSessionResource.create(request);
 
       expect(response.id,
           'cs_test_TkmJFX7eEMan6f0W3q5n21sRgRraVzKf0BPTTmb0kn9yPBT9lr0ZJBVy');
