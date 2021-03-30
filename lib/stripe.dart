@@ -5,12 +5,13 @@ import 'package:meta/meta.dart';
 import 'src/client.dart';
 import 'src/resources/balance_transaction.dart';
 import 'src/resources/charge.dart';
+import 'src/resources/checkout_session.dart';
 import 'src/resources/customer.dart';
 import 'src/resources/payment_intent.dart';
-import 'src/resources/refund.dart';
-import 'src/resources/checkout_session.dart';
-import 'src/resources/product.dart';
+import 'src/resources/portal_session.dart';
 import 'src/resources/price.dart';
+import 'src/resources/product.dart';
+import 'src/resources/refund.dart';
 import 'src/resources/subscription.dart';
 
 export 'messages.dart';
@@ -32,6 +33,9 @@ class Stripe {
 
   /// https://stripe.com/docs/api/checkout/sessions
   final CheckoutSessionResource checkoutSession;
+
+  /// https://stripe.com/docs/api/billing_portal/sessions
+  final PortalSessionResource portalSession;
 
   /// https://stripe.com/docs/api/customers
   final CustomerResource customer;
@@ -65,6 +69,7 @@ class Stripe {
   @visibleForTesting
   Stripe.withClient(this.client)
       : checkoutSession = CheckoutSessionResource(client),
+        portalSession = PortalSessionResource(client),
         customer = CustomerResource(client),
         refund = RefundResource(client),
         paymentIntent = PaymentIntentResource(client),

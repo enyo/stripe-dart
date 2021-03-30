@@ -279,8 +279,9 @@ Map<String, dynamic> _$CreateRefundRequestToJson(CreateRefundRequest instance) {
   return val;
 }
 
-CreateSessionRequest _$CreateSessionRequestFromJson(Map<String, dynamic> json) {
-  return CreateSessionRequest(
+CreateCheckoutSessionRequest _$CreateCheckoutSessionRequestFromJson(
+    Map<String, dynamic> json) {
+  return CreateCheckoutSessionRequest(
     successUrl: json['success_url'] as String,
     cancelUrl: json['cancel_url'] as String,
     paymentMethodTypes: (json['payment_method_types'] as List<dynamic>)
@@ -295,8 +296,8 @@ CreateSessionRequest _$CreateSessionRequestFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$CreateSessionRequestToJson(
-    CreateSessionRequest instance) {
+Map<String, dynamic> _$CreateCheckoutSessionRequestToJson(
+    CreateCheckoutSessionRequest instance) {
   final val = <String, dynamic>{
     'success_url': instance.successUrl,
     'cancel_url': instance.cancelUrl,
@@ -375,6 +376,30 @@ Map<String, dynamic> _$LineItemToJson(LineItem instance) {
   writeNotNull('quantity', instance.quantity);
   writeNotNull('description', instance.description);
   writeNotNull('price', instance.price);
+  return val;
+}
+
+CreatePortalSessionRequest _$CreatePortalSessionRequestFromJson(
+    Map<String, dynamic> json) {
+  return CreatePortalSessionRequest(
+    customer: json['customer'] as String,
+    returnUrl: json['return_url'] as String?,
+  );
+}
+
+Map<String, dynamic> _$CreatePortalSessionRequestToJson(
+    CreatePortalSessionRequest instance) {
+  final val = <String, dynamic>{
+    'customer': instance.customer,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('return_url', instance.returnUrl);
   return val;
 }
 
@@ -488,6 +513,25 @@ Map<String, dynamic> _$CheckoutSessionToJson(CheckoutSession instance) {
       .toList();
   return val;
 }
+
+PortalSession _$PortalSessionFromJson(Map<String, dynamic> json) {
+  return PortalSession(
+    object: json['object'] as String,
+    id: json['id'] as String,
+    customer: json['customer'] as String,
+    liveMode: json['live_mode'] as bool,
+    url: json['url'] as String,
+  );
+}
+
+Map<String, dynamic> _$PortalSessionToJson(PortalSession instance) =>
+    <String, dynamic>{
+      'object': instance.object,
+      'id': instance.id,
+      'customer': instance.customer,
+      'live_mode': instance.liveMode,
+      'url': instance.url,
+    };
 
 DataList<T> _$DataListFromJson<T>(
   Map<String, dynamic> json,

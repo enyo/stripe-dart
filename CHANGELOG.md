@@ -1,3 +1,8 @@
+## 4.3.0 (2021-03-30)
+
+- Rename session to checkoutSession
+- Add portalSession
+
 ## 4.2.0 (2021-03-30)
 
 - Add prices and products resources

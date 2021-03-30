@@ -9,7 +9,7 @@ class CheckoutSessionResource {
   CheckoutSessionResource(this._client);
 
   /// Creates a Stripe Checkout Session.
-  Future<CheckoutSession> create(CreateSessionRequest request) async {
+  Future<CheckoutSession> create(CreateCheckoutSessionRequest request) async {
     final response =
         await _client.post('checkout/sessions', data: request.toJson());
     return CheckoutSession.fromJson(response);

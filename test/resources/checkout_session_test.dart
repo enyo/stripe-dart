@@ -18,7 +18,7 @@ void main() {
   });
   group('CheckoutSessionResource', () {
     test('properly decodes all values', () async {
-      final request = CreateSessionRequest(
+      final request = CreateCheckoutSessionRequest(
           successUrl: 'https://success',
           cancelUrl: 'https://cancel',
           paymentMethodTypes: [

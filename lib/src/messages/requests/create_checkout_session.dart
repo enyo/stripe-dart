@@ -13,7 +13,7 @@ enum SessionMode {
 
 /// https://stripe.com/docs/api/checkout/sessions/create
 @JsonSerializable()
-class CreateSessionRequest {
+class CreateCheckoutSessionRequest {
   /// The URL to which Stripe should send customers when payment or setup is
   /// complete. If you’d like access to the Checkout Session for the successful
   /// payment, read more about it in the guide on fulfilling orders.
@@ -62,7 +62,7 @@ class CreateSessionRequest {
   /// consolidate line items if there are more than a few dozen.
   final List<LineItem>? lineItems;
 
-  CreateSessionRequest({
+  CreateCheckoutSessionRequest({
     required this.successUrl,
     required this.cancelUrl,
     required this.paymentMethodTypes,
@@ -72,9 +72,9 @@ class CreateSessionRequest {
     this.lineItems,
   });
 
-  factory CreateSessionRequest.fromJson(Map<String, dynamic> json) =>
-      _$CreateSessionRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$CreateSessionRequestToJson(this);
+  factory CreateCheckoutSessionRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateCheckoutSessionRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$CreateCheckoutSessionRequestToJson(this);
 }
 
 @JsonSerializable()
