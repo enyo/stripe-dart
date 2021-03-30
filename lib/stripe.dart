@@ -9,6 +9,8 @@ import 'src/resources/customer.dart';
 import 'src/resources/payment_intent.dart';
 import 'src/resources/refund.dart';
 import 'src/resources/session.dart';
+import 'src/resources/product.dart';
+import 'src/resources/price.dart';
 import 'src/resources/subscription.dart';
 
 export 'messages.dart';
@@ -40,6 +42,12 @@ class Stripe {
   /// https://stripe.com/docs/api/payment_intents
   final PaymentIntentResource paymentIntent;
 
+  /// https://stripe.com/docs/api/prices
+  final PriceResource price;
+
+  /// https://stripe.com/docs/api/products
+  final ProductResource product;
+
   /// https://stripe.com/docs/api/charges
   final ChargeResource charge;
 
@@ -60,6 +68,8 @@ class Stripe {
         customer = CustomerResource(client),
         refund = RefundResource(client),
         paymentIntent = PaymentIntentResource(client),
+        price = PriceResource(client),
+        product = ProductResource(client),
         subscription = SubscriptionResource(client),
         charge = ChargeResource(client),
         balanceTransaction = BalanceTransactionResource(client);

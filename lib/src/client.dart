@@ -71,9 +71,11 @@ class Client {
   Future<Map<String, dynamic>> get(
     final String path, {
     String? idempotencyKey,
+    Map<String, dynamic>? queryParameters,
   }) async {
     final response = await dio.get<Map<String, dynamic>>(
       path,
+      queryParameters: queryParameters,
       options: _createRequestOptions(idempotencyKey: idempotencyKey),
     );
     return processResponse(response);

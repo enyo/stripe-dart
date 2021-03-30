@@ -1,3 +1,7 @@
+## 4.2.0 (2021-03-30)
+
+- Add prices and products resources
+
 ## 4.1.0 (2021-03-29)
 
 - Add subscription resource and a way to list them.

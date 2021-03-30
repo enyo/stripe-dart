@@ -18,14 +18,16 @@ void main() {
   });
   group('SubscriptionResource', () {
     test('properly decodes all values', () async {
-      final request = ListSubscriptionRequest(
+      final request = ListSubscriptionsRequest(
         customer: 'foobar',
         status: SubscriptionStatus.all,
       );
 
       client.dio.interceptors.add(InterceptorsWrapper(
         onRequest: (options, handler) {
-          expect(options.data, request.toJson());
+          expect(options.method, 'GET');
+          expect(options.data, null);
+          expect(options.queryParameters, request.toJson());
           handler.resolve(
             Response(
               requestOptions: options,

@@ -378,17 +378,17 @@ Map<String, dynamic> _$LineItemToJson(LineItem instance) {
   return val;
 }
 
-ListSubscriptionRequest _$ListSubscriptionRequestFromJson(
+ListSubscriptionsRequest _$ListSubscriptionsRequestFromJson(
     Map<String, dynamic> json) {
-  return ListSubscriptionRequest(
+  return ListSubscriptionsRequest(
     customer: json['customer'] as String?,
     price: json['price'] as String?,
     status: _$enumDecodeNullable(_$SubscriptionStatusEnumMap, json['status']),
   );
 }
 
-Map<String, dynamic> _$ListSubscriptionRequestToJson(
-    ListSubscriptionRequest instance) {
+Map<String, dynamic> _$ListSubscriptionsRequestToJson(
+    ListSubscriptionsRequest instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -414,6 +414,48 @@ const _$SubscriptionStatusEnumMap = {
   SubscriptionStatus.all: 'all',
   SubscriptionStatus.ended: 'ended',
 };
+
+ListProductsRequest _$ListProductsRequestFromJson(Map<String, dynamic> json) {
+  return ListProductsRequest(
+    active: json['active'] as bool?,
+  );
+}
+
+Map<String, dynamic> _$ListProductsRequestToJson(ListProductsRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('active', instance.active);
+  return val;
+}
+
+ListPricesRequest _$ListPricesRequestFromJson(Map<String, dynamic> json) {
+  return ListPricesRequest(
+    active: json['active'] as bool?,
+    currency: json['currency'] as String?,
+    product: json['product'] as String?,
+  );
+}
+
+Map<String, dynamic> _$ListPricesRequestToJson(ListPricesRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('active', instance.active);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('product', instance.product);
+  return val;
+}
 
 Session _$SessionFromJson(Map<String, dynamic> json) {
   return Session(
@@ -472,6 +514,40 @@ Map<String, dynamic> _$DataListToJson<T>(
 
 const _$_SubListObjectEnumMap = {
   _SubListObject.list: 'list',
+};
+
+Product _$ProductFromJson(Map<String, dynamic> json) {
+  return Product(
+    object: _$enumDecode(_$_ProductObjectEnumMap, json['object']),
+    id: json['id'] as String,
+    active: json['active'] as bool,
+    description: json['description'] as String?,
+    metadata: json['metadata'] as Map<String, dynamic>?,
+    name: json['name'] as String,
+  );
+}
+
+Map<String, dynamic> _$ProductToJson(Product instance) {
+  final val = <String, dynamic>{
+    'object': _$_ProductObjectEnumMap[instance.object],
+    'id': instance.id,
+    'active': instance.active,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('metadata', instance.metadata);
+  val['name'] = instance.name;
+  return val;
+}
+
+const _$_ProductObjectEnumMap = {
+  _ProductObject.product: 'product',
 };
 
 Subscription _$SubscriptionFromJson(Map<String, dynamic> json) {

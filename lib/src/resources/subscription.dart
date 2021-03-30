@@ -13,8 +13,10 @@ class SubscriptionResource {
     return Subscription.fromJson(response);
   }
 
-  Future<DataList<Subscription>> list(ListSubscriptionRequest request) async {
-    final map = await _client.post('subscriptions', data: request.toJson());
+  Future<DataList<Subscription>> list(
+      [ListSubscriptionsRequest? request]) async {
+    final map =
+        await _client.get('subscriptions', queryParameters: request?.toJson());
     return DataList<Subscription>.fromJson(
         map, (value) => Subscription.fromJson(value as Map<String, dynamic>));
   }
