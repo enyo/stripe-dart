@@ -30,6 +30,15 @@ class Subscription {
   /// ID of the customer who owns the subscription.
   final String customer;
 
+  /// Start of the current period that the subscription has been invoiced for.
+  @TimestampConverter()
+  final DateTime currentPeriodStart;
+
+  /// End of the current period that the subscription has been invoiced for. At
+  /// the end of this period, a new invoice will be created.
+  @TimestampConverter()
+  final DateTime currentPeriodEnd;
+
   /// Possible values are incomplete, incomplete_expired, trialing, active,
   /// past_due, canceled, or unpaid.
   ///
@@ -67,6 +76,8 @@ class Subscription {
     required this.customer,
     required this.status,
     required this.items,
+    required this.currentPeriodStart,
+    required this.currentPeriodEnd,
   });
   factory Subscription.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionFromJson(json);

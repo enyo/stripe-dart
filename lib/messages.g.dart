@@ -603,20 +603,37 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) {
     status: _$enumDecode(_$SubscriptionStatusEnumMap, json['status']),
     items: DataList.fromJson(json['items'] as Map<String, dynamic>,
         (value) => SubscriptionItem.fromJson(value as Map<String, dynamic>)),
+    currentPeriodStart: const TimestampConverter()
+        .fromJson(json['current_period_start'] as int),
+    currentPeriodEnd:
+        const TimestampConverter().fromJson(json['current_period_end'] as int),
   );
 }
 
-Map<String, dynamic> _$SubscriptionToJson(Subscription instance) =>
-    <String, dynamic>{
-      'object': _$_SubscriptionObjectEnumMap[instance.object],
-      'id': instance.id,
-      'created': instance.created,
-      'customer': instance.customer,
-      'status': _$SubscriptionStatusEnumMap[instance.status],
-      'items': instance.items.toJson(
-        (value) => value.toJson(),
-      ),
-    };
+Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
+  final val = <String, dynamic>{
+    'object': _$_SubscriptionObjectEnumMap[instance.object],
+    'id': instance.id,
+    'created': instance.created,
+    'customer': instance.customer,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('current_period_start',
+      const TimestampConverter().toJson(instance.currentPeriodStart));
+  writeNotNull('current_period_end',
+      const TimestampConverter().toJson(instance.currentPeriodEnd));
+  val['status'] = _$SubscriptionStatusEnumMap[instance.status];
+  val['items'] = instance.items.toJson(
+    (value) => value.toJson(),
+  );
+  return val;
+}
 
 const _$_SubscriptionObjectEnumMap = {
   _SubscriptionObject.subscription: 'subscription',

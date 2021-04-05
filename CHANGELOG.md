@@ -1,3 +1,7 @@
+## 4.4.0 (2021-03-30)
+
+- Add subscription `currentPeriodStart` and `currentPeriodEnd`.
+
 ## 4.3.0 (2021-03-30)
 
 - Rename session to checkoutSession

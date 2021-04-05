@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:stripe/src/messages/converters.dart';
 
 part 'messages.g.dart';
 part 'src/messages/balance_transaction.dart';
