@@ -355,7 +355,7 @@ PortalSession _$PortalSessionFromJson(Map<String, dynamic> json) {
     object: json['object'] as String,
     id: json['id'] as String,
     customer: json['customer'] as String,
-    liveMode: json['live_mode'] as bool,
+    livemode: json['livemode'] as bool,
     url: json['url'] as String,
   );
 }
@@ -365,7 +365,7 @@ Map<String, dynamic> _$PortalSessionToJson(PortalSession instance) =>
       'object': instance.object,
       'id': instance.id,
       'customer': instance.customer,
-      'live_mode': instance.liveMode,
+      'livemode': instance.livemode,
       'url': instance.url,
     };
 

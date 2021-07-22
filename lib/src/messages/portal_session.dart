@@ -12,7 +12,7 @@ class PortalSession {
 
   /// Has the value true if the object exists in live mode or the value false if
   /// the object exists in test mode.
-  final bool liveMode;
+  final bool livemode;
 
   /// The short-lived URL of the session that gives customers access to the customer portal.
   final String url;
@@ -21,7 +21,7 @@ class PortalSession {
     required this.object,
     required this.id,
     required this.customer,
-    required this.liveMode,
+    required this.livemode,
     required this.url,
   });
 

@@ -1,3 +1,7 @@
+## 4.4.1 (2021-07-22)
+
+- Fix `livemode` attribute of PortalSession.
+
 ## 4.4.0 (2021-03-30)
 
 - Add event message.
