@@ -1,3 +1,7 @@
+## 4.5.0 (2021-09-11)
+
+- Add additional resources, notably in relation to `CheckoutSession`.
+
 ## 4.4.1 (2021-07-22)
 
 - Fix `livemode` attribute of PortalSession.

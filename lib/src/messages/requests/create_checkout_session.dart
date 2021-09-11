@@ -11,6 +11,14 @@ enum SessionMode {
   subscription,
 }
 
+enum BillingAddressCollection {
+  /// (Default) Checkout will only collect the billing address when necessary.
+  auto,
+
+  /// Checkout will always collect the customer’s billing address.
+  required,
+}
+
 /// https://stripe.com/docs/api/checkout/sessions/create
 @JsonSerializable()
 class CreateCheckoutSessionRequest {
@@ -39,6 +47,11 @@ class CreateCheckoutSessionRequest {
   /// customer’s location and other characteristics.
   final List<PaymentMethodType> paymentMethodTypes;
 
+  /// A unique string to reference the Checkout Session. This can be a customer
+  /// ID, a cart ID, or similar, and can be used to reconcile the Session with
+  /// your internal systems.
+  final String? clientReferenceId;
+
   /// If provided, this value will be used when the Customer object is created.
   /// If not provided, customers will be asked to enter their email address. Use
   /// this parameter to prefill customer data if you already have an email on
@@ -62,14 +75,32 @@ class CreateCheckoutSessionRequest {
   /// consolidate line items if there are more than a few dozen.
   final List<LineItem>? lineItems;
 
+  /// Specify whether Checkout should collect the customer’s billing address.
+  final BillingAddressCollection? billingAddressCollection;
+
+  /// Settings for automatic tax lookup for this session and resulting payments,
+  /// invoices, and subscriptions.
+  final AutomaticTax? automaticTax;
+
+  /// Controls tax ID collection settings for the session.
+  final TaxIdCollection? taxIdCollection;
+
+  /// A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in payment mode.
+  final PaymentIntentData? paymentIntentData;
+
   CreateCheckoutSessionRequest({
     required this.successUrl,
     required this.cancelUrl,
     required this.paymentMethodTypes,
     this.mode,
+    this.clientReferenceId,
     this.customerEmail,
     this.customer,
     this.lineItems,
+    this.billingAddressCollection,
+    this.automaticTax,
+    this.taxIdCollection,
+    this.paymentIntentData,
   });
 
   factory CreateCheckoutSessionRequest.fromJson(Map<String, dynamic> json) =>
@@ -97,4 +128,55 @@ class LineItem {
   factory LineItem.fromJson(Map<String, dynamic> json) =>
       _$LineItemFromJson(json);
   Map<String, dynamic> toJson() => _$LineItemToJson(this);
+}
+
+@JsonSerializable()
+class AutomaticTax {
+  final bool enabled;
+
+  AutomaticTax({
+    required this.enabled,
+  });
+
+  factory AutomaticTax.fromJson(Map<String, dynamic> json) =>
+      _$AutomaticTaxFromJson(json);
+  Map<String, dynamic> toJson() => _$AutomaticTaxToJson(this);
+}
+
+@JsonSerializable()
+class TaxIdCollection {
+  final bool enabled;
+
+  TaxIdCollection({
+    required this.enabled,
+  });
+
+  factory TaxIdCollection.fromJson(Map<String, dynamic> json) =>
+      _$TaxIdCollectionFromJson(json);
+  Map<String, dynamic> toJson() => _$TaxIdCollectionToJson(this);
+}
+
+enum SetupFutureUsage {
+  /// Use on_session if you intend to only reuse the payment method when your
+  /// customer is present in your checkout flow.
+  on_session,
+
+  /// Use off_session if your customer may or may not be present in your
+  /// checkout flow.
+  off_session,
+}
+
+@JsonSerializable()
+class PaymentIntentData {
+  final String? receiptEmail;
+  final SetupFutureUsage? setupFutureUsage;
+
+  PaymentIntentData({
+    this.receiptEmail,
+    this.setupFutureUsage,
+  });
+
+  factory PaymentIntentData.fromJson(Map<String, dynamic> json) =>
+      _$PaymentIntentDataFromJson(json);
+  Map<String, dynamic> toJson() => _$PaymentIntentDataToJson(this);
 }

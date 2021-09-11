@@ -123,6 +123,7 @@ CheckoutSession _$CheckoutSessionFromJson(Map<String, dynamic> json) {
     paymentMethodTypes: (json['payment_method_types'] as List<dynamic>)
         .map((e) => _$enumDecode(_$PaymentMethodTypeEnumMap, e))
         .toList(),
+    clientReferenceId: json['client_reference_id'] as String?,
     customer: json['customer'] as String?,
     paymentIntent: json['payment_intent'] as String?,
   );
@@ -140,6 +141,7 @@ Map<String, dynamic> _$CheckoutSessionToJson(CheckoutSession instance) {
     }
   }
 
+  writeNotNull('client_reference_id', instance.clientReferenceId);
   writeNotNull('customer', instance.customer);
   writeNotNull('payment_intent', instance.paymentIntent);
   val['payment_method_types'] = instance.paymentMethodTypes
@@ -326,6 +328,27 @@ Map<String, dynamic> _$RefundEventToJson(RefundEvent instance) =>
       ),
     };
 
+CheckoutSessionEvent _$CheckoutSessionEventFromJson(Map<String, dynamic> json) {
+  return CheckoutSessionEvent(
+    object: _$enumDecode(_$_EventObjectEnumMap, json['object']),
+    id: json['id'] as String,
+    type: json['type'] as String,
+    data: EventData.fromJson(json['data'] as Map<String, dynamic>,
+        (value) => CheckoutSession.fromJson(value as Map<String, dynamic>)),
+  );
+}
+
+Map<String, dynamic> _$CheckoutSessionEventToJson(
+        CheckoutSessionEvent instance) =>
+    <String, dynamic>{
+      'object': _$_EventObjectEnumMap[instance.object],
+      'id': instance.id,
+      'type': instance.type,
+      'data': instance.data.toJson(
+        (value) => value.toJson(),
+      ),
+    };
+
 PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) {
   return PaymentIntent(
     object: _$enumDecode(_$_PaymentIntentObjectEnumMap, json['object']),
@@ -459,11 +482,25 @@ CreateCheckoutSessionRequest _$CreateCheckoutSessionRequestFromJson(
         .map((e) => _$enumDecode(_$PaymentMethodTypeEnumMap, e))
         .toList(),
     mode: _$enumDecodeNullable(_$SessionModeEnumMap, json['mode']),
+    clientReferenceId: json['client_reference_id'] as String?,
     customerEmail: json['customer_email'] as String?,
     customer: json['customer'] as String?,
     lineItems: (json['line_items'] as List<dynamic>?)
         ?.map((e) => LineItem.fromJson(e as Map<String, dynamic>))
         .toList(),
+    billingAddressCollection: _$enumDecodeNullable(
+        _$BillingAddressCollectionEnumMap, json['billing_address_collection']),
+    automaticTax: json['automatic_tax'] == null
+        ? null
+        : AutomaticTax.fromJson(json['automatic_tax'] as Map<String, dynamic>),
+    taxIdCollection: json['tax_id_collection'] == null
+        ? null
+        : TaxIdCollection.fromJson(
+            json['tax_id_collection'] as Map<String, dynamic>),
+    paymentIntentData: json['payment_intent_data'] == null
+        ? null
+        : PaymentIntentData.fromJson(
+            json['payment_intent_data'] as Map<String, dynamic>),
   );
 }
 
@@ -484,10 +521,16 @@ Map<String, dynamic> _$CreateCheckoutSessionRequestToJson(
   val['payment_method_types'] = instance.paymentMethodTypes
       .map((e) => _$PaymentMethodTypeEnumMap[e])
       .toList();
+  writeNotNull('client_reference_id', instance.clientReferenceId);
   writeNotNull('customer_email', instance.customerEmail);
   writeNotNull('customer', instance.customer);
   writeNotNull(
       'line_items', instance.lineItems?.map((e) => e.toJson()).toList());
+  writeNotNull('billing_address_collection',
+      _$BillingAddressCollectionEnumMap[instance.billingAddressCollection]);
+  writeNotNull('automatic_tax', instance.automaticTax?.toJson());
+  writeNotNull('tax_id_collection', instance.taxIdCollection?.toJson());
+  writeNotNull('payment_intent_data', instance.paymentIntentData?.toJson());
   return val;
 }
 
@@ -506,6 +549,11 @@ const _$SessionModeEnumMap = {
   SessionMode.payment: 'payment',
   SessionMode.setup: 'setup',
   SessionMode.subscription: 'subscription',
+};
+
+const _$BillingAddressCollectionEnumMap = {
+  BillingAddressCollection.auto: 'auto',
+  BillingAddressCollection.required: 'required',
 };
 
 LineItem _$LineItemFromJson(Map<String, dynamic> json) {
@@ -533,6 +581,56 @@ Map<String, dynamic> _$LineItemToJson(LineItem instance) {
   writeNotNull('price', instance.price);
   return val;
 }
+
+AutomaticTax _$AutomaticTaxFromJson(Map<String, dynamic> json) {
+  return AutomaticTax(
+    enabled: json['enabled'] as bool,
+  );
+}
+
+Map<String, dynamic> _$AutomaticTaxToJson(AutomaticTax instance) =>
+    <String, dynamic>{
+      'enabled': instance.enabled,
+    };
+
+TaxIdCollection _$TaxIdCollectionFromJson(Map<String, dynamic> json) {
+  return TaxIdCollection(
+    enabled: json['enabled'] as bool,
+  );
+}
+
+Map<String, dynamic> _$TaxIdCollectionToJson(TaxIdCollection instance) =>
+    <String, dynamic>{
+      'enabled': instance.enabled,
+    };
+
+PaymentIntentData _$PaymentIntentDataFromJson(Map<String, dynamic> json) {
+  return PaymentIntentData(
+    receiptEmail: json['receipt_email'] as String?,
+    setupFutureUsage: _$enumDecodeNullable(
+        _$SetupFutureUsageEnumMap, json['setup_future_usage']),
+  );
+}
+
+Map<String, dynamic> _$PaymentIntentDataToJson(PaymentIntentData instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('receipt_email', instance.receiptEmail);
+  writeNotNull('setup_future_usage',
+      _$SetupFutureUsageEnumMap[instance.setupFutureUsage]);
+  return val;
+}
+
+const _$SetupFutureUsageEnumMap = {
+  SetupFutureUsage.on_session: 'on_session',
+  SetupFutureUsage.off_session: 'off_session',
+};
 
 CreateCustomerRequest _$CreateCustomerRequestFromJson(
     Map<String, dynamic> json) {

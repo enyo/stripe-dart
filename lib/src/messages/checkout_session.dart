@@ -22,6 +22,7 @@ class CheckoutSession {
   /// Doesn't work with enum because there is a dot in it.
   final String object;
   final String id;
+  final String? clientReferenceId;
   final String? customer;
   final String? paymentIntent;
   final List<PaymentMethodType> paymentMethodTypes;
@@ -30,6 +31,7 @@ class CheckoutSession {
     required this.object,
     required this.id,
     required this.paymentMethodTypes,
+    this.clientReferenceId,
     this.customer,
     this.paymentIntent,
   });

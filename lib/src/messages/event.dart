@@ -103,3 +103,20 @@ class RefundEvent extends Event {
       _$RefundEventFromJson(json);
   Map<String, dynamic> toJson() => _$RefundEventToJson(this);
 }
+
+@JsonSerializable()
+class CheckoutSessionEvent extends Event {
+  @override
+  final EventData<CheckoutSession> data;
+
+  CheckoutSessionEvent({
+    required _EventObject object,
+    required String id,
+    required String type,
+    required this.data,
+  }) : super(object: object, id: id, type: type);
+
+  factory CheckoutSessionEvent.fromJson(Map<String, dynamic> json) =>
+      _$CheckoutSessionEventFromJson(json);
+  Map<String, dynamic> toJson() => _$CheckoutSessionEventToJson(this);
+}

@@ -1,5 +1,5 @@
 name: stripe
-version: 4.4.1
+version: 4.5.0
 description: A simple Stripe API wrapper, that is meant to be used on the server.
 homepage: https://gitlab.com/exitlive/stripe-dart
 documentation: https://gitlab.com/exitlive/stripe-dart/blob/master/README.md
