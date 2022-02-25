@@ -1,5 +1,6 @@
 part of '../../messages.dart';
 
+// ignore: constant_identifier_names
 enum _SubscriptionItemObject { subscription_item }
 
 /// https://stripe.com/docs/api/charges/object

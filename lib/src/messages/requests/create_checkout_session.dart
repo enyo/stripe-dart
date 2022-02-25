@@ -85,8 +85,13 @@ class CreateCheckoutSessionRequest {
   /// Controls tax ID collection settings for the session.
   final TaxIdCollection? taxIdCollection;
 
-  /// A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in payment mode.
+  /// A subset of parameters to be passed to PaymentIntent creation for Checkout
+  /// Sessions in payment mode.
   final PaymentIntentData? paymentIntentData;
+
+  /// A subset of parameters to be passed to subscription creation for Checkout
+  /// Sessions in subscription mode.
+  final SubscriptionData? subscriptionData;
 
   CreateCheckoutSessionRequest({
     required this.successUrl,
@@ -101,6 +106,7 @@ class CreateCheckoutSessionRequest {
     this.automaticTax,
     this.taxIdCollection,
     this.paymentIntentData,
+    this.subscriptionData,
   });
 
   factory CreateCheckoutSessionRequest.fromJson(Map<String, dynamic> json) =>
@@ -159,10 +165,12 @@ class TaxIdCollection {
 enum SetupFutureUsage {
   /// Use on_session if you intend to only reuse the payment method when your
   /// customer is present in your checkout flow.
+  // ignore: constant_identifier_names
   on_session,
 
   /// Use off_session if your customer may or may not be present in your
   /// checkout flow.
+  // ignore: constant_identifier_names
   off_session,
 }
 
@@ -179,4 +187,19 @@ class PaymentIntentData {
   factory PaymentIntentData.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentDataFromJson(json);
   Map<String, dynamic> toJson() => _$PaymentIntentDataToJson(this);
+}
+
+@JsonSerializable()
+class SubscriptionData {
+  final int? trialEnd;
+  final int? trialPeriodDays;
+
+  SubscriptionData({
+    this.trialEnd,
+    this.trialPeriodDays,
+  });
+
+  factory SubscriptionData.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionDataFromJson(json);
+  Map<String, dynamic> toJson() => _$SubscriptionDataToJson(this);
 }

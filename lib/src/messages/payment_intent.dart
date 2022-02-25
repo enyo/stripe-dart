@@ -1,5 +1,6 @@
 part of '../../messages.dart';
 
+// ignore: constant_identifier_names
 enum _PaymentIntentObject { payment_intent }
 
 /// https://stripe.com/docs/api/payment_intents/object

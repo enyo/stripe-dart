@@ -1,9 +1,0 @@
-image: google/dart:2.12.0
-
-stages:
-  - test
-
-run_tests:
-  stage: test
-  script:
-    - ./ci/test.sh

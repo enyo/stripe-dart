@@ -5,6 +5,7 @@ enum PaymentMethodType {
   card,
   ideal,
   fpx,
+  // ignore: constant_identifier_names
   bacs_debit,
   bancontact,
   giropay,
@@ -13,6 +14,7 @@ enum PaymentMethodType {
   sofort,
   sepaDebit,
   grabpay,
+  // ignore: constant_identifier_names
   afterpay_clearpay,
 }
 

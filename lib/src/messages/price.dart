@@ -2,6 +2,7 @@ part of '../../messages.dart';
 
 enum _PriceObject { price }
 
+// ignore: constant_identifier_names
 enum PriceType { one_time, recurring }
 
 /// https://stripe.com/docs/api/charges/object
