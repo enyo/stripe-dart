@@ -19,23 +19,26 @@ void main() {
   group('CheckoutSessionResource', () {
     test('properly decodes all values', () async {
       final request = CreateCheckoutSessionRequest(
-          successUrl: 'https://success',
-          cancelUrl: 'https://cancel',
-          paymentMethodTypes: [
-            PaymentMethodType.card,
-            PaymentMethodType.afterpay_clearpay
-          ],
-          customer: 'cus_JBeWftkPvAhbsN',
-          lineItems: [
-            LineItem(
-              price: 'price_2234234',
-              quantity: 1,
-              images: ['http://imagefoobar'],
-            )
-          ]);
+        successUrl: 'https://success',
+        cancelUrl: 'https://cancel',
+        paymentMethodTypes: [
+          PaymentMethodType.card,
+          PaymentMethodType.afterpay_clearpay
+        ],
+        customer: 'cus_JBeWftkPvAhbsN',
+        lineItems: [
+          LineItem(
+            price: 'price_2234234',
+            quantity: 1,
+            images: ['http://imagefoobar'],
+          )
+        ],
+        subscriptionData: SubscriptionData(trialPeriodDays: 3),
+      );
 
       expect(request.toJson()['payment_method_types'],
           ['card', 'afterpay_clearpay']);
+      expect(request.toJson()['subscription_data'], {'trial_period_days': 3});
 
       client.dio.interceptors.add(InterceptorsWrapper(
         onRequest: (options, handler) {

@@ -121,18 +121,16 @@ class Client {
 /// `some_field=[value]`.
 class FormDataTransformer extends DefaultTransformer {
   void fixMap(Map object) {
-    if (object is Map) {
-      for (final key in object.keys) {
-        var value = object[key];
-        if (value is List) {
-          object[key] = Map.fromIterables(
-              List.generate(value.length, (index) => '$index'), value);
-        }
+    for (final key in object.keys) {
+      var value = object[key];
+      if (value is List) {
+        object[key] = Map.fromIterables(
+            List.generate(value.length, (index) => '$index'), value);
+      }
 
-        var newValue = object[key];
-        if (newValue is Map) {
-          fixMap(newValue);
-        }
+      var newValue = object[key];
+      if (newValue is Map) {
+        fixMap(newValue);
       }
     }
   }

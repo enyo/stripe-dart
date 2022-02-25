@@ -85,8 +85,13 @@ class CreateCheckoutSessionRequest {
   /// Controls tax ID collection settings for the session.
   final TaxIdCollection? taxIdCollection;
 
-  /// A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in payment mode.
+  /// A subset of parameters to be passed to PaymentIntent creation for Checkout
+  /// Sessions in payment mode.
   final PaymentIntentData? paymentIntentData;
+
+  /// A subset of parameters to be passed to subscription creation for Checkout
+  /// Sessions in subscription mode.
+  final SubscriptionData? subscriptionData;
 
   CreateCheckoutSessionRequest({
     required this.successUrl,
@@ -101,6 +106,7 @@ class CreateCheckoutSessionRequest {
     this.automaticTax,
     this.taxIdCollection,
     this.paymentIntentData,
+    this.subscriptionData,
   });
 
   factory CreateCheckoutSessionRequest.fromJson(Map<String, dynamic> json) =>
@@ -179,4 +185,19 @@ class PaymentIntentData {
   factory PaymentIntentData.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentDataFromJson(json);
   Map<String, dynamic> toJson() => _$PaymentIntentDataToJson(this);
+}
+
+@JsonSerializable()
+class SubscriptionData {
+  final int? trialEnd;
+  final int? trialPeriodDays;
+
+  SubscriptionData({
+    this.trialEnd,
+    this.trialPeriodDays,
+  });
+
+  factory SubscriptionData.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionDataFromJson(json);
+  Map<String, dynamic> toJson() => _$SubscriptionDataToJson(this);
 }
