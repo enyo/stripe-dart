@@ -165,10 +165,12 @@ class TaxIdCollection {
 enum SetupFutureUsage {
   /// Use on_session if you intend to only reuse the payment method when your
   /// customer is present in your checkout flow.
+  // ignore: constant_identifier_names
   on_session,
 
   /// Use off_session if your customer may or may not be present in your
   /// checkout flow.
+  // ignore: constant_identifier_names
   off_session,
 }
 

@@ -1,5 +1,6 @@
 part of '../../messages.dart';
 
+// ignore: constant_identifier_names
 enum _BalanceTransactionObject { balance_transaction }
 
 /// https://stripe.com/docs/api/balance_transactions/object

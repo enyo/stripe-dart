@@ -4,9 +4,11 @@ enum _SubscriptionObject { subscription }
 
 enum SubscriptionStatus {
   incomplete,
+  // ignore: constant_identifier_names
   incomplete_expired,
   trialing,
   active,
+  // ignore: constant_identifier_names
   past_due,
   canceled,
   unpaid,
