@@ -511,6 +511,9 @@ LineItem _$LineItemFromJson(Map<String, dynamic> json) => LineItem(
       quantity: json['quantity'] as int?,
       description: json['description'] as String?,
       price: json['price'] as String?,
+      priceData: json['price_data'] == null
+          ? null
+          : PriceData.fromJson(json['price_data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LineItemToJson(LineItem instance) {
@@ -525,7 +528,57 @@ Map<String, dynamic> _$LineItemToJson(LineItem instance) {
   writeNotNull('images', instance.images);
   writeNotNull('quantity', instance.quantity);
   writeNotNull('description', instance.description);
+  writeNotNull('price_data', instance.priceData?.toJson());
   writeNotNull('price', instance.price);
+  return val;
+}
+
+PriceData _$PriceDataFromJson(Map<String, dynamic> json) => PriceData(
+      currency: json['currency'] as String,
+      product: json['product'] as String?,
+      unit_amount: json['unit_amount'] as int?,
+      product_data: json['product_data'] == null
+          ? null
+          : ProductData.fromJson(json['product_data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PriceDataToJson(PriceData instance) {
+  final val = <String, dynamic>{
+    'currency': instance.currency,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product', instance.product);
+  writeNotNull('unit_amount', instance.unit_amount);
+  writeNotNull('product_data', instance.product_data?.toJson());
+  return val;
+}
+
+ProductData _$ProductDataFromJson(Map<String, dynamic> json) => ProductData(
+      name: json['name'] as String,
+      description: json['description'] as String?,
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$ProductDataToJson(ProductData instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('images', instance.images);
   return val;
 }
 

@@ -119,6 +119,7 @@ class LineItem {
   final List<String>? images;
   final int? quantity;
   final String? description;
+  final PriceData? priceData;
 
   /// The ID of the Price or Plan object. One of price, price_data or amount is
   /// required.
@@ -129,11 +130,46 @@ class LineItem {
     this.quantity,
     this.description,
     this.price,
+    this.priceData,
   });
 
-  factory LineItem.fromJson(Map<String, dynamic> json) =>
-      _$LineItemFromJson(json);
+  factory LineItem.fromJson(Map<String, dynamic> json) => _$LineItemFromJson(json);
   Map<String, dynamic> toJson() => _$LineItemToJson(this);
+}
+
+@JsonSerializable()
+class PriceData {
+  // This is the only field required
+  final String currency;
+  final String? product;
+  final int? unit_amount;
+  final ProductData? product_data;
+
+  PriceData({
+    required this.currency,
+    this.product,
+    this.unit_amount,
+    this.product_data,
+  });
+
+  factory PriceData.fromJson(Map<String, dynamic> json) => _$PriceDataFromJson(json);
+  Map<String, dynamic> toJson() => _$PriceDataToJson(this);
+}
+
+@JsonSerializable()
+class ProductData {
+  final String name;
+  final String? description;
+  final List<String>? images;
+
+  ProductData({
+    required this.name,
+    this.description,
+    this.images,
+  });
+
+  factory ProductData.fromJson(Map<String, dynamic> json) => _$ProductDataFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductDataToJson(this);
 }
 
 @JsonSerializable()
