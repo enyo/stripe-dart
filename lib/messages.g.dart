@@ -536,8 +536,8 @@ Map<String, dynamic> _$LineItemToJson(LineItem instance) {
 PriceData _$PriceDataFromJson(Map<String, dynamic> json) => PriceData(
       currency: json['currency'] as String,
       product: json['product'] as String?,
-      unit_amount: json['unit_amount'] as int?,
-      product_data: json['product_data'] == null
+      unitAmount: json['unit_amount'] as int?,
+      productData: json['product_data'] == null
           ? null
           : ProductData.fromJson(json['product_data'] as Map<String, dynamic>),
     );
@@ -554,8 +554,8 @@ Map<String, dynamic> _$PriceDataToJson(PriceData instance) {
   }
 
   writeNotNull('product', instance.product);
-  writeNotNull('unit_amount', instance.unit_amount);
-  writeNotNull('product_data', instance.product_data?.toJson());
+  writeNotNull('unit_amount', instance.unitAmount);
+  writeNotNull('product_data', instance.productData?.toJson());
   return val;
 }
 

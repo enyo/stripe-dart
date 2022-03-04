@@ -117,8 +117,15 @@ class CreateCheckoutSessionRequest {
 @JsonSerializable()
 class LineItem {
   final List<String>? images;
+
+  /// The quantity of the line item being purchased. Quantity should not be
+  /// defined when recurring.usage_type=metered.
   final int? quantity;
+
   final String? description;
+
+  /// Data used to generate a new Price object inline. One of price or
+  /// price_data is required.
   final PriceData? priceData;
 
   /// The ID of the Price or Plan object. One of price, price_data or amount is
@@ -133,33 +140,55 @@ class LineItem {
     this.priceData,
   });
 
-  factory LineItem.fromJson(Map<String, dynamic> json) => _$LineItemFromJson(json);
+  factory LineItem.fromJson(Map<String, dynamic> json) =>
+      _$LineItemFromJson(json);
   Map<String, dynamic> toJson() => _$LineItemToJson(this);
 }
 
 @JsonSerializable()
 class PriceData {
-  // This is the only field required
+  /// Three-letter ISO currency code, in lowercase. Must be a supported
+  /// currency.
   final String currency;
+
+  /// The ID of the product that this price will belong to. One of product or
+  /// product_data is required.
   final String? product;
-  final int? unit_amount;
-  final ProductData? product_data;
+
+  /// A non-negative integer in cents representing how much to charge. One of
+  /// unit_amount or unit_amount_decimal is required.
+  final int? unitAmount;
+
+  /// Data used to generate a new product object inline. One of product or
+  /// product_data is required.
+  final ProductData? productData;
 
   PriceData({
     required this.currency,
     this.product,
-    this.unit_amount,
-    this.product_data,
+    this.unitAmount,
+    this.productData,
   });
 
-  factory PriceData.fromJson(Map<String, dynamic> json) => _$PriceDataFromJson(json);
+  factory PriceData.fromJson(Map<String, dynamic> json) =>
+      _$PriceDataFromJson(json);
   Map<String, dynamic> toJson() => _$PriceDataToJson(this);
 }
 
 @JsonSerializable()
 class ProductData {
+  /// The product’s name, meant to be displayable to the customer. Whenever this
+  /// product is sold via a subscription, name will show up on associated
+  /// invoice line item descriptions.
   final String name;
+
+  /// The product’s description, meant to be displayable to the customer. Use
+  /// this field to optionally store a long form explanation of the product
+  /// being sold for your own rendering purposes.
   final String? description;
+
+  /// A list of up to 8 URLs of images for this product, meant to be displayable
+  /// to the customer.
   final List<String>? images;
 
   ProductData({
@@ -168,7 +197,8 @@ class ProductData {
     this.images,
   });
 
-  factory ProductData.fromJson(Map<String, dynamic> json) => _$ProductDataFromJson(json);
+  factory ProductData.fromJson(Map<String, dynamic> json) =>
+      _$ProductDataFromJson(json);
   Map<String, dynamic> toJson() => _$ProductDataToJson(this);
 }
 
