@@ -1,6 +1,8 @@
 ## 4.7.0 (2022-03-04)
 
 - Add `priceData` to `lineItems` of `CreateCheckoutSessionRequest`.
+- Add `metadata` to `Subscription` (and the
+  `CreateCheckoutSessionRequest.subscriptionData`)
 
 ## 4.6.0 (2022-02-25)
 

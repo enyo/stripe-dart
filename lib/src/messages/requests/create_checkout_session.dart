@@ -257,12 +257,25 @@ class PaymentIntentData {
 
 @JsonSerializable()
 class SubscriptionData {
+  /// Unix timestamp representing the end of the trial period the customer will
+  /// get before being charged for the first time. Has to be at least 48 hours
+  /// in the future.
   final int? trialEnd;
+
+  /// Integer representing the number of trial period days before the customer
+  /// is charged for the first time. Has to be at least 1.
   final int? trialPeriodDays;
+
+  /// Set of key-value pairs that you can attach to an object. This can be
+  /// useful for storing additional information about the object in a structured
+  /// format. Individual keys can be unset by posting an empty value to them.
+  /// All keys can be unset by posting an empty value to metadata.
+  final Map<String, dynamic>? metadata;
 
   SubscriptionData({
     this.trialEnd,
     this.trialPeriodDays,
+    this.metadata,
   });
 
   factory SubscriptionData.fromJson(Map<String, dynamic> json) =>
