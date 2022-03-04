@@ -632,6 +632,7 @@ SubscriptionData _$SubscriptionDataFromJson(Map<String, dynamic> json) =>
     SubscriptionData(
       trialEnd: json['trial_end'] as int?,
       trialPeriodDays: json['trial_period_days'] as int?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$SubscriptionDataToJson(SubscriptionData instance) {
@@ -645,6 +646,7 @@ Map<String, dynamic> _$SubscriptionDataToJson(SubscriptionData instance) {
 
   writeNotNull('trial_end', instance.trialEnd);
   writeNotNull('trial_period_days', instance.trialPeriodDays);
+  writeNotNull('metadata', instance.metadata);
   return val;
 }
 
@@ -816,6 +818,7 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
           .fromJson(json['current_period_start'] as int),
       currentPeriodEnd: const TimestampConverter()
           .fromJson(json['current_period_end'] as int),
+      metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
@@ -840,6 +843,7 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
   val['items'] = instance.items.toJson(
     (value) => value.toJson(),
   );
+  writeNotNull('metadata', instance.metadata);
   return val;
 }
 

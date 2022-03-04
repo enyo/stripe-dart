@@ -17,7 +17,7 @@ enum SubscriptionStatus {
   ended,
 }
 
-/// https://stripe.com/docs/api/charges/object
+/// https://stripe.com/docs/api/subscriptions/object
 @JsonSerializable()
 class Subscription {
   final _SubscriptionObject object;
@@ -69,7 +69,13 @@ class Subscription {
   /// may choose to reopen and pay their closed invoices.
   final SubscriptionStatus status;
 
+  /// List of subscription items, each with an attached price.
   final DataList<SubscriptionItem> items;
+
+  /// Set of key-value pairs that you can attach to an object. This can be
+  /// useful for storing additional information about the object in a structured
+  /// format.
+  final Map<String, dynamic>? metadata;
 
   Subscription({
     required this.object,
@@ -80,6 +86,7 @@ class Subscription {
     required this.items,
     required this.currentPeriodStart,
     required this.currentPeriodEnd,
+    this.metadata,
   });
   factory Subscription.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionFromJson(json);
