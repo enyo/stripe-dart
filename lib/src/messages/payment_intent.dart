@@ -9,14 +9,38 @@ class PaymentIntent {
   final _PaymentIntentObject object;
 
   final String id;
+  final int amount;
+  final String currency;
   final String status;
   final DataList<Charge> charges;
+  final String? customer;
+  final String? description;
+  final Map<String, String>? metadata;
+  final String? paymentMethod;
+  final Set<PaymentMethodType>? paymentMethodTypes;
+  final String? receiptEmail;
+  final SetupFutureUsage? setupFutureUsage;
+  final ShippingSpecification? shipping;
+  final String? statementDescriptor;
+  final String? statementDescriptorSuffix;
 
   PaymentIntent({
     required this.object,
     required this.id,
+    required this.amount,
+    required this.currency,
     required this.status,
     required this.charges,
+    this.customer,
+    this.description,
+    this.metadata,
+    this.paymentMethod,
+    this.paymentMethodTypes,
+    this.receiptEmail,
+    this.setupFutureUsage,
+    this.shipping,
+    this.statementDescriptor,
+    this.statementDescriptorSuffix,
   });
   factory PaymentIntent.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentFromJson(json);

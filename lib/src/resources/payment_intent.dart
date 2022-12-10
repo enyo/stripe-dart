@@ -11,6 +11,11 @@ class PaymentIntentResource {
   final Client _client;
   PaymentIntentResource(this._client);
 
+  Future<PaymentIntent> create(CreatePaymentIntentRequest request) async {
+    final response = await _client.post('payment_intents', data: request.toJson());
+    return PaymentIntent.fromJson(response);
+  }
+
   Future<PaymentIntent> retrieve(String paymentIntentId) async {
     final map = await _client.get('payment_intents/$paymentIntentId');
     return PaymentIntent.fromJson(map);

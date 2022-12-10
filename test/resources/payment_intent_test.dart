@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:stripe/messages.dart' show Address, PaymentMethodType, SetupFutureUsage, ShippingSpecification;
 import 'package:stripe/src/client.dart';
 import 'package:stripe/src/resources/payment_intent.dart';
 import 'package:test/test.dart';
@@ -38,6 +39,31 @@ void main() {
 
       expect(response.charges.data.length, 1);
       expect(response.charges.data.first.id, 'ch_1IZI1WCQQp28cFsC3NZk4ERe');
+
+      expect(response.amount, 1099);
+      expect(response.currency, 'eur');
+      expect(response.customer, 'cus_Mx8WVxMtgaJfkk');
+      expect(response.description, 'some description');
+      expect(response.metadata, {"foo": "bar"});
+      expect(response.paymentMethod, "card");
+      expect(response.paymentMethodTypes, {PaymentMethodType.card, PaymentMethodType.alipay});
+      expect(response.receiptEmail, 'joe.schmoe@example.com');
+      expect(response.setupFutureUsage, SetupFutureUsage.on_session);
+
+      expect(response.shipping, isA<ShippingSpecification>());
+      expect(response.shipping!.name, 'Jenny');
+      expect(response.shipping!.carrier, 'Best Lucky Delivery');
+      expect(response.shipping!.phone, '3128675309');
+      expect(response.shipping!.trackingNumber, 'hideandseek');
+      expect(response.shipping!.address, isA<Address>());
+      expect(response.shipping!.address.city, 'somewhere');
+      expect(response.shipping!.address.country, 'us');
+      expect(response.shipping!.address.line1, '123 Fake St.');
+      expect(response.shipping!.address.line2, 'POBOX nowhere');
+      expect(response.shipping!.address.postalCode, '54321');
+      expect(response.shipping!.address.state, 'zx');
+      expect(response.statementDescriptor, 'super best codez');
+      expect(response.statementDescriptorSuffix, 'for u!');
     });
   });
 }
@@ -154,25 +180,41 @@ const createSessionResponse = r'''
   "confirmation_method": "automatic",
   "created": 1556609212,
   "currency": "eur",
-  "customer": null,
-  "description": null,
+  "customer": "cus_Mx8WVxMtgaJfkk",
+  "description": "some description",
   "invoice": null,
   "last_payment_error": null,
   "livemode": false,
-  "metadata": {},
+  "metadata": {
+    "foo": "bar"
+  },
   "next_action": null,
   "on_behalf_of": null,
-  "payment_method": null,
+  "payment_method": "card",
   "payment_method_options": {},
   "payment_method_types": [
-    "card"
+    "card",
+    "alipay"
   ],
-  "receipt_email": null,
+  "receipt_email": "joe.schmoe@example.com",
   "review": null,
-  "setup_future_usage": null,
-  "shipping": null,
-  "statement_descriptor": null,
-  "statement_descriptor_suffix": null,
+  "setup_future_usage": "on_session",
+  "shipping": {
+    "address": {
+      "city": "somewhere",
+      "country": "us",
+      "line1": "123 Fake St.",
+      "line2": "POBOX nowhere",
+      "postal_code": "54321",
+      "state": "zx"
+    },
+    "name": "Jenny",
+    "carrier": "Best Lucky Delivery",
+    "phone": "3128675309",
+    "tracking_number": "hideandseek"
+  },
+  "statement_descriptor": "super best codez",
+  "statement_descriptor_suffix": "for u!",
   "status": "requires_payment_method",
   "transfer_data": null,
   "transfer_group": null
