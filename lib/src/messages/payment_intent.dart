@@ -10,6 +10,7 @@ class PaymentIntent {
 
   final String id;
   final int amount;
+  final String clientSecret;
   final String currency;
   final String status;
   final DataList<Charge> charges;
@@ -28,6 +29,7 @@ class PaymentIntent {
     required this.object,
     required this.id,
     required this.amount,
+    required this.clientSecret,
     required this.currency,
     required this.status,
     required this.charges,

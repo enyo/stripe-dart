@@ -41,6 +41,7 @@ void main() {
       expect(response.charges.data.first.id, 'ch_1IZI1WCQQp28cFsC3NZk4ERe');
 
       expect(response.amount, 1099);
+      expect(response.clientSecret, 'pi_1EUqMaAA7oWz99nSFM4ANx6C_secret_5jzNKjsCSxoL7BNOm1Hg9DFX1');
       expect(response.currency, 'eur');
       expect(response.customer, 'cus_Mx8WVxMtgaJfkk');
       expect(response.description, 'some description');

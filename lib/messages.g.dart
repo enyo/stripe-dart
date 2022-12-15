@@ -342,6 +342,7 @@ PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
       object: $enumDecode(_$_PaymentIntentObjectEnumMap, json['object']),
       id: json['id'] as String,
       amount: json['amount'] as int,
+      clientSecret: json['client_secret'] as String,
       currency: json['currency'] as String,
       status: json['status'] as String,
       charges: DataList<Charge>.fromJson(
@@ -372,6 +373,7 @@ Map<String, dynamic> _$PaymentIntentToJson(PaymentIntent instance) {
     'object': _$_PaymentIntentObjectEnumMap[instance.object]!,
     'id': instance.id,
     'amount': instance.amount,
+    'client_secret': instance.clientSecret,
     'currency': instance.currency,
     'status': instance.status,
     'charges': instance.charges.toJson(
