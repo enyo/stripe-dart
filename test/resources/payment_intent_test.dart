@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:stripe/messages.dart' show Address, PaymentMethodType, SetupFutureUsage, ShippingSpecification;
+import 'package:stripe/messages.dart'
+    show Address, PaymentMethodType, SetupFutureUsage, ShippingSpecification;
 import 'package:stripe/src/client.dart';
 import 'package:stripe/src/resources/payment_intent.dart';
 import 'package:test/test.dart';
@@ -41,13 +42,15 @@ void main() {
       expect(response.charges.data.first.id, 'ch_1IZI1WCQQp28cFsC3NZk4ERe');
 
       expect(response.amount, 1099);
-      expect(response.clientSecret, 'pi_1EUqMaAA7oWz99nSFM4ANx6C_secret_5jzNKjsCSxoL7BNOm1Hg9DFX1');
+      expect(response.clientSecret,
+          'pi_1EUqMaAA7oWz99nSFM4ANx6C_secret_5jzNKjsCSxoL7BNOm1Hg9DFX1');
       expect(response.currency, 'eur');
       expect(response.customer, 'cus_Mx8WVxMtgaJfkk');
       expect(response.description, 'some description');
       expect(response.metadata, {"foo": "bar"});
       expect(response.paymentMethod, "card");
-      expect(response.paymentMethodTypes, {PaymentMethodType.card, PaymentMethodType.alipay});
+      expect(response.paymentMethodTypes,
+          {PaymentMethodType.card, PaymentMethodType.alipay});
       expect(response.receiptEmail, 'joe.schmoe@example.com');
       expect(response.setupFutureUsage, SetupFutureUsage.on_session);
 
