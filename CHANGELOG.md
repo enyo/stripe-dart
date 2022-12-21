@@ -1,4 +1,4 @@
-## 4.7.0 (2022-12-21)
+## 4.8.0 (2022-12-21)
 
 - Add support for basic creation of payment Intents
 
