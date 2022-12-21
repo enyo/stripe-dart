@@ -1,3 +1,7 @@
+## 4.7.0 (2022-12-21)
+
+- Add support for basic creation of payment Intents
+
 ## 4.7.0 (2022-03-04)
 
 - Add `priceData` to `lineItems` of `CreateCheckoutSessionRequest`.
