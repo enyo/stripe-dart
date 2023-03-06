@@ -50,6 +50,7 @@ void main() {
       expect(response.currency, 'eur');
       expect(response.customer, 'cus_Mx8WVxMtgaJfkk');
       expect(response.description, 'some description');
+      expect(response.latestCharge, 'ch_1IZI1WCQQp28cFsC3NZk4ERe');
       expect(response.metadata, {"foo": "bar"});
       expect(response.paymentMethod, "card");
       expect(response.paymentMethodTypes,
@@ -191,6 +192,7 @@ const createSessionResponse = r'''
   "description": "some description",
   "invoice": null,
   "last_payment_error": null,
+  "latest_charge": "ch_1IZI1WCQQp28cFsC3NZk4ERe",
   "livemode": false,
   "metadata": {
     "foo": "bar"

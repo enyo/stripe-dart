@@ -20,6 +20,7 @@ class PaymentIntent {
   final DateTime? created;
   final String? customer;
   final String? description;
+  final String? latestCharge;
   final Map<String, String>? metadata;
   final String? paymentMethod;
   final Set<PaymentMethodType>? paymentMethodTypes;
@@ -41,6 +42,7 @@ class PaymentIntent {
     this.created,
     this.customer,
     this.description,
+    this.latestCharge,
     this.metadata,
     this.paymentMethod,
     this.paymentMethodTypes,

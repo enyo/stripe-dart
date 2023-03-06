@@ -374,6 +374,7 @@ PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
           json['created'], const TimestampConverter().fromJson),
       customer: json['customer'] as String?,
       description: json['description'] as String?,
+      latestCharge: json['latest_charge'] as String?,
       metadata: (json['metadata'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, e as String),
       ),
@@ -421,6 +422,7 @@ Map<String, dynamic> _$PaymentIntentToJson(PaymentIntent instance) {
           instance.created, const TimestampConverter().toJson));
   writeNotNull('customer', instance.customer);
   writeNotNull('description', instance.description);
+  writeNotNull('latest_charge', instance.latestCharge);
   writeNotNull('metadata', instance.metadata);
   writeNotNull('payment_method', instance.paymentMethod);
   writeNotNull(
