@@ -42,6 +42,9 @@ void main() {
       expect(response.charges.data.first.id, 'ch_1IZI1WCQQp28cFsC3NZk4ERe');
 
       expect(response.amount, 1099);
+      expect(response.created?.toUtc(), DateTime.parse('2019-04-30 07:26:52Z'));
+      expect(
+          response.canceledAt?.toUtc(), DateTime.parse('2019-04-30 07:27:02Z'));
       expect(response.clientSecret,
           'pi_1EUqMaAA7oWz99nSFM4ANx6C_secret_5jzNKjsCSxoL7BNOm1Hg9DFX1');
       expect(response.currency, 'eur');
@@ -81,7 +84,7 @@ const createSessionResponse = r'''
   "amount_received": 0,
   "application": null,
   "application_fee_amount": null,
-  "canceled_at": null,
+  "canceled_at": 1556609222,
   "cancellation_reason": null,
   "capture_method": "automatic",
   "charges": {

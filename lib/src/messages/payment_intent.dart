@@ -14,6 +14,10 @@ class PaymentIntent {
   final String currency;
   final String status;
   final DataList<Charge> charges;
+  @TimestampConverter()
+  final DateTime? canceledAt;
+  @TimestampConverter()
+  final DateTime? created;
   final String? customer;
   final String? description;
   final Map<String, String>? metadata;
@@ -33,6 +37,8 @@ class PaymentIntent {
     required this.currency,
     required this.status,
     required this.charges,
+    this.canceledAt,
+    this.created,
     this.customer,
     this.description,
     this.metadata,
@@ -44,6 +50,7 @@ class PaymentIntent {
     this.statementDescriptor,
     this.statementDescriptorSuffix,
   });
+
   factory PaymentIntent.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentFromJson(json);
 

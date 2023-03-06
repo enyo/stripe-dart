@@ -368,6 +368,10 @@ PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
       charges: DataList<Charge>.fromJson(
           json['charges'] as Map<String, dynamic>,
           (value) => Charge.fromJson(value as Map<String, dynamic>)),
+      canceledAt: _$JsonConverterFromJson<int, DateTime>(
+          json['canceled_at'], const TimestampConverter().fromJson),
+      created: _$JsonConverterFromJson<int, DateTime>(
+          json['created'], const TimestampConverter().fromJson),
       customer: json['customer'] as String?,
       description: json['description'] as String?,
       metadata: (json['metadata'] as Map<String, dynamic>?)?.map(
@@ -407,6 +411,14 @@ Map<String, dynamic> _$PaymentIntentToJson(PaymentIntent instance) {
     }
   }
 
+  writeNotNull(
+      'canceled_at',
+      _$JsonConverterToJson<int, DateTime>(
+          instance.canceledAt, const TimestampConverter().toJson));
+  writeNotNull(
+      'created',
+      _$JsonConverterToJson<int, DateTime>(
+          instance.created, const TimestampConverter().toJson));
   writeNotNull('customer', instance.customer);
   writeNotNull('description', instance.description);
   writeNotNull('metadata', instance.metadata);
@@ -430,10 +442,22 @@ const _$_PaymentIntentObjectEnumMap = {
   _PaymentIntentObject.payment_intent: 'payment_intent',
 };
 
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
 const _$SetupFutureUsageEnumMap = {
   SetupFutureUsage.on_session: 'on_session',
   SetupFutureUsage.off_session: 'off_session',
 };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
 
 PortalSession _$PortalSessionFromJson(Map<String, dynamic> json) =>
     PortalSession(
