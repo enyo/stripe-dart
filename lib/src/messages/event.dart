@@ -88,6 +88,23 @@ class ChargeEvent extends Event {
 }
 
 @JsonSerializable()
+class PaymentIntentEvent extends Event {
+  @override
+  final EventData<PaymentIntent> data;
+
+  PaymentIntentEvent({
+    required _EventObject object,
+    required String id,
+    required String type,
+    required this.data,
+  }) : super(object: object, id: id, type: type);
+
+  factory PaymentIntentEvent.fromJson(Map<String, dynamic> json) =>
+      _$PaymentIntentEventFromJson(json);
+  Map<String, dynamic> toJson() => _$PaymentIntentEventToJson(this);
+}
+
+@JsonSerializable()
 class RefundEvent extends Event {
   @override
   final EventData<Refund> data;
