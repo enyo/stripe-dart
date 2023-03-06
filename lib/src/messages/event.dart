@@ -20,6 +20,35 @@ abstract class Event {
     required this.id,
     required this.type,
   });
+
+  static T fromJson<T extends Event>(Map<String, dynamic> json) {
+    switch (
+        (json['data']['object']['object'] as String?)?.trim().toLowerCase()) {
+      // case 'balance_transaction':
+      //   return BalanceTransactionEvent.fromJson(json) as T;
+      case 'charge':
+        return ChargeEvent.fromJson(json) as T;
+      case 'checkout_session':
+        return CheckoutSessionEvent.fromJson(json) as T;
+      case 'customer':
+        return CustomerEvent.fromJson(json) as T;
+      case 'payment_intent':
+        return PaymentIntentEvent.fromJson(json) as T;
+      // case 'portal_session'     :
+      //   return PortalSessionEvent.fromJson(json) as T;
+      // case 'price'              :
+      //   return PriceEvent.fromJson(json) as T;
+      // case 'product'            :
+      //   return ProductEvent.fromJson(json) as T;
+      case 'refund':
+        return RefundEvent.fromJson(json) as T;
+      case 'subscription':
+        return SubscriptionEvent.fromJson(json) as T;
+      default:
+        throw FormatException(
+            'Unrecognized/unsupported Stripe object `${json['object']}` in event webhook');
+    }
+  }
 }
 
 @JsonSerializable()
