@@ -42,6 +42,7 @@ void main() {
       expect(response.charges.data.first.id, 'ch_1IZI1WCQQp28cFsC3NZk4ERe');
 
       expect(response.amount, 1099);
+      expect(response.amountReceived, 999);
       expect(response.created?.toUtc(), DateTime.parse('2019-04-30 07:26:52Z'));
       expect(
           response.canceledAt?.toUtc(), DateTime.parse('2019-04-30 07:27:02Z'));
@@ -82,7 +83,7 @@ const createSessionResponse = r'''
   "object": "payment_intent",
   "amount": 1099,
   "amount_capturable": 0,
-  "amount_received": 0,
+  "amount_received": 999,
   "application": null,
   "application_fee_amount": null,
   "canceled_at": 1556609222,

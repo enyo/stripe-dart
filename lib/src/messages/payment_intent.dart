@@ -10,6 +10,7 @@ class PaymentIntent {
 
   final String id;
   final int amount;
+  final int amountReceived;
   final String clientSecret;
   final String currency;
   final String status;
@@ -34,6 +35,7 @@ class PaymentIntent {
     required this.object,
     required this.id,
     required this.amount,
+    required this.amountReceived,
     required this.clientSecret,
     required this.currency,
     required this.status,
