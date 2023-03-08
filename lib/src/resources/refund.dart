@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:stripe/messages.dart';
 
 import '../client.dart';
+import '_resource.dart';
 
-class RefundResource {
-  final Client _client;
-  RefundResource(this._client);
+class RefundResource extends Resource<Refund> {
+  RefundResource(Client client) : super(client);
 
   Future<Refund> create(CreateRefundRequest request) async {
-    final map = await _client.post('refunds', data: request.toJson());
+    final map = await post('refunds', data: request.toJson());
     return Refund.fromJson(map);
   }
 }

@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:stripe/messages.dart';
 
 import '../client.dart';
+import '_resource.dart';
 
-class BalanceTransactionResource {
-  final Client _client;
-  BalanceTransactionResource(this._client);
+class BalanceTransactionResource extends Resource<BalanceTransaction> {
+  BalanceTransactionResource(Client client) : super(client);
 
   Future<BalanceTransaction> retrieve(String balanceTransactionId) async {
-    final map = await _client.get('balance_transactions/$balanceTransactionId');
+    final map = await get('balance_transactions/$balanceTransactionId');
     return BalanceTransaction.fromJson(map);
   }
 }
