@@ -4,7 +4,7 @@ enum _ProductObject { product }
 
 /// https://stripe.com/docs/api/products/object
 @JsonSerializable()
-class Product {
+class Product extends Message {
   final _ProductObject object;
 
   /// Unique identifier for the object.
@@ -36,7 +36,10 @@ class Product {
     this.metadata,
     required this.name,
   });
+
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 }

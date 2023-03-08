@@ -5,7 +5,7 @@ enum _PaymentIntentObject { payment_intent }
 
 /// https://stripe.com/docs/api/payment_intents/object
 @JsonSerializable()
-class PaymentIntent {
+class PaymentIntent extends Message {
   final _PaymentIntentObject object;
 
   final String id;
@@ -58,5 +58,6 @@ class PaymentIntent {
   factory PaymentIntent.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$PaymentIntentToJson(this);
 }

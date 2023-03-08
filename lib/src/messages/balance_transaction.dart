@@ -5,7 +5,7 @@ enum _BalanceTransactionObject { balance_transaction }
 
 /// https://stripe.com/docs/api/balance_transactions/object
 @JsonSerializable()
-class BalanceTransaction {
+class BalanceTransaction extends Message {
   final _BalanceTransactionObject object;
   final String id;
   final int amount;
@@ -18,7 +18,10 @@ class BalanceTransaction {
     required this.net,
     required this.currency,
   });
+
   factory BalanceTransaction.fromJson(Map<String, dynamic> json) =>
       _$BalanceTransactionFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$BalanceTransactionToJson(this);
 }

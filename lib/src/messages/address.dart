@@ -2,7 +2,7 @@ part of '../../messages.dart';
 
 /// https://stripe.com/docs/api/refunds/object
 @JsonSerializable()
-class Address {
+class Address extends Message {
   /// City, district, suburb, town, or village
   final String? city;
 
@@ -33,5 +33,6 @@ class Address {
   factory Address.fromJson(Map<String, dynamic> json) =>
       _$AddressFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$AddressToJson(this);
 }

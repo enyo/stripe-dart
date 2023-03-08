@@ -20,7 +20,7 @@ enum PaymentMethodType {
 
 /// https://stripe.com/docs/api/checkout/sessions/object
 @JsonSerializable()
-class CheckoutSession {
+class CheckoutSession extends Message {
   /// Doesn't work with enum because there is a dot in it.
   final String object;
   final String id;
@@ -40,5 +40,7 @@ class CheckoutSession {
 
   factory CheckoutSession.fromJson(Map<String, dynamic> json) =>
       _$CheckoutSessionFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$CheckoutSessionToJson(this);
 }
