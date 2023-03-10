@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:stripe/messages.dart' show FeeDetails;
 import 'package:stripe/src/client.dart';
 import 'package:stripe/src/resources/balance_transaction.dart';
 import 'package:test/test.dart';
@@ -37,6 +38,18 @@ void main() {
       expect(response.id, 'txn_1IZI1WCQQp28cFsCCDFNDOhL');
       expect(response.amount, 1200);
       expect(response.net, 1140);
+      expect(response.fee, 60);
+      expect(
+          response.feeDetails,
+          containsAll([
+            isA<FeeDetails>()
+                .having((x) => x.amount, 'amount', equals(60))
+                .having((x) => x.application, 'application', equals(null))
+                .having((x) => x.currency, 'currency', equals('eur'))
+                .having((x) => x.description, 'description',
+                    equals('Stripe processing fees'))
+                .having((x) => x.type, 'type', equals('stripe_fee'))
+          ]));
       expect(response.currency, 'eur');
     });
   });

@@ -38,6 +38,10 @@ BalanceTransaction _$BalanceTransactionFromJson(Map<String, dynamic> json) =>
       object: $enumDecode(_$_BalanceTransactionObjectEnumMap, json['object']),
       id: json['id'] as String,
       amount: json['amount'] as int,
+      fee: json['fee'] as int,
+      feeDetails: (json['fee_details'] as List<dynamic>)
+          .map((e) => FeeDetails.fromJson(e as Map<String, dynamic>))
+          .toList(),
       net: json['net'] as int,
       currency: json['currency'] as String,
     );
@@ -47,6 +51,8 @@ Map<String, dynamic> _$BalanceTransactionToJson(BalanceTransaction instance) =>
       'object': _$_BalanceTransactionObjectEnumMap[instance.object]!,
       'id': instance.id,
       'amount': instance.amount,
+      'fee': instance.fee,
+      'fee_details': instance.feeDetails.map((e) => e.toJson()).toList(),
       'net': instance.net,
       'currency': instance.currency,
     };
@@ -54,6 +60,32 @@ Map<String, dynamic> _$BalanceTransactionToJson(BalanceTransaction instance) =>
 const _$_BalanceTransactionObjectEnumMap = {
   _BalanceTransactionObject.balance_transaction: 'balance_transaction',
 };
+
+FeeDetails _$FeeDetailsFromJson(Map<String, dynamic> json) => FeeDetails(
+      amount: json['amount'] as int,
+      application: json['application'] as String?,
+      currency: json['currency'] as String,
+      description: json['description'] as String,
+      type: json['type'] as String,
+    );
+
+Map<String, dynamic> _$FeeDetailsToJson(FeeDetails instance) {
+  final val = <String, dynamic>{
+    'amount': instance.amount,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('application', instance.application);
+  val['currency'] = instance.currency;
+  val['description'] = instance.description;
+  val['type'] = instance.type;
+  return val;
+}
 
 Charge _$ChargeFromJson(Map<String, dynamic> json) => Charge(
       object: $enumDecode(_$_ChargeObjectEnumMap, json['object']),
