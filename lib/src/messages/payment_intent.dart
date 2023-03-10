@@ -14,7 +14,6 @@ class PaymentIntent extends Message {
   final String clientSecret;
   final String currency;
   final String status;
-  final DataList<Charge> charges;
   @TimestampConverter()
   final DateTime? canceledAt;
   @TimestampConverter()
@@ -39,7 +38,6 @@ class PaymentIntent extends Message {
     required this.clientSecret,
     required this.currency,
     required this.status,
-    required this.charges,
     this.canceledAt,
     this.created,
     this.customer,

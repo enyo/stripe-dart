@@ -366,9 +366,6 @@ PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
       clientSecret: json['client_secret'] as String,
       currency: json['currency'] as String,
       status: json['status'] as String,
-      charges: DataList<Charge>.fromJson(
-          json['charges'] as Map<String, dynamic>,
-          (value) => Charge.fromJson(value as Map<String, dynamic>)),
       canceledAt: _$JsonConverterFromJson<int, DateTime>(
           json['canceled_at'], const TimestampConverter().fromJson),
       created: _$JsonConverterFromJson<int, DateTime>(
@@ -403,9 +400,6 @@ Map<String, dynamic> _$PaymentIntentToJson(PaymentIntent instance) {
     'client_secret': instance.clientSecret,
     'currency': instance.currency,
     'status': instance.status,
-    'charges': instance.charges.toJson(
-      (value) => value.toJson(),
-    ),
   };
 
   void writeNotNull(String key, dynamic value) {
