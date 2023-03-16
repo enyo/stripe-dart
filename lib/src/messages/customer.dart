@@ -4,7 +4,7 @@ enum _CustomerObject { customer }
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
-class Customer {
+class Customer extends Message {
   final _CustomerObject object;
 
   /// Unique identifier for the object.
@@ -33,7 +33,10 @@ class Customer {
     this.metadata,
     this.name,
   });
+
   factory Customer.fromJson(Map<String, dynamic> json) =>
       _$CustomerFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$CustomerToJson(this);
 }

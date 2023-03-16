@@ -2,7 +2,7 @@ part of '../../messages.dart';
 
 /// https://stripe.com/docs/api/customer_portal/session
 @JsonSerializable()
-class PortalSession {
+class PortalSession extends Message {
   /// Doesn't work with enum because there is a dot in it.
   final String object;
   final String id;
@@ -27,5 +27,7 @@ class PortalSession {
 
   factory PortalSession.fromJson(Map<String, dynamic> json) =>
       _$PortalSessionFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$PortalSessionToJson(this);
 }

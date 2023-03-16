@@ -7,7 +7,7 @@ enum PriceType { one_time, recurring }
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
-class Price {
+class Price extends Message {
   final _PriceObject object;
 
   /// Unique identifier for the object.
@@ -40,6 +40,9 @@ class Price {
     required this.type,
     required this.unitAmount,
   });
+
   factory Price.fromJson(Map<String, dynamic> json) => _$PriceFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$PriceToJson(this);
 }

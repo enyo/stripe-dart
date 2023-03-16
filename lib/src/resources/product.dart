@@ -3,19 +3,18 @@ import 'dart:async';
 import 'package:stripe/messages.dart';
 
 import '../client.dart';
+import '_resource.dart';
 
-class ProductResource {
-  final Client _client;
-  ProductResource(this._client);
+class ProductResource extends Resource<Product> {
+  ProductResource(Client client) : super(client);
 
   Future<Product> retrieve(String id) async {
-    final map = await _client.get('products/$id');
+    final map = await get('products/$id');
     return Product.fromJson(map);
   }
 
   Future<DataList<Product>> list([ListProductsRequest? request]) async {
-    final map =
-        await _client.get('products', queryParameters: request?.toJson());
+    final map = await get('products', queryParameters: request?.toJson());
     return DataList<Product>.fromJson(
         map, (value) => Product.fromJson(value as Map<String, dynamic>));
   }

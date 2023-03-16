@@ -23,7 +23,9 @@ class SubscriptionItem {
     required this.price,
     required this.subscription,
   });
+
   factory SubscriptionItem.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionItemFromJson(json);
+
   Map<String, dynamic> toJson() => _$SubscriptionItemToJson(this);
 }

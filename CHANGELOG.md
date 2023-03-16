@@ -1,3 +1,15 @@
+## 4.9.0 (2023-03-10)
+
+- Add `PaymentIntentEvent` class
+- Add `Event.fromJson()` static factory method
+- Add support for `PaymentIntent.created` and `PaymentIntent.canceledAt`
+- Add `PaymentIntent.latestCharge`
+- Add `PaymentIntent.amountReceived`
+- Introduce `Message` parent class
+- Introduce `Resource` parent class
+- Remove outdated `PaymentIntent.charges` property
+- Update `BalanceTransaction` to add `fee` and `feeDetails` properties
+
 ## 4.8.0 (2022-12-21)
 
 - Add support for basic creation of payment Intents

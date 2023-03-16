@@ -19,7 +19,7 @@ enum SubscriptionStatus {
 
 /// https://stripe.com/docs/api/subscriptions/object
 @JsonSerializable()
-class Subscription {
+class Subscription extends Message {
   final _SubscriptionObject object;
 
   /// Unique identifier for the object.
@@ -88,7 +88,10 @@ class Subscription {
     required this.currentPeriodEnd,
     this.metadata,
   });
+
   factory Subscription.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$SubscriptionToJson(this);
 }

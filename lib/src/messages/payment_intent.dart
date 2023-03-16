@@ -5,17 +5,22 @@ enum _PaymentIntentObject { payment_intent }
 
 /// https://stripe.com/docs/api/payment_intents/object
 @JsonSerializable()
-class PaymentIntent {
+class PaymentIntent extends Message {
   final _PaymentIntentObject object;
 
   final String id;
   final int amount;
+  final int amountReceived;
   final String clientSecret;
   final String currency;
   final String status;
-  final DataList<Charge> charges;
+  @TimestampConverter()
+  final DateTime? canceledAt;
+  @TimestampConverter()
+  final DateTime? created;
   final String? customer;
   final String? description;
+  final String? latestCharge;
   final Map<String, String>? metadata;
   final String? paymentMethod;
   final Set<PaymentMethodType>? paymentMethodTypes;
@@ -29,12 +34,15 @@ class PaymentIntent {
     required this.object,
     required this.id,
     required this.amount,
+    required this.amountReceived,
     required this.clientSecret,
     required this.currency,
     required this.status,
-    required this.charges,
+    this.canceledAt,
+    this.created,
     this.customer,
     this.description,
+    this.latestCharge,
     this.metadata,
     this.paymentMethod,
     this.paymentMethodTypes,
@@ -44,8 +52,10 @@ class PaymentIntent {
     this.statementDescriptor,
     this.statementDescriptorSuffix,
   });
+
   factory PaymentIntent.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$PaymentIntentToJson(this);
 }
