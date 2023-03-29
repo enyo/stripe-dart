@@ -282,10 +282,10 @@ Map<String, dynamic> _$SubscriptionEventToJson(SubscriptionEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
-      'type': instance.type,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
+      'type': instance.type,
     };
 
 const _$_EventObjectEnumMap = {
@@ -305,10 +305,10 @@ Map<String, dynamic> _$CustomerEventToJson(CustomerEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
-      'type': instance.type,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
+      'type': instance.type,
     };
 
 ChargeEvent _$ChargeEventFromJson(Map<String, dynamic> json) => ChargeEvent(
@@ -323,10 +323,10 @@ Map<String, dynamic> _$ChargeEventToJson(ChargeEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
-      'type': instance.type,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
+      'type': instance.type,
     };
 
 PaymentIntentEvent _$PaymentIntentEventFromJson(Map<String, dynamic> json) =>
@@ -343,10 +343,10 @@ Map<String, dynamic> _$PaymentIntentEventToJson(PaymentIntentEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
-      'type': instance.type,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
+      'type': instance.type,
     };
 
 RefundEvent _$RefundEventFromJson(Map<String, dynamic> json) => RefundEvent(
@@ -361,10 +361,10 @@ Map<String, dynamic> _$RefundEventToJson(RefundEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
-      'type': instance.type,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
+      'type': instance.type,
     };
 
 CheckoutSessionEvent _$CheckoutSessionEventFromJson(
@@ -383,10 +383,10 @@ Map<String, dynamic> _$CheckoutSessionEventToJson(
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
-      'type': instance.type,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
+      'type': instance.type,
     };
 
 PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
@@ -398,6 +398,10 @@ PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
       clientSecret: json['client_secret'] as String,
       currency: json['currency'] as String,
       status: json['status'] as String,
+      automaticPaymentMethods: json['automatic_payment_methods'] == null
+          ? const AutomaticPaymentMethods()
+          : AutomaticPaymentMethods.fromJson(
+              json['automatic_payment_methods'] as Map<String, dynamic>),
       canceledAt: _$JsonConverterFromJson<int, DateTime>(
           json['canceled_at'], const TimestampConverter().fromJson),
       created: _$JsonConverterFromJson<int, DateTime>(
@@ -429,6 +433,7 @@ Map<String, dynamic> _$PaymentIntentToJson(PaymentIntent instance) {
     'id': instance.id,
     'amount': instance.amount,
     'amount_received': instance.amountReceived,
+    'automatic_payment_methods': instance.automaticPaymentMethods.toJson(),
     'client_secret': instance.clientSecret,
     'currency': instance.currency,
     'status': instance.status,
@@ -488,6 +493,18 @@ Json? _$JsonConverterToJson<Json, Value>(
   Json? Function(Value value) toJson,
 ) =>
     value == null ? null : toJson(value);
+
+AutomaticPaymentMethods _$AutomaticPaymentMethodsFromJson(
+        Map<String, dynamic> json) =>
+    AutomaticPaymentMethods(
+      enabled: json['enabled'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$AutomaticPaymentMethodsToJson(
+        AutomaticPaymentMethods instance) =>
+    <String, dynamic>{
+      'enabled': instance.enabled,
+    };
 
 PortalSession _$PortalSessionFromJson(Map<String, dynamic> json) =>
     PortalSession(
@@ -866,6 +883,10 @@ CreatePaymentIntentRequest _$CreatePaymentIntentRequestFromJson(
     CreatePaymentIntentRequest(
       amount: json['amount'] as int,
       currency: json['currency'] as String,
+      automaticPaymentMethods: json['automatic_payment_methods'] == null
+          ? null
+          : AutomaticPaymentMethods.fromJson(
+              json['automatic_payment_methods'] as Map<String, dynamic>),
       confirm: json['confirm'] as bool?,
       customer: json['customer'] as String?,
       description: json['description'] as String?,
@@ -892,7 +913,6 @@ Map<String, dynamic> _$CreatePaymentIntentRequestToJson(
     CreatePaymentIntentRequest instance) {
   final val = <String, dynamic>{
     'amount': instance.amount,
-    'currency': instance.currency,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -901,6 +921,9 @@ Map<String, dynamic> _$CreatePaymentIntentRequestToJson(
     }
   }
 
+  writeNotNull(
+      'automatic_payment_methods', instance.automaticPaymentMethods?.toJson());
+  val['currency'] = instance.currency;
   writeNotNull('confirm', instance.confirm);
   writeNotNull('customer', instance.customer);
   writeNotNull('description', instance.description);

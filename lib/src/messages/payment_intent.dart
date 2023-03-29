@@ -11,6 +11,7 @@ class PaymentIntent extends Message {
   final String id;
   final int amount;
   final int amountReceived;
+  final AutomaticPaymentMethods automaticPaymentMethods;
   final String clientSecret;
   final String currency;
   final String status;
@@ -38,6 +39,7 @@ class PaymentIntent extends Message {
     required this.clientSecret,
     required this.currency,
     required this.status,
+    this.automaticPaymentMethods = const AutomaticPaymentMethods(),
     this.canceledAt,
     this.created,
     this.customer,
@@ -58,4 +60,16 @@ class PaymentIntent extends Message {
 
   @override
   Map<String, dynamic> toJson() => _$PaymentIntentToJson(this);
+}
+
+@JsonSerializable()
+class AutomaticPaymentMethods {
+  final bool enabled;
+
+  const AutomaticPaymentMethods({this.enabled = false});
+
+  factory AutomaticPaymentMethods.fromJson(Map<String, dynamic> json) =>
+      _$AutomaticPaymentMethodsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AutomaticPaymentMethodsToJson(this);
 }
