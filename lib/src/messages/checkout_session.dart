@@ -1,21 +1,43 @@
 part of '../../messages.dart';
 
 enum PaymentMethodType {
+  // ignore: constant_identifier_names
+  acss_debit,
+  affirm,
+  // ignore: constant_identifier_names
+  afterpay_clearpay,
   alipay,
-  card,
-  ideal,
-  fpx,
+  // ignore: constant_identifier_names
+  au_becs_debit,
   // ignore: constant_identifier_names
   bacs_debit,
   bancontact,
-  giropay,
-  p24,
-  eps,
-  sofort,
-  sepaDebit,
-  grabpay,
+  blik,
+  boleto,
+  card,
+  cashapp,
   // ignore: constant_identifier_names
-  afterpay_clearpay,
+  customer_balance,
+  eps,
+  fpx,
+  giropay,
+  grabpay,
+  ideal,
+  klarna,
+  konbini,
+  link,
+  oxxo,
+  p24,
+  paynow,
+  pix,
+  promptpay,
+  // ignore: constant_identifier_names
+  sepa_debit,
+  sofort,
+  // ignore: constant_identifier_names
+  us_bank_account,
+  // ignore: constant_identifier_names
+  wechat_pay,
 }
 
 /// https://stripe.com/docs/api/checkout/sessions/object
