@@ -1,3 +1,6 @@
+## 4.10.0 (2023-03-29)
+- Add `PaymentIntent.automaticPaymentMethods` property
+
 ## 4.9.0 (2023-03-10)
 
 - Add `PaymentIntentEvent` class
