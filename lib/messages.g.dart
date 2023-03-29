@@ -1084,6 +1084,40 @@ const _$SubscriptionStatusEnumMap = {
   SubscriptionStatus.ended: 'ended',
 };
 
+UpdateCustomerRequest _$UpdateCustomerRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpdateCustomerRequest(
+      id: json['id'] as String,
+      description: json['description'] as String?,
+      email: json['email'] as String?,
+      metadata: (json['metadata'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+      name: json['name'] as String?,
+      paymentMethod: json['payment_method'] as String?,
+      phoneNumber: json['phone_number'] as String?,
+    );
+
+Map<String, dynamic> _$UpdateCustomerRequestToJson(
+    UpdateCustomerRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('email', instance.email);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('name', instance.name);
+  writeNotNull('payment_method', instance.paymentMethod);
+  writeNotNull('phone_number', instance.phoneNumber);
+  val['id'] = instance.id;
+  return val;
+}
+
 Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
       object: $enumDecode(_$_SubscriptionObjectEnumMap, json['object']),
       id: json['id'] as String,

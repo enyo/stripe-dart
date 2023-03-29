@@ -17,4 +17,9 @@ class CustomerResource extends Resource<Customer> {
     final map = await get('customers/$customerId');
     return Customer.fromJson(map);
   }
+
+  Future<Customer> update(UpdateCustomerRequest request) async {
+    final response = await post('customers/${request.id}', data: request.toJson());
+    return Customer.fromJson(response);
+  }
 }
