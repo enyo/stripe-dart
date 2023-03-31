@@ -45,14 +45,14 @@ class CreateCustomerRequest extends _CustomerRequest {
     String? name,
     String? paymentMethod,
     String? phoneNumber,
-  }): super(
-    description: description,
-    email: email,
-    metadata: metadata,
-    name: name,
-    paymentMethod: paymentMethod,
-    phoneNumber: phoneNumber,
-  );
+  }) : super(
+          description: description,
+          email: email,
+          metadata: metadata,
+          name: name,
+          paymentMethod: paymentMethod,
+          phoneNumber: phoneNumber,
+        );
 
   factory CreateCustomerRequest.fromJson(Map<String, dynamic> json) =>
       _$CreateCustomerRequestFromJson(json);
