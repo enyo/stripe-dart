@@ -1,8 +1,7 @@
 part of '../../../messages.dart';
 
 /// https://stripe.com/docs/api/checkout/customers/create
-@JsonSerializable()
-class CreateCustomerRequest {
+abstract class _CustomerRequest {
   /// An arbitrary string that you can attach to a customer object. It is
   /// displayed alongside the customer in the dashboard.
   final String? description;
@@ -27,7 +26,7 @@ class CreateCustomerRequest {
   /// The customer’s phone number.
   final String? phoneNumber;
 
-  CreateCustomerRequest({
+  _CustomerRequest({
     this.description,
     this.email,
     this.metadata,
@@ -35,8 +34,28 @@ class CreateCustomerRequest {
     this.paymentMethod,
     this.phoneNumber,
   });
+}
+
+@JsonSerializable()
+class CreateCustomerRequest extends _CustomerRequest {
+  CreateCustomerRequest({
+    String? description,
+    String? email,
+    Map<String, String>? metadata,
+    String? name,
+    String? paymentMethod,
+    String? phoneNumber,
+  }) : super(
+          description: description,
+          email: email,
+          metadata: metadata,
+          name: name,
+          paymentMethod: paymentMethod,
+          phoneNumber: phoneNumber,
+        );
 
   factory CreateCustomerRequest.fromJson(Map<String, dynamic> json) =>
       _$CreateCustomerRequestFromJson(json);
+
   Map<String, dynamic> toJson() => _$CreateCustomerRequestToJson(this);
 }

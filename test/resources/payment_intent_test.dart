@@ -3,7 +3,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:stripe/messages.dart'
-    show Address, PaymentMethodType, SetupFutureUsage, ShippingSpecification;
+    show
+        Address,
+        AutomaticPaymentMethods,
+        PaymentMethodType,
+        SetupFutureUsage,
+        ShippingSpecification;
 import 'package:stripe/src/client.dart';
 import 'package:stripe/src/resources/payment_intent.dart';
 import 'package:test/test.dart';
@@ -39,6 +44,8 @@ void main() {
       expect(response.status, 'requires_payment_method');
       expect(response.amount, 1099);
       expect(response.amountReceived, 999);
+      expect(response.automaticPaymentMethods, isA<AutomaticPaymentMethods>());
+      expect(response.automaticPaymentMethods.enabled, isTrue);
       expect(response.created?.toUtc(), DateTime.parse('2019-04-30 07:26:52Z'));
       expect(
           response.canceledAt?.toUtc(), DateTime.parse('2019-04-30 07:27:02Z'));
@@ -80,6 +87,9 @@ const createSessionResponse = r'''
   "amount": 1099,
   "amount_capturable": 0,
   "amount_received": 999,
+  "automatic_payment_methods": {
+    "enabled": true
+  },
   "application": null,
   "application_fee_amount": null,
   "canceled_at": 1556609222,

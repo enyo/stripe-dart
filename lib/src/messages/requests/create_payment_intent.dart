@@ -10,6 +10,8 @@ class CreatePaymentIntentRequest {
   /// value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
   final int amount;
 
+  final AutomaticPaymentMethods? automaticPaymentMethods;
+
   /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
   final String currency;
 
@@ -87,6 +89,7 @@ class CreatePaymentIntentRequest {
   CreatePaymentIntentRequest({
     required this.amount,
     required this.currency,
+    this.automaticPaymentMethods,
     this.confirm,
     this.customer,
     this.description,
