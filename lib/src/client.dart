@@ -59,7 +59,7 @@ class Client {
           options: _createRequestOptions(idempotencyKey: idempotencyKey));
       return processResponse(response);
     } on DioError catch (e) {
-      var message = e.message;
+      var message = e.message ?? '';
       if (e.response?.data != null) {
         message += '${e.response!.data}';
       }
@@ -114,12 +114,12 @@ class Client {
   }
 }
 
-/// This converter is usd by Dio to convert [List] objects to [Map] so they
+/// This converter is used by Dio to convert [List] objects to [Map] so they
 /// are encoded properly for Stripe.
 ///
 /// Stripe expects array to be submited like this: `some_field[0]=value` and not
 /// `some_field=[value]`.
-class FormDataTransformer extends DefaultTransformer {
+class FormDataTransformer extends BackgroundTransformer {
   void fixMap(Map object) {
     for (final key in object.keys) {
       var value = object[key];
