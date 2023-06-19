@@ -58,7 +58,7 @@ class Client {
           data: data,
           options: _createRequestOptions(idempotencyKey: idempotencyKey));
       return processResponse(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       var message = e.message ?? '';
       if (e.response?.data != null) {
         message += '${e.response!.data}';
