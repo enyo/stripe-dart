@@ -18,4 +18,9 @@ class ProductResource extends Resource<Product> {
     return DataList<Product>.fromJson(
         map, (value) => Product.fromJson(value as Map<String, dynamic>));
   }
+
+  Future<Product> create(CreateProductRequest request) async {
+    final map = await post('products', data: request.toJson());
+    return Product.fromJson(map);
+  }
 }
