@@ -1008,6 +1008,175 @@ Map<String, dynamic> _$CreateRefundRequestToJson(CreateRefundRequest instance) {
   return val;
 }
 
+CreateProductRequest _$CreateProductRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateProductRequest(
+      id: json['id'] as String?,
+      name: json['name'] as String,
+      active: json['active'] as bool? ?? true,
+      description: json['description'] as String?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
+      defaultPriceData: json['default_price_data'] as Map<String, dynamic>?,
+      features: (json['features'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList(),
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      packageDimensions: json['package_dimensions'] as Map<String, dynamic>?,
+      shippable: json['shippable'] as bool?,
+      statementDescriptor: json['statement_descriptor'] as String?,
+      taxCode: json['tax_code'] as String?,
+      unitLabel: json['unit_label'] as String?,
+      url: json['url'] as String?,
+    );
+
+Map<String, dynamic> _$CreateProductRequestToJson(
+    CreateProductRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['name'] = instance.name;
+  val['active'] = instance.active;
+  writeNotNull('description', instance.description);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('default_price_data', instance.defaultPriceData);
+  writeNotNull('features', instance.features);
+  writeNotNull('images', instance.images);
+  writeNotNull('package_dimensions', instance.packageDimensions);
+  writeNotNull('shippable', instance.shippable);
+  writeNotNull('statement_descriptor', instance.statementDescriptor);
+  writeNotNull('tax_code', instance.taxCode);
+  writeNotNull('unit_label', instance.unitLabel);
+  writeNotNull('url', instance.url);
+  return val;
+}
+
+CreatePriceRequest _$CreatePriceRequestFromJson(Map<String, dynamic> json) =>
+    CreatePriceRequest(
+      currency: json['currency'] as String,
+      product: json['product'] as String?,
+      unitAmount: json['unit_amount'] as int?,
+      active: json['active'] as bool?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
+      nickname: json['nickname'] as String?,
+      recurring: json['recurring'] == null
+          ? null
+          : Recurring.fromJson(json['recurring'] as Map<String, dynamic>),
+      parameters: json['parameters'] == null
+          ? null
+          : PriceParameters.fromJson(
+              json['parameters'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CreatePriceRequestToJson(CreatePriceRequest instance) {
+  final val = <String, dynamic>{
+    'currency': instance.currency,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product', instance.product);
+  writeNotNull('unit_amount', instance.unitAmount);
+  writeNotNull('active', instance.active);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('nickname', instance.nickname);
+  writeNotNull('recurring', instance.recurring?.toJson());
+  writeNotNull('parameters', instance.parameters?.toJson());
+  return val;
+}
+
+Recurring _$RecurringFromJson(Map<String, dynamic> json) => Recurring(
+      interval: $enumDecode(_$RecurringIntervalEnumMap, json['interval']),
+      aggregateUsage:
+          $enumDecodeNullable(_$AggregateUsageEnumMap, json['aggregate_usage']),
+      intervalCount: json['interval_count'] as int?,
+      usageType: json['usage_type'] as String?,
+    );
+
+Map<String, dynamic> _$RecurringToJson(Recurring instance) {
+  final val = <String, dynamic>{
+    'interval': _$RecurringIntervalEnumMap[instance.interval]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'aggregate_usage', _$AggregateUsageEnumMap[instance.aggregateUsage]);
+  writeNotNull('interval_count', instance.intervalCount);
+  writeNotNull('usage_type', instance.usageType);
+  return val;
+}
+
+const _$RecurringIntervalEnumMap = {
+  RecurringInterval.day: 'day',
+  RecurringInterval.week: 'week',
+  RecurringInterval.month: 'month',
+  RecurringInterval.year: 'year',
+};
+
+const _$AggregateUsageEnumMap = {
+  AggregateUsage.sum: 'sum',
+  AggregateUsage.last_during_period: 'last_during_period',
+  AggregateUsage.last_ever: 'last_ever',
+  AggregateUsage.max: 'max',
+};
+
+PriceParameters _$PriceParametersFromJson(Map<String, dynamic> json) =>
+    PriceParameters(
+      customUnitAmount: json['custom_unit_amount'] as int?,
+      productData: json['product_data'] == null
+          ? null
+          : ProductData.fromJson(json['product_data'] as Map<String, dynamic>),
+      tiers: (json['tiers'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList(),
+      tiersMode: json['tiers_mode'] as String?,
+      billingScheme: json['billing_scheme'] as String?,
+      currencyOptions: json['currency_options'] as Map<String, dynamic>?,
+      lookupKey: json['lookup_key'] as String?,
+      taxBehavior: json['tax_behavior'] as String?,
+      transferLookupKey: json['transfer_lookup_key'] as String?,
+      transformQuantity: json['transform_quantity'] as Map<String, dynamic>?,
+      unitAmountDecimal: (json['unit_amount_decimal'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$PriceParametersToJson(PriceParameters instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('custom_unit_amount', instance.customUnitAmount);
+  writeNotNull('product_data', instance.productData?.toJson());
+  writeNotNull('tiers', instance.tiers);
+  writeNotNull('tiers_mode', instance.tiersMode);
+  writeNotNull('billing_scheme', instance.billingScheme);
+  writeNotNull('currency_options', instance.currencyOptions);
+  writeNotNull('lookup_key', instance.lookupKey);
+  writeNotNull('tax_behavior', instance.taxBehavior);
+  writeNotNull('transfer_lookup_key', instance.transferLookupKey);
+  writeNotNull('transform_quantity', instance.transformQuantity);
+  writeNotNull('unit_amount_decimal', instance.unitAmountDecimal);
+  return val;
+}
+
 ListPricesRequest _$ListPricesRequestFromJson(Map<String, dynamic> json) =>
     ListPricesRequest(
       active: json['active'] as bool?,
