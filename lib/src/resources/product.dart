@@ -20,12 +20,7 @@ class ProductResource extends Resource<Product> {
   }
 
   Future<Product> create(CreateProductRequest request) async {
-    try {
-      final map = await post('products', data: request.toJson());
-      return Product.fromJson(map);
-    } catch (e) {
-      print(e);
-      rethrow;
-    }
+    final map = await post('products', data: request.toJson());
+    return Product.fromJson(map);
   }
 }
