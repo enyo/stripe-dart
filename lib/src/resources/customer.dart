@@ -24,7 +24,7 @@ class CustomerResource extends Resource<Customer> {
     return Customer.fromJson(response);
   }
 
-  Future<DataList<Customer>> search(Map<String, dynamic> queryString) async {
+  Future<DataList<Customer>> search({required String queryString}) async {
     final Map<String, dynamic> map = await get(
       'customers/search',
       queryParameters: {'query': queryString},
