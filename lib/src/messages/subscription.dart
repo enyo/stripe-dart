@@ -41,10 +41,19 @@ class Subscription extends Message {
   @TimestampConverter()
   final DateTime currentPeriodEnd;
 
+  /// Date when the subscription was first created. The date might differ from
+  /// the [created] date due to backdating.
+  @TimestampConverter()
+  final DateTime startDate;
+
   /// A date in the future at which the subscription will automatically get
   /// canceled.
   @TimestampConverter()
   final DateTime? cancelAt;
+
+  /// If the subscription has ended, the date the subscription ended.
+  @TimestampConverter()
+  final DateTime? endedAt;
 
   /// Possible values are incomplete, incomplete_expired, trialing, active,
   /// past_due, canceled, or unpaid.
@@ -91,7 +100,9 @@ class Subscription extends Message {
     required this.items,
     required this.currentPeriodStart,
     required this.currentPeriodEnd,
+    required this.startDate,
     this.cancelAt,
+    this.endedAt,
     this.metadata,
   });
 
