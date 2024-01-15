@@ -1300,6 +1300,8 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
           .fromJson(json['current_period_start'] as int),
       currentPeriodEnd: const TimestampConverter()
           .fromJson(json['current_period_end'] as int),
+      cancelAt: _$JsonConverterFromJson<int, DateTime>(
+          json['cancel_at'], const TimestampConverter().fromJson),
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
@@ -1313,10 +1315,6 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
         const TimestampConverter().toJson(instance.currentPeriodStart),
     'current_period_end':
         const TimestampConverter().toJson(instance.currentPeriodEnd),
-    'status': _$SubscriptionStatusEnumMap[instance.status]!,
-    'items': instance.items.toJson(
-      (value) => value.toJson(),
-    ),
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -1325,6 +1323,14 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
     }
   }
 
+  writeNotNull(
+      'cancel_at',
+      _$JsonConverterToJson<int, DateTime>(
+          instance.cancelAt, const TimestampConverter().toJson));
+  val['status'] = _$SubscriptionStatusEnumMap[instance.status]!;
+  val['items'] = instance.items.toJson(
+    (value) => value.toJson(),
+  );
   writeNotNull('metadata', instance.metadata);
   return val;
 }
