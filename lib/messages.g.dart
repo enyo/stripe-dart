@@ -1353,6 +1353,7 @@ SubscriptionItem _$SubscriptionItemFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       price: Price.fromJson(json['price'] as Map<String, dynamic>),
       subscription: json['subscription'] as String,
+      quantity: json['quantity'] as int,
     );
 
 Map<String, dynamic> _$SubscriptionItemToJson(SubscriptionItem instance) =>
@@ -1361,6 +1362,7 @@ Map<String, dynamic> _$SubscriptionItemToJson(SubscriptionItem instance) =>
       'id': instance.id,
       'price': instance.price.toJson(),
       'subscription': instance.subscription,
+      'quantity': instance.quantity,
     };
 
 const _$_SubscriptionItemObjectEnumMap = {
