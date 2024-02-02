@@ -1300,6 +1300,11 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
           .fromJson(json['current_period_start'] as int),
       currentPeriodEnd: const TimestampConverter()
           .fromJson(json['current_period_end'] as int),
+      startDate: const TimestampConverter().fromJson(json['start_date'] as int),
+      cancelAt: _$JsonConverterFromJson<int, DateTime>(
+          json['cancel_at'], const TimestampConverter().fromJson),
+      endedAt: _$JsonConverterFromJson<int, DateTime>(
+          json['ended_at'], const TimestampConverter().fromJson),
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
@@ -1313,10 +1318,7 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
         const TimestampConverter().toJson(instance.currentPeriodStart),
     'current_period_end':
         const TimestampConverter().toJson(instance.currentPeriodEnd),
-    'status': _$SubscriptionStatusEnumMap[instance.status]!,
-    'items': instance.items.toJson(
-      (value) => value.toJson(),
-    ),
+    'start_date': const TimestampConverter().toJson(instance.startDate),
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -1325,6 +1327,18 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
     }
   }
 
+  writeNotNull(
+      'cancel_at',
+      _$JsonConverterToJson<int, DateTime>(
+          instance.cancelAt, const TimestampConverter().toJson));
+  writeNotNull(
+      'ended_at',
+      _$JsonConverterToJson<int, DateTime>(
+          instance.endedAt, const TimestampConverter().toJson));
+  val['status'] = _$SubscriptionStatusEnumMap[instance.status]!;
+  val['items'] = instance.items.toJson(
+    (value) => value.toJson(),
+  );
   writeNotNull('metadata', instance.metadata);
   return val;
 }
@@ -1339,6 +1353,7 @@ SubscriptionItem _$SubscriptionItemFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       price: Price.fromJson(json['price'] as Map<String, dynamic>),
       subscription: json['subscription'] as String,
+      quantity: json['quantity'] as int,
     );
 
 Map<String, dynamic> _$SubscriptionItemToJson(SubscriptionItem instance) =>
@@ -1347,6 +1362,7 @@ Map<String, dynamic> _$SubscriptionItemToJson(SubscriptionItem instance) =>
       'id': instance.id,
       'price': instance.price.toJson(),
       'subscription': instance.subscription,
+      'quantity': instance.quantity,
     };
 
 const _$_SubscriptionItemObjectEnumMap = {
