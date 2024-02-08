@@ -51,6 +51,13 @@ class Subscription extends Message {
   @TimestampConverter()
   final DateTime? cancelAt;
 
+  /// If the subscription has been canceled with the at_period_end flag set to
+  /// true, cancel_at_period_end on the subscription will be true.
+  /// You can use this attribute to determine whether a subscription that has
+  /// a status of active is scheduled to be canceled at the end of the current
+  /// period.
+  final bool cancelAtPeriodEnd;
+
   /// If the subscription has ended, the date the subscription ended.
   @TimestampConverter()
   final DateTime? endedAt;
@@ -102,6 +109,7 @@ class Subscription extends Message {
     required this.currentPeriodEnd,
     required this.startDate,
     this.cancelAt,
+    this.cancelAtPeriodEnd = false,
     this.endedAt,
     this.metadata,
   });
