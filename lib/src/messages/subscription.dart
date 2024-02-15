@@ -46,6 +46,13 @@ class Subscription extends Message {
   @TimestampConverter()
   final DateTime startDate;
 
+  /// The reference point that aligns future billing cycle dates.
+  /// It sets the day of week for week intervals, the day of month for month
+  /// and year intervals, and the month of year for year intervals.
+  /// The timestamp is in UTC format.
+  @TimestampConverter()
+  final DateTime billingCycleAnchor;
+
   /// A date in the future at which the subscription will automatically get
   /// canceled.
   @TimestampConverter()
@@ -108,6 +115,7 @@ class Subscription extends Message {
     required this.currentPeriodStart,
     required this.currentPeriodEnd,
     required this.startDate,
+    required this.billingCycleAnchor,
     this.cancelAt,
     this.cancelAtPeriodEnd = false,
     this.endedAt,

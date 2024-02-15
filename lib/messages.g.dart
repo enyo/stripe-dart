@@ -1301,6 +1301,8 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
       currentPeriodEnd: const TimestampConverter()
           .fromJson(json['current_period_end'] as int),
       startDate: const TimestampConverter().fromJson(json['start_date'] as int),
+      billingCycleAnchor: const TimestampConverter()
+          .fromJson(json['billing_cycle_anchor'] as int),
       cancelAt: _$JsonConverterFromJson<int, DateTime>(
           json['cancel_at'], const TimestampConverter().fromJson),
       cancelAtPeriodEnd: json['cancel_at_period_end'] as bool? ?? false,
@@ -1320,6 +1322,8 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
     'current_period_end':
         const TimestampConverter().toJson(instance.currentPeriodEnd),
     'start_date': const TimestampConverter().toJson(instance.startDate),
+    'billing_cycle_anchor':
+        const TimestampConverter().toJson(instance.billingCycleAnchor),
   };
 
   void writeNotNull(String key, dynamic value) {
