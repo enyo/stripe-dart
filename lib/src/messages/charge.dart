@@ -27,9 +27,11 @@ class Charge extends Message {
 
 @JsonSerializable()
 class PaymentMethodDetails {
+  final String id;
   final PaymentMethodDetailsCard? card;
 
   PaymentMethodDetails({
+    required this.id,
     this.card,
   });
 
