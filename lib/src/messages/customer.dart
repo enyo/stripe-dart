@@ -50,10 +50,10 @@ class Customer extends Message {
 class InvoiceSettings {
   /// ID of a payment method that’s attached to the customer, to be used as the
   /// customer’s default payment method for subscriptions and invoices.
-  final String defaultPaymentMethod;
+  final String? defaultPaymentMethod;
 
   InvoiceSettings({
-    required this.defaultPaymentMethod,
+    this.defaultPaymentMethod,
   });
 
   factory InvoiceSettings.fromJson(Map<String, dynamic> json) =>

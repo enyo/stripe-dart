@@ -247,13 +247,21 @@ const _$_CustomerObjectEnumMap = {
 
 InvoiceSettings _$InvoiceSettingsFromJson(Map<String, dynamic> json) =>
     InvoiceSettings(
-      defaultPaymentMethod: json['default_payment_method'] as String,
+      defaultPaymentMethod: json['default_payment_method'] as String?,
     );
 
-Map<String, dynamic> _$InvoiceSettingsToJson(InvoiceSettings instance) =>
-    <String, dynamic>{
-      'default_payment_method': instance.defaultPaymentMethod,
-    };
+Map<String, dynamic> _$InvoiceSettingsToJson(InvoiceSettings instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('default_payment_method', instance.defaultPaymentMethod);
+  return val;
+}
 
 DataList<T> _$DataListFromJson<T>(
   Map<String, dynamic> json,
