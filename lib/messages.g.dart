@@ -213,6 +213,8 @@ const _$PaymentMethodTypeEnumMap = {
 Customer _$CustomerFromJson(Map<String, dynamic> json) => Customer(
       object: $enumDecode(_$_CustomerObjectEnumMap, json['object']),
       id: json['id'] as String,
+      invoiceSettings: InvoiceSettings.fromJson(
+          json['invoice_settings'] as Map<String, dynamic>),
       description: json['description'] as String?,
       email: json['email'] as String?,
       metadata: json['metadata'] as Map<String, dynamic>?,
@@ -223,6 +225,7 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
   final val = <String, dynamic>{
     'object': _$_CustomerObjectEnumMap[instance.object]!,
     'id': instance.id,
+    'invoice_settings': instance.invoiceSettings.toJson(),
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -241,6 +244,16 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
 const _$_CustomerObjectEnumMap = {
   _CustomerObject.customer: 'customer',
 };
+
+InvoiceSettings _$InvoiceSettingsFromJson(Map<String, dynamic> json) =>
+    InvoiceSettings(
+      defaultPaymentMethod: json['default_payment_method'] as String,
+    );
+
+Map<String, dynamic> _$InvoiceSettingsToJson(InvoiceSettings instance) =>
+    <String, dynamic>{
+      'default_payment_method': instance.defaultPaymentMethod,
+    };
 
 DataList<T> _$DataListFromJson<T>(
   Map<String, dynamic> json,
