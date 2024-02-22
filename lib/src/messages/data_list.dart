@@ -1,6 +1,10 @@
 part of '../../messages.dart';
 
-enum _SubListObject { list }
+enum _SubListObject {
+  list,
+  @JsonValue('search_result')
+  searchResult,
+}
 
 @JsonSerializable()
 class DataList<T> {
