@@ -23,4 +23,22 @@ class ProductResource extends Resource<Product> {
     final map = await post('products', data: request.toJson());
     return Product.fromJson(map);
   }
+
+  Future<DataList<Product>> search({
+    /// https://docs.stripe.com/search#query-fields-for-products
+    required String queryString,
+  }) async {
+    final Map<String, dynamic> map = await get(
+      'products/search',
+      queryParameters: {'query': queryString},
+    );
+
+    final products = DataList<Product>.fromJson(
+      map,
+      (subscriptionMap) =>
+          Product.fromJson(subscriptionMap as Map<String, dynamic>),
+    );
+
+    return products;
+  }
 }

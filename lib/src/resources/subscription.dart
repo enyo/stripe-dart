@@ -19,4 +19,22 @@ class SubscriptionResource extends Resource<Subscription> {
     return DataList<Subscription>.fromJson(
         map, (value) => Subscription.fromJson(value as Map<String, dynamic>));
   }
+
+  Future<DataList<Subscription>> search({
+    /// https://docs.stripe.com/search#query-fields-for-subscriptions
+    required String queryString,
+  }) async {
+    final Map<String, dynamic> map = await get(
+      'subscriptions/search',
+      queryParameters: {'query': queryString},
+    );
+
+    final subscriptions = DataList<Subscription>.fromJson(
+      map,
+      (subscriptionMap) =>
+          Subscription.fromJson(subscriptionMap as Map<String, dynamic>),
+    );
+
+    return subscriptions;
+  }
 }
