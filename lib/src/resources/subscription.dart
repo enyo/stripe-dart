@@ -39,6 +39,19 @@ class SubscriptionResource extends Resource<Subscription> {
   }
 
   /// https://docs.stripe.com/api/subscriptions/cancel
+  Future<Subscription> update(
+    String id, {
+    required SubscriptionUpdate update,
+  }) async {
+    final response = await post(
+      'subscriptions/$id',
+      data: update.toJson(),
+    );
+
+    return Subscription.fromJson(response);
+  }
+
+  /// https://docs.stripe.com/api/subscriptions/cancel
   Future<Subscription> cancel(
     String id, {
     bool? invoiceNow,

@@ -1288,6 +1288,24 @@ Map<String, dynamic> _$UpdateCustomerRequestToJson(
   return val;
 }
 
+SubscriptionUpdate _$SubscriptionUpdateFromJson(Map<String, dynamic> json) =>
+    SubscriptionUpdate(
+      cancelAtPeriodEnd: json['cancel_at_period_end'] as bool?,
+    );
+
+Map<String, dynamic> _$SubscriptionUpdateToJson(SubscriptionUpdate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cancel_at_period_end', instance.cancelAtPeriodEnd);
+  return val;
+}
+
 Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
       object: $enumDecode(_$_SubscriptionObjectEnumMap, json['object']),
       id: json['id'] as String,
