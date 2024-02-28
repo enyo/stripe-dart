@@ -8,7 +8,7 @@ part of '../../messages.dart';
 @JsonSerializable()
 class PaymentMethod extends Message {
   /// Unique identifier for the object.
-  final int id;
+  final String id;
 
   /// Has the value true if the object exists in live mode or the value false
   /// if the object exists in test mode.

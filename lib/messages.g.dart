@@ -571,7 +571,7 @@ Map<String, dynamic> _$AutomaticPaymentMethodsToJson(
 
 PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
     PaymentMethod(
-      id: json['id'] as int,
+      id: json['id'] as String,
       livemode: json['livemode'] as bool,
       type: json['type'] as String,
       billingDetails: BillingDetails.fromJson(
