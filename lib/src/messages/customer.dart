@@ -46,6 +46,7 @@ class Customer extends Message {
 }
 
 /// The customer’s default invoice settings.
+/// https://docs.stripe.com/api/customers/object#customer_object-invoice_settings
 @JsonSerializable()
 class InvoiceSettings {
   /// ID of a payment method that’s attached to the customer, to be used as the
