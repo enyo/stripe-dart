@@ -87,6 +87,32 @@ Map<String, dynamic> _$FeeDetailsToJson(FeeDetails instance) {
   return val;
 }
 
+BillingDetails _$BillingDetailsFromJson(Map<String, dynamic> json) =>
+    BillingDetails(
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(json['address'] as Map<String, dynamic>),
+      email: json['email'] as String?,
+      name: json['name'] as String?,
+      phone: json['phone'] as String?,
+    );
+
+Map<String, dynamic> _$BillingDetailsToJson(BillingDetails instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('address', instance.address?.toJson());
+  writeNotNull('email', instance.email);
+  writeNotNull('name', instance.name);
+  writeNotNull('phone', instance.phone);
+  return val;
+}
+
 Charge _$ChargeFromJson(Map<String, dynamic> json) => Charge(
       object: $enumDecode(_$_ChargeObjectEnumMap, json['object']),
       id: json['id'] as String,
@@ -543,6 +569,85 @@ Map<String, dynamic> _$AutomaticPaymentMethodsToJson(
       'enabled': instance.enabled,
     };
 
+PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
+    PaymentMethod(
+      id: json['id'] as int,
+      livemode: json['livemode'] as bool,
+      type: json['type'] as String,
+      billingDetails: BillingDetails.fromJson(
+          json['billing_details'] as Map<String, dynamic>),
+      customer: json['customer'] as String?,
+      card: json['card'] == null
+          ? null
+          : PaymentMethodCard.fromJson(json['card'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'livemode': instance.livemode,
+    'type': instance.type,
+    'billing_details': instance.billingDetails.toJson(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer', instance.customer);
+  writeNotNull('card', instance.card?.toJson());
+  return val;
+}
+
+PaymentMethodCard _$PaymentMethodCardFromJson(Map<String, dynamic> json) =>
+    PaymentMethodCard(
+      brand: json['brand'] as String,
+      last4: json['last4'] as String,
+      expMonth: json['exp_month'] as int,
+      expYear: json['exp_year'] as int,
+      displayBrand: json['display_brand'] as String?,
+    );
+
+Map<String, dynamic> _$PaymentMethodCardToJson(PaymentMethodCard instance) {
+  final val = <String, dynamic>{
+    'brand': instance.brand,
+    'last4': instance.last4,
+    'exp_month': instance.expMonth,
+    'exp_year': instance.expYear,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('display_brand', instance.displayBrand);
+  return val;
+}
+
+Wallet _$WalletFromJson(Map<String, dynamic> json) => Wallet(
+      type: json['type'] as String,
+      dynamicLast4: json['dynamic_last4'] as String?,
+    );
+
+Map<String, dynamic> _$WalletToJson(Wallet instance) {
+  final val = <String, dynamic>{
+    'type': instance.type,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('dynamic_last4', instance.dynamicLast4);
+  return val;
+}
+
 PortalSession _$PortalSessionFromJson(Map<String, dynamic> json) =>
     PortalSession(
       object: json['object'] as String,
@@ -635,35 +740,6 @@ Map<String, dynamic> _$RefundToJson(Refund instance) => <String, dynamic>{
 const _$_RefundObjectEnumMap = {
   _RefundObject.refund: 'refund',
 };
-
-ShippingSpecification _$ShippingSpecificationFromJson(
-        Map<String, dynamic> json) =>
-    ShippingSpecification(
-      address: Address.fromJson(json['address'] as Map<String, dynamic>),
-      name: json['name'] as String,
-      carrier: json['carrier'] as String?,
-      phone: json['phone'] as String?,
-      trackingNumber: json['tracking_number'] as String?,
-    );
-
-Map<String, dynamic> _$ShippingSpecificationToJson(
-    ShippingSpecification instance) {
-  final val = <String, dynamic>{
-    'address': instance.address.toJson(),
-    'name': instance.name,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('carrier', instance.carrier);
-  writeNotNull('phone', instance.phone);
-  writeNotNull('tracking_number', instance.trackingNumber);
-  return val;
-}
 
 CreateCheckoutSessionRequest _$CreateCheckoutSessionRequestFromJson(
         Map<String, dynamic> json) =>
@@ -1005,79 +1081,6 @@ Map<String, dynamic> _$CreatePortalSessionRequestToJson(
   return val;
 }
 
-CreateRefundRequest _$CreateRefundRequestFromJson(Map<String, dynamic> json) =>
-    CreateRefundRequest(
-      charge: json['charge'] as String?,
-      amount: json['amount'] as int?,
-      paymentIntent: json['payment_intent'] as String?,
-      reason: json['reason'] as String?,
-    );
-
-Map<String, dynamic> _$CreateRefundRequestToJson(CreateRefundRequest instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('charge', instance.charge);
-  writeNotNull('amount', instance.amount);
-  writeNotNull('payment_intent', instance.paymentIntent);
-  writeNotNull('reason', instance.reason);
-  return val;
-}
-
-CreateProductRequest _$CreateProductRequestFromJson(
-        Map<String, dynamic> json) =>
-    CreateProductRequest(
-      id: json['id'] as String?,
-      name: json['name'] as String,
-      active: json['active'] as bool? ?? true,
-      description: json['description'] as String?,
-      metadata: json['metadata'] as Map<String, dynamic>?,
-      defaultPriceData: json['default_price_data'] as Map<String, dynamic>?,
-      features: (json['features'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
-      images:
-          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      packageDimensions: json['package_dimensions'] as Map<String, dynamic>?,
-      shippable: json['shippable'] as bool?,
-      statementDescriptor: json['statement_descriptor'] as String?,
-      taxCode: json['tax_code'] as String?,
-      unitLabel: json['unit_label'] as String?,
-      url: json['url'] as String?,
-    );
-
-Map<String, dynamic> _$CreateProductRequestToJson(
-    CreateProductRequest instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('id', instance.id);
-  val['name'] = instance.name;
-  val['active'] = instance.active;
-  writeNotNull('description', instance.description);
-  writeNotNull('metadata', instance.metadata);
-  writeNotNull('default_price_data', instance.defaultPriceData);
-  writeNotNull('features', instance.features);
-  writeNotNull('images', instance.images);
-  writeNotNull('package_dimensions', instance.packageDimensions);
-  writeNotNull('shippable', instance.shippable);
-  writeNotNull('statement_descriptor', instance.statementDescriptor);
-  writeNotNull('tax_code', instance.taxCode);
-  writeNotNull('unit_label', instance.unitLabel);
-  writeNotNull('url', instance.url);
-  return val;
-}
-
 CreatePriceRequest _$CreatePriceRequestFromJson(Map<String, dynamic> json) =>
     CreatePriceRequest(
       currency: json['currency'] as String,
@@ -1198,6 +1201,79 @@ Map<String, dynamic> _$PriceParametersToJson(PriceParameters instance) {
   return val;
 }
 
+CreateProductRequest _$CreateProductRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateProductRequest(
+      id: json['id'] as String?,
+      name: json['name'] as String,
+      active: json['active'] as bool? ?? true,
+      description: json['description'] as String?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
+      defaultPriceData: json['default_price_data'] as Map<String, dynamic>?,
+      features: (json['features'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList(),
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      packageDimensions: json['package_dimensions'] as Map<String, dynamic>?,
+      shippable: json['shippable'] as bool?,
+      statementDescriptor: json['statement_descriptor'] as String?,
+      taxCode: json['tax_code'] as String?,
+      unitLabel: json['unit_label'] as String?,
+      url: json['url'] as String?,
+    );
+
+Map<String, dynamic> _$CreateProductRequestToJson(
+    CreateProductRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['name'] = instance.name;
+  val['active'] = instance.active;
+  writeNotNull('description', instance.description);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('default_price_data', instance.defaultPriceData);
+  writeNotNull('features', instance.features);
+  writeNotNull('images', instance.images);
+  writeNotNull('package_dimensions', instance.packageDimensions);
+  writeNotNull('shippable', instance.shippable);
+  writeNotNull('statement_descriptor', instance.statementDescriptor);
+  writeNotNull('tax_code', instance.taxCode);
+  writeNotNull('unit_label', instance.unitLabel);
+  writeNotNull('url', instance.url);
+  return val;
+}
+
+CreateRefundRequest _$CreateRefundRequestFromJson(Map<String, dynamic> json) =>
+    CreateRefundRequest(
+      charge: json['charge'] as String?,
+      amount: json['amount'] as int?,
+      paymentIntent: json['payment_intent'] as String?,
+      reason: json['reason'] as String?,
+    );
+
+Map<String, dynamic> _$CreateRefundRequestToJson(CreateRefundRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('charge', instance.charge);
+  writeNotNull('amount', instance.amount);
+  writeNotNull('payment_intent', instance.paymentIntent);
+  writeNotNull('reason', instance.reason);
+  return val;
+}
+
 ListPricesRequest _$ListPricesRequestFromJson(Map<String, dynamic> json) =>
     ListPricesRequest(
       active: json['active'] as bool?,
@@ -1305,6 +1381,35 @@ Map<String, dynamic> _$UpdateCustomerRequestToJson(
   writeNotNull('payment_method', instance.paymentMethod);
   writeNotNull('phone_number', instance.phoneNumber);
   val['id'] = instance.id;
+  return val;
+}
+
+ShippingSpecification _$ShippingSpecificationFromJson(
+        Map<String, dynamic> json) =>
+    ShippingSpecification(
+      address: Address.fromJson(json['address'] as Map<String, dynamic>),
+      name: json['name'] as String,
+      carrier: json['carrier'] as String?,
+      phone: json['phone'] as String?,
+      trackingNumber: json['tracking_number'] as String?,
+    );
+
+Map<String, dynamic> _$ShippingSpecificationToJson(
+    ShippingSpecification instance) {
+  final val = <String, dynamic>{
+    'address': instance.address.toJson(),
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('carrier', instance.carrier);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('tracking_number', instance.trackingNumber);
   return val;
 }
 
