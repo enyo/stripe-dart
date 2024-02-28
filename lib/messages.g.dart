@@ -452,6 +452,26 @@ Map<String, dynamic> _$CheckoutSessionEventToJson(
       'type': instance.type,
     };
 
+PaymentMethodEvent _$PaymentMethodEventFromJson(Map<String, dynamic> json) =>
+    PaymentMethodEvent(
+      object: $enumDecode(_$_EventObjectEnumMap, json['object']),
+      id: json['id'] as String,
+      type: json['type'] as String,
+      data: EventData<PaymentMethod>.fromJson(
+          json['data'] as Map<String, dynamic>,
+          (value) => PaymentMethod.fromJson(value as Map<String, dynamic>)),
+    );
+
+Map<String, dynamic> _$PaymentMethodEventToJson(PaymentMethodEvent instance) =>
+    <String, dynamic>{
+      'object': _$_EventObjectEnumMap[instance.object]!,
+      'id': instance.id,
+      'data': instance.data.toJson(
+        (value) => value.toJson(),
+      ),
+      'type': instance.type,
+    };
+
 PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
     PaymentIntent(
       object: $enumDecode(_$_PaymentIntentObjectEnumMap, json['object']),
