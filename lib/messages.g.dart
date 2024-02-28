@@ -111,7 +111,6 @@ const _$_ChargeObjectEnumMap = {
 PaymentMethodDetails _$PaymentMethodDetailsFromJson(
         Map<String, dynamic> json) =>
     PaymentMethodDetails(
-      id: json['id'] as String,
       card: json['card'] == null
           ? null
           : PaymentMethodDetailsCard.fromJson(
@@ -120,9 +119,7 @@ PaymentMethodDetails _$PaymentMethodDetailsFromJson(
 
 Map<String, dynamic> _$PaymentMethodDetailsToJson(
     PaymentMethodDetails instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
