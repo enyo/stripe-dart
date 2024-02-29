@@ -31,4 +31,22 @@ class PaymentIntentResource extends Resource<PaymentIntent> {
     }
     return true;
   }
+
+  Future<DataList<PaymentIntent>> search({
+    /// https://docs.stripe.com/search#query-fields-for-payment-intents
+    required String queryString,
+  }) async {
+    final Map<String, dynamic> map = await get(
+      'payment_intents/search',
+      queryParameters: {'query': queryString},
+    );
+
+    final intents = DataList<PaymentIntent>.fromJson(
+      map,
+      (customerMap) =>
+          PaymentIntent.fromJson(customerMap as Map<String, dynamic>),
+    );
+
+    return intents;
+  }
 }

@@ -313,6 +313,7 @@ Map<String, dynamic> _$DataListToJson<T>(
 
 const _$_SubListObjectEnumMap = {
   _SubListObject.list: 'list',
+  _SubListObject.searchResult: 'search_result',
 };
 
 EventData<T> _$EventDataFromJson<T>(
@@ -1430,6 +1431,24 @@ Map<String, dynamic> _$ShippingSpecificationToJson(
   writeNotNull('carrier', instance.carrier);
   writeNotNull('phone', instance.phone);
   writeNotNull('tracking_number', instance.trackingNumber);
+  return val;
+}
+
+SubscriptionUpdate _$SubscriptionUpdateFromJson(Map<String, dynamic> json) =>
+    SubscriptionUpdate(
+      cancelAtPeriodEnd: json['cancel_at_period_end'] as bool?,
+    );
+
+Map<String, dynamic> _$SubscriptionUpdateToJson(SubscriptionUpdate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cancel_at_period_end', instance.cancelAtPeriodEnd);
   return val;
 }
 

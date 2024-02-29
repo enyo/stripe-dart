@@ -29,5 +29,6 @@ part 'src/messages/requests/list_products.dart';
 part 'src/messages/requests/list_subscriptions.dart';
 part 'src/messages/requests/update_customer.dart';
 part 'src/messages/shipping_specification.dart';
+part 'src/messages/requests/update_subscription.dart';
 part 'src/messages/subscription.dart';
 part 'src/messages/subscription_item.dart';
