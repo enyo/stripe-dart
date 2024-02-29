@@ -31,6 +31,10 @@ class PaymentMethod extends Message {
   /// details.
   final PaymentMethodCard? card;
 
+  /// If this is an us_bank_account [PaymentMethod], this hash contains details
+  /// about the US bank account payment method.
+  final PaymentMethodUsBankAccount? usBankAccount;
+
   PaymentMethod({
     required this.id,
     required this.livemode,
@@ -38,6 +42,7 @@ class PaymentMethod extends Message {
     required this.billingDetails,
     this.customer,
     this.card,
+    this.usBankAccount,
   });
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) =>
@@ -66,12 +71,20 @@ class PaymentMethodCard {
   /// brand choice on dual-branded cards.
   final String? displayBrand;
 
+  /// Uniquely identifies this particular card number. You can use this
+  /// attribute to check whether two customers who’ve signed up with you are
+  /// using the same card number, for example. For payment methods that tokenize
+  /// card information (Apple Pay, Google Pay), the tokenized number might be
+  /// provided instead of the underlying card number.
+  final String? fingerprint;
+
   PaymentMethodCard({
     required this.brand,
     required this.last4,
     required this.expMonth,
     required this.expYear,
     this.displayBrand,
+    this.fingerprint,
   });
 
   factory PaymentMethodCard.fromJson(Map<String, dynamic> json) =>
@@ -100,4 +113,33 @@ class Wallet {
   factory Wallet.fromJson(Map<String, dynamic> json) => _$WalletFromJson(json);
 
   Map<String, dynamic> toJson() => _$WalletToJson(this);
+}
+
+/// https://docs.stripe.com/api/payment_methods/object#payment_method_object-us_bank_account
+@JsonSerializable()
+class PaymentMethodUsBankAccount {
+  /// The name of the bank.
+  final String? bankName;
+
+  /// Uniquely identifies this particular bank account. You can use this
+  /// attribute to check whether two bank accounts are the same.
+  final String? fingerprint;
+
+  /// Last four digits of the bank account number.
+  final String? last4;
+
+  /// Routing number of the bank account.
+  final String? routingNumber;
+
+  PaymentMethodUsBankAccount({
+    this.bankName,
+    this.fingerprint,
+    this.last4,
+    this.routingNumber,
+  });
+
+  factory PaymentMethodUsBankAccount.fromJson(Map<String, dynamic> json) =>
+      _$PaymentMethodUsBankAccountFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PaymentMethodUsBankAccountToJson(this);
 }
