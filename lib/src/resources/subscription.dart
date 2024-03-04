@@ -9,7 +9,7 @@ class SubscriptionResource extends Resource<Subscription> {
   SubscriptionResource(Client client) : super(client);
 
   Future<Subscription> retrieve(String id) async {
-    final response = await get('subscription/$id');
+    final response = await get('subscriptions/$id');
     return Subscription.fromJson(response);
   }
 
@@ -38,7 +38,7 @@ class SubscriptionResource extends Resource<Subscription> {
     return subscriptions;
   }
 
-  /// https://docs.stripe.com/api/subscriptions/cancel
+  /// https://docs.stripe.com/api/subscriptions/update
   Future<Subscription> update(
     String id, {
     required SubscriptionUpdate update,
@@ -58,7 +58,7 @@ class SubscriptionResource extends Resource<Subscription> {
     bool? prorate,
   }) async {
     final response = await delete(
-      'subscription/$id',
+      'subscriptions/$id',
       data: {
         if (invoiceNow != null) 'invoice_now': invoiceNow,
         if (prorate != null) 'prorate': invoiceNow,
