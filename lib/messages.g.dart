@@ -601,6 +601,10 @@ PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
       card: json['card'] == null
           ? null
           : PaymentMethodCard.fromJson(json['card'] as Map<String, dynamic>),
+      usBankAccount: json['us_bank_account'] == null
+          ? null
+          : PaymentMethodUsBankAccount.fromJson(
+              json['us_bank_account'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) {
@@ -619,6 +623,7 @@ Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) {
 
   writeNotNull('customer', instance.customer);
   writeNotNull('card', instance.card?.toJson());
+  writeNotNull('us_bank_account', instance.usBankAccount?.toJson());
   return val;
 }
 
@@ -629,6 +634,7 @@ PaymentMethodCard _$PaymentMethodCardFromJson(Map<String, dynamic> json) =>
       expMonth: json['exp_month'] as int,
       expYear: json['exp_year'] as int,
       displayBrand: json['display_brand'] as String?,
+      fingerprint: json['fingerprint'] as String?,
     );
 
 Map<String, dynamic> _$PaymentMethodCardToJson(PaymentMethodCard instance) {
@@ -646,6 +652,7 @@ Map<String, dynamic> _$PaymentMethodCardToJson(PaymentMethodCard instance) {
   }
 
   writeNotNull('display_brand', instance.displayBrand);
+  writeNotNull('fingerprint', instance.fingerprint);
   return val;
 }
 
@@ -666,6 +673,32 @@ Map<String, dynamic> _$WalletToJson(Wallet instance) {
   }
 
   writeNotNull('dynamic_last4', instance.dynamicLast4);
+  return val;
+}
+
+PaymentMethodUsBankAccount _$PaymentMethodUsBankAccountFromJson(
+        Map<String, dynamic> json) =>
+    PaymentMethodUsBankAccount(
+      bankName: json['bank_name'] as String?,
+      fingerprint: json['fingerprint'] as String?,
+      last4: json['last4'] as String?,
+      routingNumber: json['routing_number'] as String?,
+    );
+
+Map<String, dynamic> _$PaymentMethodUsBankAccountToJson(
+    PaymentMethodUsBankAccount instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('bank_name', instance.bankName);
+  writeNotNull('fingerprint', instance.fingerprint);
+  writeNotNull('last4', instance.last4);
+  writeNotNull('routing_number', instance.routingNumber);
   return val;
 }
 
