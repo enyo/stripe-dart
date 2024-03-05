@@ -340,6 +340,7 @@ SubscriptionEvent _$SubscriptionEventFromJson(Map<String, dynamic> json) =>
       data: EventData<Subscription>.fromJson(
           json['data'] as Map<String, dynamic>,
           (value) => Subscription.fromJson(value as Map<String, dynamic>)),
+      livemode: json['livemode'] as bool,
     );
 
 Map<String, dynamic> _$SubscriptionEventToJson(SubscriptionEvent instance) =>
@@ -350,6 +351,7 @@ Map<String, dynamic> _$SubscriptionEventToJson(SubscriptionEvent instance) =>
         (value) => value.toJson(),
       ),
       'type': instance.type,
+      'livemode': instance.livemode,
     };
 
 const _$_EventObjectEnumMap = {
@@ -363,6 +365,7 @@ CustomerEvent _$CustomerEventFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       data: EventData<Customer>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Customer.fromJson(value as Map<String, dynamic>)),
+      livemode: json['livemode'] as bool,
     );
 
 Map<String, dynamic> _$CustomerEventToJson(CustomerEvent instance) =>
@@ -373,6 +376,7 @@ Map<String, dynamic> _$CustomerEventToJson(CustomerEvent instance) =>
         (value) => value.toJson(),
       ),
       'type': instance.type,
+      'livemode': instance.livemode,
     };
 
 ChargeEvent _$ChargeEventFromJson(Map<String, dynamic> json) => ChargeEvent(
@@ -381,6 +385,7 @@ ChargeEvent _$ChargeEventFromJson(Map<String, dynamic> json) => ChargeEvent(
       type: json['type'] as String,
       data: EventData<Charge>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Charge.fromJson(value as Map<String, dynamic>)),
+      livemode: json['livemode'] as bool,
     );
 
 Map<String, dynamic> _$ChargeEventToJson(ChargeEvent instance) =>
@@ -391,6 +396,7 @@ Map<String, dynamic> _$ChargeEventToJson(ChargeEvent instance) =>
         (value) => value.toJson(),
       ),
       'type': instance.type,
+      'livemode': instance.livemode,
     };
 
 PaymentIntentEvent _$PaymentIntentEventFromJson(Map<String, dynamic> json) =>
@@ -401,6 +407,7 @@ PaymentIntentEvent _$PaymentIntentEventFromJson(Map<String, dynamic> json) =>
       data: EventData<PaymentIntent>.fromJson(
           json['data'] as Map<String, dynamic>,
           (value) => PaymentIntent.fromJson(value as Map<String, dynamic>)),
+      livemode: json['livemode'] as bool,
     );
 
 Map<String, dynamic> _$PaymentIntentEventToJson(PaymentIntentEvent instance) =>
@@ -411,6 +418,7 @@ Map<String, dynamic> _$PaymentIntentEventToJson(PaymentIntentEvent instance) =>
         (value) => value.toJson(),
       ),
       'type': instance.type,
+      'livemode': instance.livemode,
     };
 
 RefundEvent _$RefundEventFromJson(Map<String, dynamic> json) => RefundEvent(
@@ -419,6 +427,7 @@ RefundEvent _$RefundEventFromJson(Map<String, dynamic> json) => RefundEvent(
       type: json['type'] as String,
       data: EventData<Refund>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Refund.fromJson(value as Map<String, dynamic>)),
+      livemode: json['livemode'] as bool,
     );
 
 Map<String, dynamic> _$RefundEventToJson(RefundEvent instance) =>
@@ -429,6 +438,7 @@ Map<String, dynamic> _$RefundEventToJson(RefundEvent instance) =>
         (value) => value.toJson(),
       ),
       'type': instance.type,
+      'livemode': instance.livemode,
     };
 
 CheckoutSessionEvent _$CheckoutSessionEventFromJson(
@@ -440,6 +450,7 @@ CheckoutSessionEvent _$CheckoutSessionEventFromJson(
       data: EventData<CheckoutSession>.fromJson(
           json['data'] as Map<String, dynamic>,
           (value) => CheckoutSession.fromJson(value as Map<String, dynamic>)),
+      livemode: json['livemode'] as bool,
     );
 
 Map<String, dynamic> _$CheckoutSessionEventToJson(
@@ -451,6 +462,7 @@ Map<String, dynamic> _$CheckoutSessionEventToJson(
         (value) => value.toJson(),
       ),
       'type': instance.type,
+      'livemode': instance.livemode,
     };
 
 PaymentMethodEvent _$PaymentMethodEventFromJson(Map<String, dynamic> json) =>
@@ -461,6 +473,7 @@ PaymentMethodEvent _$PaymentMethodEventFromJson(Map<String, dynamic> json) =>
       data: EventData<PaymentMethod>.fromJson(
           json['data'] as Map<String, dynamic>,
           (value) => PaymentMethod.fromJson(value as Map<String, dynamic>)),
+      livemode: json['livemode'] as bool,
     );
 
 Map<String, dynamic> _$PaymentMethodEventToJson(PaymentMethodEvent instance) =>
@@ -471,6 +484,7 @@ Map<String, dynamic> _$PaymentMethodEventToJson(PaymentMethodEvent instance) =>
         (value) => value.toJson(),
       ),
       'type': instance.type,
+      'livemode': instance.livemode,
     };
 
 PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>

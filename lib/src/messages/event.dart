@@ -15,11 +15,15 @@ abstract class Event<T extends Message> extends Message {
   /// Description of the event (e.g., invoice.created or charge.refunded).
   final String type;
 
+  /// Whether the event is coming from live mode.
+  final bool livemode;
+
   Event({
     required this.object,
     required this.id,
     required this.data,
     required this.type,
+    required this.livemode,
   });
 
   static T fromJson<T extends Event>(Map<String, dynamic> json) {
@@ -75,7 +79,9 @@ class SubscriptionEvent extends Event<Subscription> {
     required String id,
     required String type,
     required EventData<Subscription> data,
-  }) : super(object: object, id: id, data: data, type: type);
+    required bool livemode,
+  }) : super(
+            object: object, id: id, data: data, type: type, livemode: livemode);
 
   factory SubscriptionEvent.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionEventFromJson(json);
@@ -91,7 +97,9 @@ class CustomerEvent extends Event<Customer> {
     required String id,
     required String type,
     required EventData<Customer> data,
-  }) : super(object: object, id: id, data: data, type: type);
+    required bool livemode,
+  }) : super(
+            object: object, id: id, data: data, type: type, livemode: livemode);
 
   factory CustomerEvent.fromJson(Map<String, dynamic> json) =>
       _$CustomerEventFromJson(json);
@@ -107,7 +115,9 @@ class ChargeEvent extends Event<Charge> {
     required String id,
     required String type,
     required EventData<Charge> data,
-  }) : super(object: object, id: id, data: data, type: type);
+    required bool livemode,
+  }) : super(
+            object: object, id: id, data: data, type: type, livemode: livemode);
 
   factory ChargeEvent.fromJson(Map<String, dynamic> json) =>
       _$ChargeEventFromJson(json);
@@ -123,7 +133,9 @@ class PaymentIntentEvent extends Event<PaymentIntent> {
     required String id,
     required String type,
     required EventData<PaymentIntent> data,
-  }) : super(object: object, id: id, data: data, type: type);
+    required bool livemode,
+  }) : super(
+            object: object, id: id, data: data, type: type, livemode: livemode);
 
   factory PaymentIntentEvent.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentEventFromJson(json);
@@ -139,7 +151,9 @@ class RefundEvent extends Event<Refund> {
     required String id,
     required String type,
     required EventData<Refund> data,
-  }) : super(object: object, id: id, data: data, type: type);
+    required bool livemode,
+  }) : super(
+            object: object, id: id, data: data, type: type, livemode: livemode);
 
   factory RefundEvent.fromJson(Map<String, dynamic> json) =>
       _$RefundEventFromJson(json);
@@ -155,7 +169,9 @@ class CheckoutSessionEvent extends Event<CheckoutSession> {
     required String id,
     required String type,
     required EventData<CheckoutSession> data,
-  }) : super(object: object, id: id, data: data, type: type);
+    required bool livemode,
+  }) : super(
+            object: object, id: id, data: data, type: type, livemode: livemode);
 
   factory CheckoutSessionEvent.fromJson(Map<String, dynamic> json) =>
       _$CheckoutSessionEventFromJson(json);
@@ -171,7 +187,9 @@ class PaymentMethodEvent extends Event<PaymentMethod> {
     required String id,
     required String type,
     required EventData<PaymentMethod> data,
-  }) : super(object: object, id: id, data: data, type: type);
+    required bool livemode,
+  }) : super(
+            object: object, id: id, data: data, type: type, livemode: livemode);
 
   factory PaymentMethodEvent.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodEventFromJson(json);
