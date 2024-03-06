@@ -1432,6 +1432,32 @@ const _$SubscriptionStatusEnumMap = {
   SubscriptionStatus.ended: 'ended',
 };
 
+ListSubscriptionItemsRequest _$ListSubscriptionItemsRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListSubscriptionItemsRequest(
+      subscription: json['subscription'] as String?,
+      endingBefore: json['ending_before'] as String?,
+      limit: json['limit'] as int?,
+      startingAfter: json['starting_after'] as String?,
+    );
+
+Map<String, dynamic> _$ListSubscriptionItemsRequestToJson(
+    ListSubscriptionItemsRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('subscription', instance.subscription);
+  writeNotNull('ending_before', instance.endingBefore);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('starting_after', instance.startingAfter);
+  return val;
+}
+
 UpdateCustomerRequest _$UpdateCustomerRequestFromJson(
         Map<String, dynamic> json) =>
     UpdateCustomerRequest(
@@ -1466,6 +1492,85 @@ Map<String, dynamic> _$UpdateCustomerRequestToJson(
   return val;
 }
 
+SubscriptionUpdate _$SubscriptionUpdateFromJson(Map<String, dynamic> json) =>
+    SubscriptionUpdate(
+      cancelAtPeriodEnd: json['cancel_at_period_end'] as bool?,
+    );
+
+Map<String, dynamic> _$SubscriptionUpdateToJson(SubscriptionUpdate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cancel_at_period_end', instance.cancelAtPeriodEnd);
+  return val;
+}
+
+SubscriptionItemUpdate _$SubscriptionItemUpdateFromJson(
+        Map<String, dynamic> json) =>
+    SubscriptionItemUpdate(
+      paymentBehavior: $enumDecodeNullable(
+          _$PaymentBehaviorEnumMap, json['payment_behavior']),
+      metadata: (json['metadata'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+      price: json['price'] as String?,
+      prorationBehavior: $enumDecodeNullable(
+          _$ProrationBehaviorEnumMap, json['proration_behavior']),
+      quantity: json['quantity'] as int?,
+      billingThresholds: json['billing_thresholds'] as Map<String, dynamic>?,
+      offSession: json['off_session'] as bool?,
+      priceData: json['price_data'] as Map<String, dynamic>?,
+      prorationDate: json['proration_date'] == null
+          ? null
+          : DateTime.parse(json['proration_date'] as String),
+      taxRates: (json['tax_rates'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$SubscriptionItemUpdateToJson(
+    SubscriptionItemUpdate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull(
+      'payment_behavior', _$PaymentBehaviorEnumMap[instance.paymentBehavior]);
+  writeNotNull('price', instance.price);
+  writeNotNull('proration_behavior',
+      _$ProrationBehaviorEnumMap[instance.prorationBehavior]);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('billing_thresholds', instance.billingThresholds);
+  writeNotNull('off_session', instance.offSession);
+  writeNotNull('price_data', instance.priceData);
+  writeNotNull('proration_date', instance.prorationDate?.toIso8601String());
+  writeNotNull('tax_rates', instance.taxRates);
+  return val;
+}
+
+const _$PaymentBehaviorEnumMap = {
+  PaymentBehavior.allow_incomplete: 'allow_incomplete',
+  PaymentBehavior.default_incomplete: 'default_incomplete',
+  PaymentBehavior.error_if_incomplete: 'error_if_incomplete',
+  PaymentBehavior.pending_if_incomplete: 'pending_if_incomplete',
+};
+
+const _$ProrationBehaviorEnumMap = {
+  ProrationBehavior.always_invoice: 'always_invoice',
+  ProrationBehavior.create_prorations: 'create_prorations',
+  ProrationBehavior.none: 'none',
+};
+
 ShippingSpecification _$ShippingSpecificationFromJson(
         Map<String, dynamic> json) =>
     ShippingSpecification(
@@ -1492,24 +1597,6 @@ Map<String, dynamic> _$ShippingSpecificationToJson(
   writeNotNull('carrier', instance.carrier);
   writeNotNull('phone', instance.phone);
   writeNotNull('tracking_number', instance.trackingNumber);
-  return val;
-}
-
-SubscriptionUpdate _$SubscriptionUpdateFromJson(Map<String, dynamic> json) =>
-    SubscriptionUpdate(
-      cancelAtPeriodEnd: json['cancel_at_period_end'] as bool?,
-    );
-
-Map<String, dynamic> _$SubscriptionUpdateToJson(SubscriptionUpdate instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('cancel_at_period_end', instance.cancelAtPeriodEnd);
   return val;
 }
 

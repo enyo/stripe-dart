@@ -5,7 +5,7 @@ enum _SubscriptionItemObject { subscription_item }
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
-class SubscriptionItem {
+class SubscriptionItem extends Message {
   final _SubscriptionItemObject object;
 
   /// Unique identifier for the object.
@@ -31,5 +31,6 @@ class SubscriptionItem {
   factory SubscriptionItem.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionItemFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$SubscriptionItemToJson(this);
 }
