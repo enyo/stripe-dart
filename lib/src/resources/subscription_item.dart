@@ -13,10 +13,13 @@ class SubscriptionItemResource extends Resource<SubscriptionItem> {
     return SubscriptionItem.fromJson(response);
   }
 
-  Future<DataList<SubscriptionItem>> list(
-      [ListSubscriptionsRequest? request]) async {
-    final map =
-        await get('subscription_items', queryParameters: request?.toJson());
+  Future<DataList<SubscriptionItem>> list([
+    ListSubscriptionItemsRequest? request,
+  ]) async {
+    final map = await get(
+      'subscription_items',
+      queryParameters: request?.toJson(),
+    );
     return DataList<SubscriptionItem>.fromJson(
       map,
       (value) => SubscriptionItem.fromJson(value as Map<String, dynamic>),
@@ -25,7 +28,7 @@ class SubscriptionItemResource extends Resource<SubscriptionItem> {
 
   Future<SubscriptionItem> update(
     String id, {
-    required SubscriptionUpdate update,
+    required SubscriptionItemUpdate update,
   }) async {
     final response = await post(
       'subscription_items/$id',
