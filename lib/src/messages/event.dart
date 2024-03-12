@@ -51,6 +51,8 @@ abstract class Event<T extends Message> extends Message {
         return SubscriptionEvent.fromJson(json) as T;
       case 'payment_method':
         return PaymentMethodEvent.fromJson(json) as T;
+      case 'invoice':
+        return InvoiceEvent.fromJson(json) as T;
       default:
         throw FormatException(
             'Unrecognized/unsupported Stripe object `${json['object']}` in event webhook');
