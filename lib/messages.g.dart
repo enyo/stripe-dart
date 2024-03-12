@@ -268,6 +268,27 @@ const _$_SubListObjectEnumMap = {
   _SubListObject.list: 'list',
 };
 
+EphemeralKey _$EphemeralKeyFromJson(Map<String, dynamic> json) => EphemeralKey(
+      object: $enumDecode(_$_EphemeralKeyObjectEnumMap, json['object']),
+      id: json['id'] as String,
+      created: const TimestampConverter().fromJson(json['created'] as int),
+      expires: const TimestampConverter().fromJson(json['expires'] as int),
+      secret: json['secret'] as String,
+    );
+
+Map<String, dynamic> _$EphemeralKeyToJson(EphemeralKey instance) =>
+    <String, dynamic>{
+      'object': _$_EphemeralKeyObjectEnumMap[instance.object]!,
+      'id': instance.id,
+      'created': const TimestampConverter().toJson(instance.created),
+      'expires': const TimestampConverter().toJson(instance.expires),
+      'secret': instance.secret,
+    };
+
+const _$_EphemeralKeyObjectEnumMap = {
+  _EphemeralKeyObject.ephemeral_key: 'ephemeral_key',
+};
+
 EventData<T> _$EventDataFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
@@ -522,6 +543,33 @@ Map<String, dynamic> _$AutomaticPaymentMethodsToJson(
       'enabled': instance.enabled,
     };
 
+PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
+    PaymentMethod(
+      metadata: json['metadata'] as Map<String, dynamic>?,
+      id: json['id'] as String,
+      customer: json['customer'] as String?,
+      card: json['card'] == null
+          ? null
+          : PaymentMethodDetailsCard.fromJson(
+              json['card'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('metadata', instance.metadata);
+  val['id'] = instance.id;
+  writeNotNull('customer', instance.customer);
+  writeNotNull('card', instance.card?.toJson());
+  return val;
+}
+
 PortalSession _$PortalSessionFromJson(Map<String, dynamic> json) =>
     PortalSession(
       object: json['object'] as String,
@@ -613,6 +661,58 @@ Map<String, dynamic> _$RefundToJson(Refund instance) => <String, dynamic>{
 
 const _$_RefundObjectEnumMap = {
   _RefundObject.refund: 'refund',
+};
+
+SetupIntent _$SetupIntentFromJson(Map<String, dynamic> json) => SetupIntent(
+      object: $enumDecode(_$_SetupIntentObjectEnumMap, json['object']),
+      id: json['id'] as String,
+      clientSecret: json['client_secret'] as String,
+      status: json['status'] as String,
+      created: _$JsonConverterFromJson<int, DateTime>(
+          json['created'], const TimestampConverter().fromJson),
+      customer: json['customer'] as String?,
+      description: json['description'] as String?,
+      metadata: (json['metadata'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+      paymentMethod: json['payment_method'] as String?,
+      paymentMethodTypes: (json['payment_method_types'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$PaymentMethodTypeEnumMap, e))
+          .toSet(),
+    );
+
+Map<String, dynamic> _$SetupIntentToJson(SetupIntent instance) {
+  final val = <String, dynamic>{
+    'object': _$_SetupIntentObjectEnumMap[instance.object]!,
+    'id': instance.id,
+    'client_secret': instance.clientSecret,
+    'status': instance.status,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'created',
+      _$JsonConverterToJson<int, DateTime>(
+          instance.created, const TimestampConverter().toJson));
+  writeNotNull('customer', instance.customer);
+  writeNotNull('description', instance.description);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('payment_method', instance.paymentMethod);
+  writeNotNull(
+      'payment_method_types',
+      instance.paymentMethodTypes
+          ?.map((e) => _$PaymentMethodTypeEnumMap[e]!)
+          .toList());
+  return val;
+}
+
+const _$_SetupIntentObjectEnumMap = {
+  _SetupIntentObject.setup_intent: 'setup_intent',
 };
 
 ShippingSpecification _$ShippingSpecificationFromJson(
