@@ -1,6 +1,8 @@
 library stripe;
 
 import 'package:meta/meta.dart';
+import 'package:stripe/src/resources/ephemeral_key.dart';
+import 'package:stripe/src/resources/setup_intent.dart';
 
 import 'src/client.dart';
 import 'src/resources/balance_transaction.dart';
@@ -61,6 +63,11 @@ class Stripe {
   /// https://stripe.com/docs/api/balance_transactions
   final BalanceTransactionResource balanceTransaction;
 
+  final SetupIntentResource setupIntent;
+
+  // [NEW]
+  final EphemeralKeyResource ephemeralKey;
+
   factory Stripe(String apiKey) {
     final client = Client(apiKey: apiKey);
     return Stripe.withClient(client);
@@ -77,5 +84,7 @@ class Stripe {
         product = ProductResource(client),
         subscription = SubscriptionResource(client),
         charge = ChargeResource(client),
-        balanceTransaction = BalanceTransactionResource(client);
+        balanceTransaction = BalanceTransactionResource(client),
+        setupIntent = SetupIntentResource(client),
+        ephemeralKey = EphemeralKeyResource(client);
 }
