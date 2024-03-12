@@ -1084,6 +1084,38 @@ Map<String, dynamic> _$CreatePortalSessionRequestToJson(
   return val;
 }
 
+CreateSetupIntentRequest _$CreateSetupIntentRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateSetupIntentRequest(
+      clientSecret: json['client_secret'] as String?,
+      status: json['status'] as String?,
+      customer: json['customer'] as String?,
+      description: json['description'] as String?,
+      metadata: (json['metadata'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+      paymentMethod: json['payment_method'] as String?,
+    );
+
+Map<String, dynamic> _$CreateSetupIntentRequestToJson(
+    CreateSetupIntentRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('client_secret', instance.clientSecret);
+  writeNotNull('status', instance.status);
+  writeNotNull('customer', instance.customer);
+  writeNotNull('description', instance.description);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('payment_method', instance.paymentMethod);
+  return val;
+}
+
 CreateRefundRequest _$CreateRefundRequestFromJson(Map<String, dynamic> json) =>
     CreateRefundRequest(
       charge: json['charge'] as String?,
