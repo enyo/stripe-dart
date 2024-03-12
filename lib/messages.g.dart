@@ -487,6 +487,26 @@ Map<String, dynamic> _$PaymentMethodEventToJson(PaymentMethodEvent instance) =>
       'livemode': instance.livemode,
     };
 
+InvoiceEvent _$InvoiceEventFromJson(Map<String, dynamic> json) => InvoiceEvent(
+      object: $enumDecode(_$_EventObjectEnumMap, json['object']),
+      id: json['id'] as String,
+      type: json['type'] as String,
+      data: EventData<Invoice>.fromJson(json['data'] as Map<String, dynamic>,
+          (value) => Invoice.fromJson(value as Map<String, dynamic>)),
+      livemode: json['livemode'] as bool,
+    );
+
+Map<String, dynamic> _$InvoiceEventToJson(InvoiceEvent instance) =>
+    <String, dynamic>{
+      'object': _$_EventObjectEnumMap[instance.object]!,
+      'id': instance.id,
+      'data': instance.data.toJson(
+        (value) => value.toJson(),
+      ),
+      'type': instance.type,
+      'livemode': instance.livemode,
+    };
+
 Invoice _$InvoiceFromJson(Map<String, dynamic> json) => Invoice(
       id: json['id'] as String,
       currency: json['currency'] as String,

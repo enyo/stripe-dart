@@ -197,3 +197,21 @@ class PaymentMethodEvent extends Event<PaymentMethod> {
   @override
   Map<String, dynamic> toJson() => _$PaymentMethodEventToJson(this);
 }
+
+@JsonSerializable()
+class InvoiceEvent extends Event<Invoice> {
+  InvoiceEvent({
+    required _EventObject object,
+    required String id,
+    required String type,
+    required EventData<Invoice> data,
+    required bool livemode,
+  }) : super(
+            object: object, id: id, data: data, type: type, livemode: livemode);
+
+  factory InvoiceEvent.fromJson(Map<String, dynamic> json) =>
+      _$InvoiceEventFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$InvoiceEventToJson(this);
+}
