@@ -33,6 +33,11 @@ class Invoice extends Message {
   /// The subscription that this invoice was prepared for, if any.
   final String? subscription;
 
+  /// The PaymentIntent associated with this invoice. The PaymentIntent is
+  /// generated when the invoice is finalized, and can then be used to pay the
+  /// invoice. Note that voiding an invoice will cancel the PaymentIntent.
+  final String? paymentIntent;
+
   /// The country of the business associated with this invoice, most often the
   /// business creating the invoice.
   final String? accountCountry;
@@ -50,6 +55,7 @@ class Invoice extends Message {
     this.hostedInvoiceUrl,
     this.status,
     this.subscription,
+    this.paymentIntent,
     this.accountCountry,
     this.accountName,
   });
