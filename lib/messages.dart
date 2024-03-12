@@ -12,6 +12,7 @@ part 'src/messages/checkout_session.dart';
 part 'src/messages/customer.dart';
 part 'src/messages/data_list.dart';
 part 'src/messages/event.dart';
+part 'src/messages/invoice.dart';
 part 'src/messages/payment_intent.dart';
 part 'src/messages/payment_method.dart';
 part 'src/messages/portal_session.dart';

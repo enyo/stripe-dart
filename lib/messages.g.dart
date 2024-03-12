@@ -487,6 +487,42 @@ Map<String, dynamic> _$PaymentMethodEventToJson(PaymentMethodEvent instance) =>
       'livemode': instance.livemode,
     };
 
+Invoice _$InvoiceFromJson(Map<String, dynamic> json) => Invoice(
+      id: json['id'] as String,
+      currency: json['currency'] as String,
+      customer: json['customer'] as String,
+      total: json['total'] as int,
+      description: json['description'] as String?,
+      hostedInvoiceUrl: json['hosted_invoice_url'] as String?,
+      status: json['status'] as String?,
+      subscription: json['subscription'] as String?,
+      accountCountry: json['account_country'] as String?,
+      accountName: json['account_name'] as String?,
+    );
+
+Map<String, dynamic> _$InvoiceToJson(Invoice instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'currency': instance.currency,
+    'customer': instance.customer,
+    'total': instance.total,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('hosted_invoice_url', instance.hostedInvoiceUrl);
+  writeNotNull('status', instance.status);
+  writeNotNull('subscription', instance.subscription);
+  writeNotNull('account_country', instance.accountCountry);
+  writeNotNull('account_name', instance.accountName);
+  return val;
+}
+
 PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
     PaymentIntent(
       object: $enumDecode(_$_PaymentIntentObjectEnumMap, json['object']),
