@@ -67,6 +67,10 @@ class PaymentMethodCard {
   /// Four-digit number representing the card’s expiration year.
   final int expYear;
 
+  /// If this Card is part of a card wallet, this contains the details of the
+  /// card wallet.
+  final Wallet? wallet;
+
   /// The brand to use when displaying the card, this accounts for customer’s
   /// brand choice on dual-branded cards.
   final String? displayBrand;
@@ -83,6 +87,7 @@ class PaymentMethodCard {
     required this.last4,
     required this.expMonth,
     required this.expYear,
+    this.wallet,
     this.displayBrand,
     this.fingerprint,
   });
