@@ -67,6 +67,26 @@ class Client {
     }
   }
 
+  /// Makes a DELETE request to the Stripe API
+  Future<Map<String, dynamic>> delete(
+    final String path, {
+    final Map<String, dynamic>? data,
+    final String? idempotencyKey,
+  }) async {
+    try {
+      final response = await dio.delete<Map<String, dynamic>>(path,
+          data: data,
+          options: _createRequestOptions(idempotencyKey: idempotencyKey));
+      return processResponse(response);
+    } on DioException catch (e) {
+      var message = e.message ?? '';
+      if (e.response?.data != null) {
+        message += '${e.response!.data}';
+      }
+      throw InvalidRequestException(message);
+    }
+  }
+
   /// Makes a get request to the Stripe API
   Future<Map<String, dynamic>> get(
     final String path, {
