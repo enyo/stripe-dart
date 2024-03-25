@@ -18,8 +18,13 @@ class CustomerResource extends Resource<Customer> {
     return Customer.fromJson(map);
   }
 
-  Future<List<Customer>> retrieveAll(String customerId) async {
-    final map = await get('customers');
+  Future<List<Customer>> search(
+    String email,
+  ) async {
+    final map = await get('customers/search', queryParameters: {
+      'query': 'email=$email',
+    });
+
     return (map['data'] as List).map((e) => Customer.fromJson(e)).toList();
   }
 
