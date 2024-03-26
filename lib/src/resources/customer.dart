@@ -22,7 +22,7 @@ class CustomerResource extends Resource<Customer> {
     String email,
   ) async {
     final map = await get('customers/search', queryParameters: {
-      'query': 'email=$email',
+      'query': "email='$email'",
     });
 
     return (map['data'] as List).map((e) => Customer.fromJson(e)).toList();
