@@ -1116,6 +1116,52 @@ Map<String, dynamic> _$CreateSetupIntentRequestToJson(
   return val;
 }
 
+UpdateSetupIntentRequest _$UpdateSetupIntentRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpdateSetupIntentRequest(
+      id: json['id'] as String,
+      paymentMethod: json['payment_method'] as String?,
+    );
+
+Map<String, dynamic> _$UpdateSetupIntentRequestToJson(
+    UpdateSetupIntentRequest instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('payment_method', instance.paymentMethod);
+  return val;
+}
+
+ConfirmSetupIntentRequest _$ConfirmSetupIntentRequestFromJson(
+        Map<String, dynamic> json) =>
+    ConfirmSetupIntentRequest(
+      id: json['id'] as String,
+      paymentMethod: json['payment_method'] as String?,
+    );
+
+Map<String, dynamic> _$ConfirmSetupIntentRequestToJson(
+    ConfirmSetupIntentRequest instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('payment_method', instance.paymentMethod);
+  return val;
+}
+
 CreateRefundRequest _$CreateRefundRequestFromJson(Map<String, dynamic> json) =>
     CreateRefundRequest(
       charge: json['charge'] as String?,

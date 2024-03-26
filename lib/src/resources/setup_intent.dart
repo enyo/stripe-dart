@@ -16,9 +16,33 @@ class SetupIntentResource extends Resource<SetupIntent> {
     return SetupIntent.fromJson(response);
   }
 
+  Future<SetupIntent> update(UpdateSetupIntentRequest request) async {
+    final setupIntentId = request.id;
+    final response = await post(
+      'setup_intents/$setupIntentId',
+      data: request.toJson(),
+    );
+    return SetupIntent.fromJson(response);
+  }
+
   Future<SetupIntent> retrieve(String setupIntentId) async {
     final map = await get('setup_intents/$setupIntentId');
     return SetupIntent.fromJson(map);
+  }
+
+  /// Returns true if successful.
+  Future<bool> confirm(ConfirmSetupIntentRequest request) async {
+    final setupIntentId = request.id;
+    try {
+      await post(
+        'setup_intents/$setupIntentId/confirm',
+        data: request.toJson(),
+      );
+    } catch (e) {
+      log.warning(e);
+      return false;
+    }
+    return true;
   }
 
   /// Returns true if successful.
@@ -27,7 +51,6 @@ class SetupIntentResource extends Resource<SetupIntent> {
       await post('setup_intents/$setupIntentId/cancel');
     } catch (e) {
       log.warning(e);
-
       return false;
     }
     return true;

@@ -24,6 +24,8 @@ part 'src/messages/requests/create_customer.dart';
 part 'src/messages/requests/create_payment_intent.dart';
 part 'src/messages/requests/create_portal_session.dart';
 part 'src/messages/requests/create_setup_intent.dart';
+part 'src/messages/requests/update_setup_intent.dart';
+part 'src/messages/requests/confirm_setup_intent.dart';
 part 'src/messages/requests/create_refund.dart';
 part 'src/messages/requests/list_prices.dart';
 part 'src/messages/requests/list_products.dart';
