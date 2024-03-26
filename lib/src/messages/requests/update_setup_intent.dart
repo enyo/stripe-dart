@@ -15,5 +15,6 @@ class UpdateSetupIntentRequest {
   factory UpdateSetupIntentRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateSetupIntentRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UpdateSetupIntentRequestToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$UpdateSetupIntentRequestToJson(this)..remove('id');
 }
