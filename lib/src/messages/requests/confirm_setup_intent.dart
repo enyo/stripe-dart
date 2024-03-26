@@ -15,5 +15,6 @@ class ConfirmSetupIntentRequest {
   factory ConfirmSetupIntentRequest.fromJson(Map<String, dynamic> json) =>
       _$ConfirmSetupIntentRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ConfirmSetupIntentRequestToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$ConfirmSetupIntentRequestToJson(this)..remove('id');
 }
