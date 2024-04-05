@@ -105,6 +105,9 @@ class Subscription extends Message {
   /// format.
   final Map<String, dynamic>? metadata;
 
+  /// The most recent invoice this subscription has generated.
+  final String? latestInvoice;
+
   Subscription({
     required this.object,
     required this.id,
@@ -120,6 +123,7 @@ class Subscription extends Message {
     this.cancelAtPeriodEnd = false,
     this.endedAt,
     this.metadata,
+    this.latestInvoice,
   });
 
   factory Subscription.fromJson(Map<String, dynamic> json) =>

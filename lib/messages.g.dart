@@ -322,15 +322,26 @@ EventData<T> _$EventDataFromJson<T>(
 ) =>
     EventData<T>(
       object: fromJsonT(json['object']),
+      previousAttributes: json['previous_attributes'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$EventDataToJson<T>(
   EventData<T> instance,
   Object? Function(T value) toJsonT,
-) =>
-    <String, dynamic>{
-      'object': toJsonT(instance.object),
-    };
+) {
+  final val = <String, dynamic>{
+    'object': toJsonT(instance.object),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('previous_attributes', instance.previousAttributes);
+  return val;
+}
 
 SubscriptionEvent _$SubscriptionEventFromJson(Map<String, dynamic> json) =>
     SubscriptionEvent(
@@ -1684,6 +1695,7 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
       endedAt: _$JsonConverterFromJson<int, DateTime>(
           json['ended_at'], const TimestampConverter().fromJson),
       metadata: json['metadata'] as Map<String, dynamic>?,
+      latestInvoice: json['latest_invoice'] as String?,
     );
 
 Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
@@ -1721,6 +1733,7 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
     (value) => value.toJson(),
   );
   writeNotNull('metadata', instance.metadata);
+  writeNotNull('latest_invoice', instance.latestInvoice);
   return val;
 }
 
