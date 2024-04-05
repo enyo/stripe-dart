@@ -64,7 +64,19 @@ abstract class Event<T extends Message> extends Message {
 class EventData<T> {
   final T object;
 
-  EventData({required this.object});
+  /// Object containing the names of the updated attributes and their values
+  /// prior to the event (only included in events of type *.updated).
+  /// If an array attribute has any updated elements, this object contains the
+  /// entire array.
+  ///
+  /// In Stripe API versions 2017-04-06 or earlier, an updated array attribute
+  /// in this object includes only the updated array elements.
+  final Map<String, dynamic>? previousAttributes;
+
+  EventData({
+    required this.object,
+    this.previousAttributes,
+  });
 
   factory EventData.fromJson(
           Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
