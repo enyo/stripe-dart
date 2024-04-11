@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:stripe/src/messages/converters.dart';
 import 'package:stripe/src/messages/enums.dart';
 
+export 'package:stripe/src/messages/enums.dart';
+
 part 'messages.g.dart';
 part 'src/messages/_message.dart';
 part 'src/messages/address.dart';
