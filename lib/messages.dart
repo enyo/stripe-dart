@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:stripe/src/messages/converters.dart';
 import 'package:stripe/src/messages/enums.dart';
 
+export 'package:stripe/src/messages/enums.dart';
+
 part 'messages.g.dart';
 part 'src/messages/_message.dart';
 part 'src/messages/address.dart';
@@ -34,5 +36,6 @@ part 'src/messages/requests/update_customer.dart';
 part 'src/messages/requests/update_subscription.dart';
 part 'src/messages/requests/update_subscription_item.dart';
 part 'src/messages/shipping_specification.dart';
+part 'src/messages/stripe_api_error.dart';
 part 'src/messages/subscription.dart';
 part 'src/messages/subscription_item.dart';

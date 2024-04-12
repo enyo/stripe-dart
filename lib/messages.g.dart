@@ -1673,6 +1673,45 @@ Map<String, dynamic> _$ShippingSpecificationToJson(
   return val;
 }
 
+StripeApiError _$StripeApiErrorFromJson(Map<String, dynamic> json) =>
+    StripeApiError(
+      type: $enumDecode(_$StripeApiErrorTypeEnumMap, json['type']),
+      code: json['code'] as String?,
+      declineCode: json['decline_code'] as String?,
+      message: json['message'] as String?,
+      param: json['param'] as String?,
+      paymentIntent: json['payment_intent'] == null
+          ? null
+          : PaymentIntent.fromJson(
+              json['payment_intent'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StripeApiErrorToJson(StripeApiError instance) {
+  final val = <String, dynamic>{
+    'type': _$StripeApiErrorTypeEnumMap[instance.type]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('code', instance.code);
+  writeNotNull('decline_code', instance.declineCode);
+  writeNotNull('message', instance.message);
+  writeNotNull('param', instance.param);
+  writeNotNull('payment_intent', instance.paymentIntent?.toJson());
+  return val;
+}
+
+const _$StripeApiErrorTypeEnumMap = {
+  StripeApiErrorType.apiError: 'api_error',
+  StripeApiErrorType.cardError: 'card_error',
+  StripeApiErrorType.idempotencyError: 'idempotency_error',
+  StripeApiErrorType.invalidRequestError: 'invalid_request_error',
+};
+
 Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
       object: $enumDecode(_$_SubscriptionObjectEnumMap, json['object']),
       id: json['id'] as String,
