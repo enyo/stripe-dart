@@ -857,6 +857,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       description: json['description'] as String?,
       metadata: json['metadata'] as Map<String, dynamic>?,
       name: json['name'] as String,
+      defaultPrice: json['default_price'] as String?,
     );
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
@@ -875,6 +876,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('description', instance.description);
   writeNotNull('metadata', instance.metadata);
   val['name'] = instance.name;
+  writeNotNull('default_price', instance.defaultPrice);
   return val;
 }
 
