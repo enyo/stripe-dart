@@ -209,6 +209,7 @@ const _$PaymentMethodTypeEnumMap = {
   PaymentMethodType.affirm: 'affirm',
   PaymentMethodType.afterpay_clearpay: 'afterpay_clearpay',
   PaymentMethodType.alipay: 'alipay',
+  PaymentMethodType.amazon_pay: 'amazon_pay',
   PaymentMethodType.au_becs_debit: 'au_becs_debit',
   PaymentMethodType.bacs_debit: 'bacs_debit',
   PaymentMethodType.bancontact: 'bancontact',
