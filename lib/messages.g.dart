@@ -1926,6 +1926,8 @@ SubscriptionSchedule _$SubscriptionScheduleFromJson(
           .map((e) =>
               SubscriptionSchedulePhase.fromJson(e as Map<String, dynamic>))
           .toList(),
+      status: $enumDecode(_$SubscriptionScheduleStatusEnumMap, json['status']),
+      subscription: json['subscription'] as String?,
     );
 
 Map<String, dynamic> _$SubscriptionScheduleToJson(
@@ -1944,11 +1946,21 @@ Map<String, dynamic> _$SubscriptionScheduleToJson(
   writeNotNull('customer', instance.customer);
   writeNotNull('metadata', instance.metadata);
   val['phases'] = instance.phases.map((e) => e.toJson()).toList();
+  val['status'] = _$SubscriptionScheduleStatusEnumMap[instance.status]!;
+  writeNotNull('subscription', instance.subscription);
   return val;
 }
 
 const _$_SubscriptionScheduleObjectEnumMap = {
   _SubscriptionScheduleObject.subscriptionSchedule: 'subscription_schedule',
+};
+
+const _$SubscriptionScheduleStatusEnumMap = {
+  SubscriptionScheduleStatus.notStarted: 'not_started',
+  SubscriptionScheduleStatus.active: 'active',
+  SubscriptionScheduleStatus.completed: 'completed',
+  SubscriptionScheduleStatus.released: 'released',
+  SubscriptionScheduleStatus.canceled: 'canceled',
 };
 
 SubscriptionSchedulePhase _$SubscriptionSchedulePhaseFromJson(

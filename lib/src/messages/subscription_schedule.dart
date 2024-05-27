@@ -5,6 +5,19 @@ enum _SubscriptionScheduleObject {
   subscriptionSchedule,
 }
 
+enum SubscriptionScheduleStatus {
+  @JsonValue('not_started')
+  notStarted,
+  @JsonValue('active')
+  active,
+  @JsonValue('completed')
+  completed,
+  @JsonValue('released')
+  released,
+  @JsonValue('canceled')
+  canceled,
+}
+
 @JsonSerializable()
 class SubscriptionSchedule extends Message {
   final _SubscriptionScheduleObject object;
@@ -17,12 +30,18 @@ class SubscriptionSchedule extends Message {
 
   final List<SubscriptionSchedulePhase> phases;
 
+  final SubscriptionScheduleStatus status;
+
+  final String? subscription;
+
   const SubscriptionSchedule({
     required this.object,
     required this.id,
     this.customer,
     this.metadata,
     required this.phases,
+    required this.status,
+    this.subscription,
   });
 
   factory SubscriptionSchedule.fromJson(Map<String, dynamic> json) =>
