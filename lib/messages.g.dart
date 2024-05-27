@@ -348,6 +348,7 @@ SubscriptionEvent _$SubscriptionEventFromJson(Map<String, dynamic> json) =>
     SubscriptionEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Subscription>.fromJson(
           json['data'] as Map<String, dynamic>,
@@ -359,6 +360,7 @@ Map<String, dynamic> _$SubscriptionEventToJson(SubscriptionEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
+      'created': instance.created,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
@@ -374,6 +376,7 @@ CustomerEvent _$CustomerEventFromJson(Map<String, dynamic> json) =>
     CustomerEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Customer>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Customer.fromJson(value as Map<String, dynamic>)),
@@ -384,6 +387,7 @@ Map<String, dynamic> _$CustomerEventToJson(CustomerEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
+      'created': instance.created,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
@@ -394,6 +398,7 @@ Map<String, dynamic> _$CustomerEventToJson(CustomerEvent instance) =>
 ChargeEvent _$ChargeEventFromJson(Map<String, dynamic> json) => ChargeEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Charge>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Charge.fromJson(value as Map<String, dynamic>)),
@@ -404,6 +409,7 @@ Map<String, dynamic> _$ChargeEventToJson(ChargeEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
+      'created': instance.created,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
@@ -415,6 +421,7 @@ PaymentIntentEvent _$PaymentIntentEventFromJson(Map<String, dynamic> json) =>
     PaymentIntentEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<PaymentIntent>.fromJson(
           json['data'] as Map<String, dynamic>,
@@ -426,6 +433,7 @@ Map<String, dynamic> _$PaymentIntentEventToJson(PaymentIntentEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
+      'created': instance.created,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
@@ -436,6 +444,7 @@ Map<String, dynamic> _$PaymentIntentEventToJson(PaymentIntentEvent instance) =>
 RefundEvent _$RefundEventFromJson(Map<String, dynamic> json) => RefundEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Refund>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Refund.fromJson(value as Map<String, dynamic>)),
@@ -446,6 +455,7 @@ Map<String, dynamic> _$RefundEventToJson(RefundEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
+      'created': instance.created,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
@@ -458,6 +468,7 @@ CheckoutSessionEvent _$CheckoutSessionEventFromJson(
     CheckoutSessionEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<CheckoutSession>.fromJson(
           json['data'] as Map<String, dynamic>,
@@ -470,6 +481,7 @@ Map<String, dynamic> _$CheckoutSessionEventToJson(
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
+      'created': instance.created,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
@@ -481,6 +493,7 @@ PaymentMethodEvent _$PaymentMethodEventFromJson(Map<String, dynamic> json) =>
     PaymentMethodEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<PaymentMethod>.fromJson(
           json['data'] as Map<String, dynamic>,
@@ -492,6 +505,7 @@ Map<String, dynamic> _$PaymentMethodEventToJson(PaymentMethodEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
+      'created': instance.created,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
@@ -502,6 +516,7 @@ Map<String, dynamic> _$PaymentMethodEventToJson(PaymentMethodEvent instance) =>
 InvoiceEvent _$InvoiceEventFromJson(Map<String, dynamic> json) => InvoiceEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Invoice>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Invoice.fromJson(value as Map<String, dynamic>)),
@@ -512,6 +527,7 @@ Map<String, dynamic> _$InvoiceEventToJson(InvoiceEvent instance) =>
     <String, dynamic>{
       'object': _$_EventObjectEnumMap[instance.object]!,
       'id': instance.id,
+      'created': instance.created,
       'data': instance.data.toJson(
         (value) => value.toJson(),
       ),
