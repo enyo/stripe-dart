@@ -53,8 +53,6 @@ class SubscriptionSchedule extends Message {
 
 @JsonSerializable()
 class SubscriptionSchedulePhase extends Message {
-  final String id;
-
   @TimestampConverter()
   final DateTime? startDate;
 
@@ -64,7 +62,6 @@ class SubscriptionSchedulePhase extends Message {
   final List<SubscriptionSchedulePhaseItem> items;
 
   const SubscriptionSchedulePhase({
-    required this.id,
     this.startDate,
     this.endDate,
     required this.items,
