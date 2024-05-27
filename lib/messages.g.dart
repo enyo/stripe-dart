@@ -1707,7 +1707,6 @@ Map<String, dynamic> _$UpdateSubscriptionScheduleRequestToJson(
 UpdateSubscriptionSchedulePhase _$UpdateSubscriptionSchedulePhaseFromJson(
         Map<String, dynamic> json) =>
     UpdateSubscriptionSchedulePhase(
-      id: json['id'] as String,
       startDate: _$JsonConverterFromJson<int, DateTime>(
           json['start_date'], const TimestampConverter().fromJson),
       endDate: _$JsonConverterFromJson<int, DateTime>(
@@ -1720,9 +1719,7 @@ UpdateSubscriptionSchedulePhase _$UpdateSubscriptionSchedulePhaseFromJson(
 
 Map<String, dynamic> _$UpdateSubscriptionSchedulePhaseToJson(
     UpdateSubscriptionSchedulePhase instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {

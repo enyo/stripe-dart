@@ -19,8 +19,6 @@ class UpdateSubscriptionScheduleRequest extends Message {
 
 @JsonSerializable()
 class UpdateSubscriptionSchedulePhase extends Message {
-  final String id;
-
   @TimestampConverter()
   final DateTime? startDate;
 
@@ -30,7 +28,6 @@ class UpdateSubscriptionSchedulePhase extends Message {
   final List<UpdateSubscriptionSchedulePhaseItem> items;
 
   const UpdateSubscriptionSchedulePhase({
-    required this.id,
     this.startDate,
     this.endDate,
     required this.items,
