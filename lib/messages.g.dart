@@ -1432,6 +1432,26 @@ Map<String, dynamic> _$CreateRefundRequestToJson(CreateRefundRequest instance) {
   return val;
 }
 
+CreateSubscriptionScheduleRequest _$CreateSubscriptionScheduleRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateSubscriptionScheduleRequest(
+      fromSubscription: json['from_subscription'] as String?,
+    );
+
+Map<String, dynamic> _$CreateSubscriptionScheduleRequestToJson(
+    CreateSubscriptionScheduleRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('from_subscription', instance.fromSubscription);
+  return val;
+}
+
 ListPricesRequest _$ListPricesRequestFromJson(Map<String, dynamic> json) =>
     ListPricesRequest(
       active: json['active'] as bool?,
