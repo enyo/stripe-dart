@@ -13,8 +13,13 @@ class SubscriptionScheduleResource extends Resource {
   }
 
   /// https://stripe.com/docs/api/subscription_schedules/list
-  Future<DataList<SubscriptionSchedule>> list() async {
-    final map = await get('subscription_schedules');
+  Future<DataList<SubscriptionSchedule>> list([
+    ListSubscriptionSchedulesRequest? request,
+  ]) async {
+    final map = await get(
+      'subscription_schedules',
+      queryParameters: request?.toJson(),
+    );
 
     return DataList<SubscriptionSchedule>.fromJson(
       map,

@@ -33,6 +33,7 @@ part 'src/messages/requests/list_prices.dart';
 part 'src/messages/requests/list_products.dart';
 part 'src/messages/requests/list_subscription_items.dart';
 part 'src/messages/requests/list_subscriptions.dart';
+part 'src/messages/requests/list_subscription_schedules.dart';
 part 'src/messages/requests/update_customer.dart';
 part 'src/messages/requests/update_subscription.dart';
 part 'src/messages/requests/update_subscription_item.dart';

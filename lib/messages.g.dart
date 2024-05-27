@@ -1554,6 +1554,28 @@ const _$SubscriptionStatusEnumMap = {
   SubscriptionStatus.ended: 'ended',
 };
 
+ListSubscriptionSchedulesRequest _$ListSubscriptionSchedulesRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListSubscriptionSchedulesRequest(
+      customer: json['customer'] as String?,
+      limit: (json['limit'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$ListSubscriptionSchedulesRequestToJson(
+    ListSubscriptionSchedulesRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer', instance.customer);
+  writeNotNull('limit', instance.limit);
+  return val;
+}
+
 UpdateCustomerRequest _$UpdateCustomerRequestFromJson(
         Map<String, dynamic> json) =>
     UpdateCustomerRequest(
