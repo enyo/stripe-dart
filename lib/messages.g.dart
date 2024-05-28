@@ -1570,6 +1570,28 @@ const _$SubscriptionStatusEnumMap = {
   SubscriptionStatus.ended: 'ended',
 };
 
+ListSubscriptionSchedulesRequest _$ListSubscriptionSchedulesRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListSubscriptionSchedulesRequest(
+      customer: json['customer'] as String?,
+      limit: (json['limit'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$ListSubscriptionSchedulesRequestToJson(
+    ListSubscriptionSchedulesRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer', instance.customer);
+  writeNotNull('limit', instance.limit);
+  return val;
+}
+
 UpdateCustomerRequest _$UpdateCustomerRequestFromJson(
         Map<String, dynamic> json) =>
     UpdateCustomerRequest(
@@ -1701,7 +1723,6 @@ Map<String, dynamic> _$UpdateSubscriptionScheduleRequestToJson(
 UpdateSubscriptionSchedulePhase _$UpdateSubscriptionSchedulePhaseFromJson(
         Map<String, dynamic> json) =>
     UpdateSubscriptionSchedulePhase(
-      id: json['id'] as String,
       startDate: _$JsonConverterFromJson<int, DateTime>(
           json['start_date'], const TimestampConverter().fromJson),
       endDate: _$JsonConverterFromJson<int, DateTime>(
@@ -1714,9 +1735,7 @@ UpdateSubscriptionSchedulePhase _$UpdateSubscriptionSchedulePhaseFromJson(
 
 Map<String, dynamic> _$UpdateSubscriptionSchedulePhaseToJson(
     UpdateSubscriptionSchedulePhase instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -1920,6 +1939,8 @@ SubscriptionSchedule _$SubscriptionScheduleFromJson(
           .map((e) =>
               SubscriptionSchedulePhase.fromJson(e as Map<String, dynamic>))
           .toList(),
+      status: $enumDecode(_$SubscriptionScheduleStatusEnumMap, json['status']),
+      subscription: json['subscription'] as String?,
     );
 
 Map<String, dynamic> _$SubscriptionScheduleToJson(
@@ -1938,6 +1959,8 @@ Map<String, dynamic> _$SubscriptionScheduleToJson(
   writeNotNull('customer', instance.customer);
   writeNotNull('metadata', instance.metadata);
   val['phases'] = instance.phases.map((e) => e.toJson()).toList();
+  val['status'] = _$SubscriptionScheduleStatusEnumMap[instance.status]!;
+  writeNotNull('subscription', instance.subscription);
   return val;
 }
 
@@ -1945,10 +1968,17 @@ const _$_SubscriptionScheduleObjectEnumMap = {
   _SubscriptionScheduleObject.subscriptionSchedule: 'subscription_schedule',
 };
 
+const _$SubscriptionScheduleStatusEnumMap = {
+  SubscriptionScheduleStatus.notStarted: 'not_started',
+  SubscriptionScheduleStatus.active: 'active',
+  SubscriptionScheduleStatus.completed: 'completed',
+  SubscriptionScheduleStatus.released: 'released',
+  SubscriptionScheduleStatus.canceled: 'canceled',
+};
+
 SubscriptionSchedulePhase _$SubscriptionSchedulePhaseFromJson(
         Map<String, dynamic> json) =>
     SubscriptionSchedulePhase(
-      id: json['id'] as String,
       startDate: _$JsonConverterFromJson<int, DateTime>(
           json['start_date'], const TimestampConverter().fromJson),
       endDate: _$JsonConverterFromJson<int, DateTime>(
@@ -1961,9 +1991,7 @@ SubscriptionSchedulePhase _$SubscriptionSchedulePhaseFromJson(
 
 Map<String, dynamic> _$SubscriptionSchedulePhaseToJson(
     SubscriptionSchedulePhase instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
