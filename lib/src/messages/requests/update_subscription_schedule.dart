@@ -1,11 +1,21 @@
 part of '../../../messages.dart';
 
+enum SubscriptionScheduleEndBehavior {
+  @JsonValue('release')
+  release,
+  @JsonValue('cancel')
+  cancel,
+}
+
 @JsonSerializable()
 class UpdateSubscriptionScheduleRequest extends Message {
   final List<UpdateSubscriptionSchedulePhase> phases;
 
+  final SubscriptionScheduleEndBehavior? endBehavior;
+
   const UpdateSubscriptionScheduleRequest({
     required this.phases,
+    this.endBehavior,
   });
 
   factory UpdateSubscriptionScheduleRequest.fromJson(
