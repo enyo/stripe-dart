@@ -52,6 +52,7 @@ class CheckoutSession extends Message {
   final String? customer;
   final String? paymentIntent;
   final List<PaymentMethodType> paymentMethodTypes;
+  final String? status;
   final String? url;
 
   CheckoutSession({
@@ -61,6 +62,7 @@ class CheckoutSession extends Message {
     this.clientReferenceId,
     this.customer,
     this.paymentIntent,
+    this.status,
     this.url
   });
 
