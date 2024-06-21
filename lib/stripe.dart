@@ -1,6 +1,7 @@
 library stripe;
 
 import 'package:meta/meta.dart';
+import 'package:stripe/src/resources/subscription_schedule.dart';
 
 import 'src/client.dart';
 import 'src/resources/balance_transaction.dart';
@@ -13,6 +14,7 @@ import 'src/resources/price.dart';
 import 'src/resources/product.dart';
 import 'src/resources/refund.dart';
 import 'src/resources/subscription.dart';
+import 'src/resources/subscription_item.dart';
 
 export 'messages.dart';
 export 'src/webhook.dart';
@@ -58,6 +60,12 @@ class Stripe {
   /// https://stripe.com/docs/api/subscriptions
   final SubscriptionResource subscription;
 
+  /// https://stripe.com/docs/api/subscription_items
+  final SubscriptionItemResource subscriptionItem;
+
+  /// https://stripe.com/docs/api/subscription_schedules
+  final SubscriptionScheduleResource subscriptionSchedule;
+
   /// https://stripe.com/docs/api/balance_transactions
   final BalanceTransactionResource balanceTransaction;
 
@@ -76,6 +84,8 @@ class Stripe {
         price = PriceResource(client),
         product = ProductResource(client),
         subscription = SubscriptionResource(client),
+        subscriptionItem = SubscriptionItemResource(client),
+        subscriptionSchedule = SubscriptionScheduleResource(client),
         charge = ChargeResource(client),
         balanceTransaction = BalanceTransactionResource(client);
 }

@@ -27,6 +27,9 @@ class Price extends Message {
   /// one-time purchase or a recurring (subscription) purchase.
   final PriceType type;
 
+  /// Non-null when [type] is 'recurring'.
+  final Recurring? recurring;
+
   /// The unit amount in cents to be charged, represented as a whole integer if
   /// possible. Only set if billing_scheme=per_unit.
   final int unitAmount;
@@ -38,6 +41,7 @@ class Price extends Message {
     required this.currency,
     required this.product,
     required this.type,
+    required this.recurring,
     required this.unitAmount,
   });
 
