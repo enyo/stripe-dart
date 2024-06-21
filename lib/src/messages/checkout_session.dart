@@ -8,6 +8,8 @@ enum PaymentMethodType {
   afterpay_clearpay,
   alipay,
   // ignore: constant_identifier_names
+  amazon_pay,
+  // ignore: constant_identifier_names
   au_becs_debit,
   // ignore: constant_identifier_names
   bacs_debit,

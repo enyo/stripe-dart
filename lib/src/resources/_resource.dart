@@ -24,4 +24,9 @@ abstract class Resource<T extends Message> {
   Future<Map<String, dynamic>> post(final String path,
           {final Map<String, dynamic>? data}) =>
       _client.post(makeUrl(path), data: data);
+
+  @protected
+  Future<Map<String, dynamic>> delete(final String path,
+          {final Map<String, dynamic>? data}) =>
+      _client.delete(makeUrl(path), data: data);
 }

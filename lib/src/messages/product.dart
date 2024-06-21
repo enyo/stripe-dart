@@ -28,6 +28,9 @@ class Product extends Message {
   /// invoice line item descriptions.
   final String name;
 
+  /// The ID of the Price object that is the default price for this product.
+  final String? defaultPrice;
+
   Product({
     required this.object,
     required this.id,
@@ -35,6 +38,7 @@ class Product extends Message {
     this.description,
     this.metadata,
     required this.name,
+    this.defaultPrice,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) =>

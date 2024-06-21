@@ -41,6 +41,34 @@ class Subscription extends Message {
   @TimestampConverter()
   final DateTime currentPeriodEnd;
 
+  /// Date when the subscription was first created. The date might differ from
+  /// the [created] date due to backdating.
+  @TimestampConverter()
+  final DateTime startDate;
+
+  /// The reference point that aligns future billing cycle dates.
+  /// It sets the day of week for week intervals, the day of month for month
+  /// and year intervals, and the month of year for year intervals.
+  /// The timestamp is in UTC format.
+  @TimestampConverter()
+  final DateTime billingCycleAnchor;
+
+  /// A date in the future at which the subscription will automatically get
+  /// canceled.
+  @TimestampConverter()
+  final DateTime? cancelAt;
+
+  /// If the subscription has been canceled with the at_period_end flag set to
+  /// true, cancel_at_period_end on the subscription will be true.
+  /// You can use this attribute to determine whether a subscription that has
+  /// a status of active is scheduled to be canceled at the end of the current
+  /// period.
+  final bool cancelAtPeriodEnd;
+
+  /// If the subscription has ended, the date the subscription ended.
+  @TimestampConverter()
+  final DateTime? endedAt;
+
   /// Possible values are incomplete, incomplete_expired, trialing, active,
   /// past_due, canceled, or unpaid.
   ///
@@ -77,6 +105,9 @@ class Subscription extends Message {
   /// format.
   final Map<String, dynamic>? metadata;
 
+  /// The most recent invoice this subscription has generated.
+  final String? latestInvoice;
+
   Subscription({
     required this.object,
     required this.id,
@@ -86,7 +117,13 @@ class Subscription extends Message {
     required this.items,
     required this.currentPeriodStart,
     required this.currentPeriodEnd,
+    required this.startDate,
+    required this.billingCycleAnchor,
+    this.cancelAt,
+    this.cancelAtPeriodEnd = false,
+    this.endedAt,
     this.metadata,
+    this.latestInvoice,
   });
 
   factory Subscription.fromJson(Map<String, dynamic> json) =>
