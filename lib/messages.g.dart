@@ -181,6 +181,8 @@ CheckoutSession _$CheckoutSessionFromJson(Map<String, dynamic> json) =>
       clientReferenceId: json['client_reference_id'] as String?,
       customer: json['customer'] as String?,
       paymentIntent: json['payment_intent'] as String?,
+      status: json['status'] as String?,
+      url: json['url'] as String?,
     );
 
 Map<String, dynamic> _$CheckoutSessionToJson(CheckoutSession instance) {
@@ -201,6 +203,8 @@ Map<String, dynamic> _$CheckoutSessionToJson(CheckoutSession instance) {
   val['payment_method_types'] = instance.paymentMethodTypes
       .map((e) => _$PaymentMethodTypeEnumMap[e]!)
       .toList();
+  writeNotNull('status', instance.status);
+  writeNotNull('url', instance.url);
   return val;
 }
 
@@ -1891,6 +1895,11 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
         const TimestampConverter().toJson(instance.currentPeriodStart),
     'current_period_end':
         const TimestampConverter().toJson(instance.currentPeriodEnd),
+    'cancel_at_period_end': instance.cancelAtPeriodEnd,
+    'status': _$SubscriptionStatusEnumMap[instance.status]!,
+    'items': instance.items.toJson(
+      (value) => value.toJson(),
+    ),
     'start_date': const TimestampConverter().toJson(instance.startDate),
     'billing_cycle_anchor':
         const TimestampConverter().toJson(instance.billingCycleAnchor),
