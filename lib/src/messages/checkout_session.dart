@@ -55,16 +55,15 @@ class CheckoutSession extends Message {
   final String? status;
   final String? url;
 
-  CheckoutSession({
-    required this.object,
-    required this.id,
-    required this.paymentMethodTypes,
-    this.clientReferenceId,
-    this.customer,
-    this.paymentIntent,
-    this.status,
-    this.url
-  });
+  CheckoutSession(
+      {required this.object,
+      required this.id,
+      required this.paymentMethodTypes,
+      this.clientReferenceId,
+      this.customer,
+      this.paymentIntent,
+      this.status,
+      this.url});
 
   factory CheckoutSession.fromJson(Map<String, dynamic> json) =>
       _$CheckoutSessionFromJson(json);
