@@ -35,20 +35,20 @@ Map<String, dynamic> _$AddressToJson(Address instance) {
 
 BalanceTransaction _$BalanceTransactionFromJson(Map<String, dynamic> json) =>
     BalanceTransaction(
-      object: $enumDecode(_$_BalanceTransactionObjectEnumMap, json['object']),
+      object: $enumDecode(_$BalanceTransactionObjectEnumMap, json['object']),
       id: json['id'] as String,
-      amount: (json['amount'] as num).toInt(),
-      fee: (json['fee'] as num).toInt(),
+      amount: json['amount'] as int,
+      fee: json['fee'] as int,
       feeDetails: (json['fee_details'] as List<dynamic>)
           .map((e) => FeeDetails.fromJson(e as Map<String, dynamic>))
           .toList(),
-      net: (json['net'] as num).toInt(),
+      net: json['net'] as int,
       currency: json['currency'] as String,
     );
 
 Map<String, dynamic> _$BalanceTransactionToJson(BalanceTransaction instance) =>
     <String, dynamic>{
-      'object': _$_BalanceTransactionObjectEnumMap[instance.object]!,
+      'object': _$BalanceTransactionObjectEnumMap[instance.object]!,
       'id': instance.id,
       'amount': instance.amount,
       'fee': instance.fee,
@@ -57,12 +57,12 @@ Map<String, dynamic> _$BalanceTransactionToJson(BalanceTransaction instance) =>
       'currency': instance.currency,
     };
 
-const _$_BalanceTransactionObjectEnumMap = {
-  _BalanceTransactionObject.balance_transaction: 'balance_transaction',
+const _$BalanceTransactionObjectEnumMap = {
+  BalanceTransactionObject.balance_transaction: 'balance_transaction',
 };
 
 FeeDetails _$FeeDetailsFromJson(Map<String, dynamic> json) => FeeDetails(
-      amount: (json['amount'] as num).toInt(),
+      amount: json['amount'] as int,
       application: json['application'] as String?,
       currency: json['currency'] as String,
       description: json['description'] as String,
@@ -348,7 +348,7 @@ SubscriptionEvent _$SubscriptionEventFromJson(Map<String, dynamic> json) =>
     SubscriptionEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Subscription>.fromJson(
           json['data'] as Map<String, dynamic>,
@@ -376,7 +376,7 @@ CustomerEvent _$CustomerEventFromJson(Map<String, dynamic> json) =>
     CustomerEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Customer>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Customer.fromJson(value as Map<String, dynamic>)),
@@ -398,7 +398,7 @@ Map<String, dynamic> _$CustomerEventToJson(CustomerEvent instance) =>
 ChargeEvent _$ChargeEventFromJson(Map<String, dynamic> json) => ChargeEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Charge>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Charge.fromJson(value as Map<String, dynamic>)),
@@ -421,7 +421,7 @@ PaymentIntentEvent _$PaymentIntentEventFromJson(Map<String, dynamic> json) =>
     PaymentIntentEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<PaymentIntent>.fromJson(
           json['data'] as Map<String, dynamic>,
@@ -444,7 +444,7 @@ Map<String, dynamic> _$PaymentIntentEventToJson(PaymentIntentEvent instance) =>
 RefundEvent _$RefundEventFromJson(Map<String, dynamic> json) => RefundEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Refund>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Refund.fromJson(value as Map<String, dynamic>)),
@@ -468,7 +468,7 @@ CheckoutSessionEvent _$CheckoutSessionEventFromJson(
     CheckoutSessionEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<CheckoutSession>.fromJson(
           json['data'] as Map<String, dynamic>,
@@ -493,7 +493,7 @@ PaymentMethodEvent _$PaymentMethodEventFromJson(Map<String, dynamic> json) =>
     PaymentMethodEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<PaymentMethod>.fromJson(
           json['data'] as Map<String, dynamic>,
@@ -516,7 +516,7 @@ Map<String, dynamic> _$PaymentMethodEventToJson(PaymentMethodEvent instance) =>
 InvoiceEvent _$InvoiceEventFromJson(Map<String, dynamic> json) => InvoiceEvent(
       object: $enumDecode(_$_EventObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       type: json['type'] as String,
       data: EventData<Invoice>.fromJson(json['data'] as Map<String, dynamic>,
           (value) => Invoice.fromJson(value as Map<String, dynamic>)),
@@ -539,7 +539,7 @@ Invoice _$InvoiceFromJson(Map<String, dynamic> json) => Invoice(
       id: json['id'] as String,
       currency: json['currency'] as String,
       customer: json['customer'] as String,
-      total: (json['total'] as num).toInt(),
+      total: json['total'] as int,
       description: json['description'] as String?,
       hostedInvoiceUrl: json['hosted_invoice_url'] as String?,
       status: json['status'] as String?,
@@ -575,10 +575,10 @@ Map<String, dynamic> _$InvoiceToJson(Invoice instance) {
 
 PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
     PaymentIntent(
-      object: $enumDecode(_$_PaymentIntentObjectEnumMap, json['object']),
+      object: $enumDecode(_$PaymentIntentObjectEnumMap, json['object']),
       id: json['id'] as String,
-      amount: (json['amount'] as num).toInt(),
-      amountReceived: (json['amount_received'] as num).toInt(),
+      amount: json['amount'] as int,
+      amountReceived: json['amount_received'] as int,
       clientSecret: json['client_secret'] as String,
       currency: json['currency'] as String,
       status: json['status'] as String,
@@ -613,7 +613,7 @@ PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$PaymentIntentToJson(PaymentIntent instance) {
   final val = <String, dynamic>{
-    'object': _$_PaymentIntentObjectEnumMap[instance.object]!,
+    'object': _$PaymentIntentObjectEnumMap[instance.object]!,
     'id': instance.id,
     'amount': instance.amount,
     'amount_received': instance.amountReceived,
@@ -657,8 +657,8 @@ Map<String, dynamic> _$PaymentIntentToJson(PaymentIntent instance) {
   return val;
 }
 
-const _$_PaymentIntentObjectEnumMap = {
-  _PaymentIntentObject.payment_intent: 'payment_intent',
+const _$PaymentIntentObjectEnumMap = {
+  PaymentIntentObject.payment_intent: 'payment_intent',
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(
@@ -731,8 +731,8 @@ PaymentMethodCard _$PaymentMethodCardFromJson(Map<String, dynamic> json) =>
     PaymentMethodCard(
       brand: json['brand'] as String,
       last4: json['last4'] as String,
-      expMonth: (json['exp_month'] as num).toInt(),
-      expYear: (json['exp_year'] as num).toInt(),
+      expMonth: json['exp_month'] as int,
+      expYear: json['exp_year'] as int,
       wallet: json['wallet'] == null
           ? null
           : Wallet.fromJson(json['wallet'] as Map<String, dynamic>),
@@ -825,7 +825,7 @@ Map<String, dynamic> _$PortalSessionToJson(PortalSession instance) =>
     };
 
 Price _$PriceFromJson(Map<String, dynamic> json) => Price(
-      object: $enumDecode(_$_PriceObjectEnumMap, json['object']),
+      object: $enumDecode(_$PriceObjectEnumMap, json['object']),
       id: json['id'] as String,
       active: json['active'] as bool,
       currency: json['currency'] as String,
@@ -834,12 +834,12 @@ Price _$PriceFromJson(Map<String, dynamic> json) => Price(
       recurring: json['recurring'] == null
           ? null
           : Recurring.fromJson(json['recurring'] as Map<String, dynamic>),
-      unitAmount: (json['unit_amount'] as num).toInt(),
+      unitAmount: json['unit_amount'] as int,
     );
 
 Map<String, dynamic> _$PriceToJson(Price instance) {
   final val = <String, dynamic>{
-    'object': _$_PriceObjectEnumMap[instance.object]!,
+    'object': _$PriceObjectEnumMap[instance.object]!,
     'id': instance.id,
     'active': instance.active,
     'currency': instance.currency,
@@ -858,8 +858,8 @@ Map<String, dynamic> _$PriceToJson(Price instance) {
   return val;
 }
 
-const _$_PriceObjectEnumMap = {
-  _PriceObject.price: 'price',
+const _$PriceObjectEnumMap = {
+  PriceObject.price: 'price',
 };
 
 const _$PriceTypeEnumMap = {
@@ -868,7 +868,7 @@ const _$PriceTypeEnumMap = {
 };
 
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
-      object: $enumDecode(_$_ProductObjectEnumMap, json['object']),
+      object: $enumDecode(_$ProductObjectEnumMap, json['object']),
       id: json['id'] as String,
       active: json['active'] as bool,
       description: json['description'] as String?,
@@ -879,7 +879,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
 
 Map<String, dynamic> _$ProductToJson(Product instance) {
   final val = <String, dynamic>{
-    'object': _$_ProductObjectEnumMap[instance.object]!,
+    'object': _$ProductObjectEnumMap[instance.object]!,
     'id': instance.id,
     'active': instance.active,
   };
@@ -897,22 +897,22 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   return val;
 }
 
-const _$_ProductObjectEnumMap = {
-  _ProductObject.product: 'product',
+const _$ProductObjectEnumMap = {
+  ProductObject.product: 'product',
 };
 
 Refund _$RefundFromJson(Map<String, dynamic> json) => Refund(
-      object: $enumDecode(_$_RefundObjectEnumMap, json['object']),
+      object: $enumDecode(_$RefundObjectEnumMap, json['object']),
       id: json['id'] as String,
     );
 
 Map<String, dynamic> _$RefundToJson(Refund instance) => <String, dynamic>{
-      'object': _$_RefundObjectEnumMap[instance.object]!,
+      'object': _$RefundObjectEnumMap[instance.object]!,
       'id': instance.id,
     };
 
-const _$_RefundObjectEnumMap = {
-  _RefundObject.refund: 'refund',
+const _$RefundObjectEnumMap = {
+  RefundObject.refund: 'refund',
 };
 
 CreateCheckoutSessionRequest _$CreateCheckoutSessionRequestFromJson(
@@ -996,7 +996,7 @@ const _$BillingAddressCollectionEnumMap = {
 LineItem _$LineItemFromJson(Map<String, dynamic> json) => LineItem(
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      quantity: (json['quantity'] as num?)?.toInt(),
+      quantity: json['quantity'] as int?,
       description: json['description'] as String?,
       price: json['price'] as String?,
       priceData: json['price_data'] == null
@@ -1024,7 +1024,7 @@ Map<String, dynamic> _$LineItemToJson(LineItem instance) {
 PriceData _$PriceDataFromJson(Map<String, dynamic> json) => PriceData(
       currency: json['currency'] as String,
       product: json['product'] as String?,
-      unitAmount: (json['unit_amount'] as num?)?.toInt(),
+      unitAmount: json['unit_amount'] as int?,
       productData: json['product_data'] == null
           ? null
           : ProductData.fromJson(json['product_data'] as Map<String, dynamic>),
@@ -1113,8 +1113,8 @@ Map<String, dynamic> _$PaymentIntentDataToJson(PaymentIntentData instance) {
 
 SubscriptionData _$SubscriptionDataFromJson(Map<String, dynamic> json) =>
     SubscriptionData(
-      trialEnd: (json['trial_end'] as num?)?.toInt(),
-      trialPeriodDays: (json['trial_period_days'] as num?)?.toInt(),
+      trialEnd: json['trial_end'] as int?,
+      trialPeriodDays: json['trial_period_days'] as int?,
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
@@ -1168,7 +1168,7 @@ Map<String, dynamic> _$CreateCustomerRequestToJson(
 CreatePaymentIntentRequest _$CreatePaymentIntentRequestFromJson(
         Map<String, dynamic> json) =>
     CreatePaymentIntentRequest(
-      amount: (json['amount'] as num).toInt(),
+      amount: json['amount'] as int,
       currency: json['currency'] as String,
       automaticPaymentMethods: json['automatic_payment_methods'] == null
           ? null
@@ -1259,7 +1259,7 @@ CreatePriceRequest _$CreatePriceRequestFromJson(Map<String, dynamic> json) =>
     CreatePriceRequest(
       currency: json['currency'] as String,
       product: json['product'] as String?,
-      unitAmount: (json['unit_amount'] as num?)?.toInt(),
+      unitAmount: json['unit_amount'] as int?,
       active: json['active'] as bool?,
       metadata: json['metadata'] as Map<String, dynamic>?,
       nickname: json['nickname'] as String?,
@@ -1297,7 +1297,7 @@ Recurring _$RecurringFromJson(Map<String, dynamic> json) => Recurring(
       interval: $enumDecode(_$RecurringIntervalEnumMap, json['interval']),
       aggregateUsage:
           $enumDecodeNullable(_$AggregateUsageEnumMap, json['aggregate_usage']),
-      intervalCount: (json['interval_count'] as num?)?.toInt(),
+      intervalCount: json['interval_count'] as int?,
       usageType: json['usage_type'] as String?,
     );
 
@@ -1335,7 +1335,7 @@ const _$AggregateUsageEnumMap = {
 
 PriceParameters _$PriceParametersFromJson(Map<String, dynamic> json) =>
     PriceParameters(
-      customUnitAmount: (json['custom_unit_amount'] as num?)?.toInt(),
+      customUnitAmount: json['custom_unit_amount'] as int?,
       productData: json['product_data'] == null
           ? null
           : ProductData.fromJson(json['product_data'] as Map<String, dynamic>),
@@ -1427,7 +1427,7 @@ Map<String, dynamic> _$CreateProductRequestToJson(
 CreateRefundRequest _$CreateRefundRequestFromJson(Map<String, dynamic> json) =>
     CreateRefundRequest(
       charge: json['charge'] as String?,
-      amount: (json['amount'] as num?)?.toInt(),
+      amount: json['amount'] as int?,
       paymentIntent: json['payment_intent'] as String?,
       reason: json['reason'] as String?,
     );
@@ -1513,7 +1513,7 @@ ListSubscriptionItemsRequest _$ListSubscriptionItemsRequestFromJson(
     ListSubscriptionItemsRequest(
       subscription: json['subscription'] as String?,
       endingBefore: json['ending_before'] as String?,
-      limit: (json['limit'] as num?)?.toInt(),
+      limit: json['limit'] as int?,
       startingAfter: json['starting_after'] as String?,
     );
 
@@ -1574,7 +1574,7 @@ ListSubscriptionSchedulesRequest _$ListSubscriptionSchedulesRequestFromJson(
         Map<String, dynamic> json) =>
     ListSubscriptionSchedulesRequest(
       customer: json['customer'] as String?,
-      limit: (json['limit'] as num?)?.toInt(),
+      limit: json['limit'] as int?,
     );
 
 Map<String, dynamic> _$ListSubscriptionSchedulesRequestToJson(
@@ -1655,7 +1655,7 @@ SubscriptionItemUpdate _$SubscriptionItemUpdateFromJson(
       price: json['price'] as String?,
       prorationBehavior: $enumDecodeNullable(
           _$ProrationBehaviorEnumMap, json['proration_behavior']),
-      quantity: (json['quantity'] as num?)?.toInt(),
+      quantity: json['quantity'] as int?,
       billingThresholds: json['billing_thresholds'] as Map<String, dynamic>?,
       offSession: json['off_session'] as bool?,
       priceData: json['price_data'] as Map<String, dynamic>?,
@@ -1777,7 +1777,7 @@ UpdateSubscriptionSchedulePhaseItem
     _$UpdateSubscriptionSchedulePhaseItemFromJson(Map<String, dynamic> json) =>
         UpdateSubscriptionSchedulePhaseItem(
           price: json['price'] as String,
-          quantity: (json['quantity'] as num).toInt(),
+          quantity: json['quantity'] as int,
         );
 
 Map<String, dynamic> _$UpdateSubscriptionSchedulePhaseItemToJson(
@@ -1856,22 +1856,21 @@ const _$StripeApiErrorTypeEnumMap = {
 };
 
 Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
-      object: $enumDecode(_$_SubscriptionObjectEnumMap, json['object']),
+      object: $enumDecode(_$SubscriptionObjectEnumMap, json['object']),
       id: json['id'] as String,
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       customer: json['customer'] as String,
       status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
       items: DataList<SubscriptionItem>.fromJson(
           json['items'] as Map<String, dynamic>,
           (value) => SubscriptionItem.fromJson(value as Map<String, dynamic>)),
       currentPeriodStart: const TimestampConverter()
-          .fromJson((json['current_period_start'] as num).toInt()),
+          .fromJson(json['current_period_start'] as int),
       currentPeriodEnd: const TimestampConverter()
-          .fromJson((json['current_period_end'] as num).toInt()),
-      startDate: const TimestampConverter()
-          .fromJson((json['start_date'] as num).toInt()),
+          .fromJson(json['current_period_end'] as int),
+      startDate: const TimestampConverter().fromJson(json['start_date'] as int),
       billingCycleAnchor: const TimestampConverter()
-          .fromJson((json['billing_cycle_anchor'] as num).toInt()),
+          .fromJson(json['billing_cycle_anchor'] as int),
       cancelAt: _$JsonConverterFromJson<int, DateTime>(
           json['cancel_at'], const TimestampConverter().fromJson),
       cancelAtPeriodEnd: json['cancel_at_period_end'] as bool? ?? false,
@@ -1883,7 +1882,7 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
 
 Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
   final val = <String, dynamic>{
-    'object': _$_SubscriptionObjectEnumMap[instance.object]!,
+    'object': _$SubscriptionObjectEnumMap[instance.object]!,
     'id': instance.id,
     'created': instance.created,
     'customer': instance.customer,
@@ -1920,30 +1919,30 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) {
   return val;
 }
 
-const _$_SubscriptionObjectEnumMap = {
-  _SubscriptionObject.subscription: 'subscription',
+const _$SubscriptionObjectEnumMap = {
+  SubscriptionObject.subscription: 'subscription',
 };
 
 SubscriptionItem _$SubscriptionItemFromJson(Map<String, dynamic> json) =>
     SubscriptionItem(
-      object: $enumDecode(_$_SubscriptionItemObjectEnumMap, json['object']),
+      object: $enumDecode(_$SubscriptionItemObjectEnumMap, json['object']),
       id: json['id'] as String,
       price: Price.fromJson(json['price'] as Map<String, dynamic>),
       subscription: json['subscription'] as String,
-      quantity: (json['quantity'] as num).toInt(),
+      quantity: json['quantity'] as int,
     );
 
 Map<String, dynamic> _$SubscriptionItemToJson(SubscriptionItem instance) =>
     <String, dynamic>{
-      'object': _$_SubscriptionItemObjectEnumMap[instance.object]!,
+      'object': _$SubscriptionItemObjectEnumMap[instance.object]!,
       'id': instance.id,
       'price': instance.price.toJson(),
       'subscription': instance.subscription,
       'quantity': instance.quantity,
     };
 
-const _$_SubscriptionItemObjectEnumMap = {
-  _SubscriptionItemObject.subscription_item: 'subscription_item',
+const _$SubscriptionItemObjectEnumMap = {
+  SubscriptionItemObject.subscription_item: 'subscription_item',
 };
 
 SubscriptionSchedule _$SubscriptionScheduleFromJson(
@@ -2033,7 +2032,7 @@ SubscriptionSchedulePhaseItem _$SubscriptionSchedulePhaseItemFromJson(
         Map<String, dynamic> json) =>
     SubscriptionSchedulePhaseItem(
       price: json['price'] as String,
-      quantity: (json['quantity'] as num).toInt(),
+      quantity: json['quantity'] as int,
     );
 
 Map<String, dynamic> _$SubscriptionSchedulePhaseItemToJson(
