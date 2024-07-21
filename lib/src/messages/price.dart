@@ -1,6 +1,6 @@
 part of '../../messages.dart';
 
-enum _PriceObject { price }
+enum PriceObject { price }
 
 // ignore: constant_identifier_names
 enum PriceType { one_time, recurring }
@@ -8,7 +8,7 @@ enum PriceType { one_time, recurring }
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
 class Price extends Message {
-  final _PriceObject object;
+  final PriceObject object;
 
   /// Unique identifier for the object.
   final String id;

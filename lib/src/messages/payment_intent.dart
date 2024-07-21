@@ -1,12 +1,12 @@
 part of '../../messages.dart';
 
 // ignore: constant_identifier_names
-enum _PaymentIntentObject { payment_intent }
+enum PaymentIntentObject { payment_intent }
 
 /// https://stripe.com/docs/api/payment_intents/object
 @JsonSerializable()
 class PaymentIntent extends Message {
-  final _PaymentIntentObject object;
+  final PaymentIntentObject object;
 
   final String id;
   final int amount;

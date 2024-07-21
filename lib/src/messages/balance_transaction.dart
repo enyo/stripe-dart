@@ -1,12 +1,13 @@
 part of '../../messages.dart';
 
-// ignore: constant_identifier_names
-enum _BalanceTransactionObject { balance_transaction }
+// ignore_for_file: constant_identifier_names
+
+enum BalanceTransactionObject { balance_transaction }
 
 /// https://stripe.com/docs/api/balance_transactions/object
 @JsonSerializable()
 class BalanceTransaction extends Message {
-  final _BalanceTransactionObject object;
+  final BalanceTransactionObject object;
   final String id;
   final int amount;
   final int fee;

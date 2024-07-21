@@ -1,11 +1,11 @@
 part of '../../messages.dart';
 
-enum _RefundObject { refund }
+enum RefundObject { refund }
 
 /// https://stripe.com/docs/api/refunds/object
 @JsonSerializable()
 class Refund extends Message {
-  final _RefundObject object;
+  final RefundObject object;
   final String id;
 
   Refund({

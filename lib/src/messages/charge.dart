@@ -1,5 +1,7 @@
 part of '../../messages.dart';
 
+// ignore_for_file: library_private_types_in_public_api
+
 enum _ChargeObject { charge }
 
 /// https://stripe.com/docs/api/charges/object
