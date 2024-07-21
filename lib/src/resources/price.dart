@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '../client.dart';
 import '_resource.dart';
 
 class PriceResource extends Resource<Price> {
-  PriceResource(Client client) : super(client);
+  PriceResource(super.client);
 
   Future<Price> retrieve(String id) async {
     final map = await get('prices/$id');

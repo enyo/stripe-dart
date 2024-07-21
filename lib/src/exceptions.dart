@@ -7,7 +7,7 @@ abstract class StripeException implements Exception {
 
 /// Invalid request errors arise when your request has invalid parameters.
 class InvalidRequestException extends StripeException {
-  InvalidRequestException(String message) : super(message);
+  InvalidRequestException(super.message);
 
   @override
   String toString() => 'Invalid request: $message.';
@@ -15,7 +15,7 @@ class InvalidRequestException extends StripeException {
 
 /// For all API error responses where the type is unknown or not provided.
 class UnknownTypeException extends StripeException {
-  UnknownTypeException(String message) : super(message);
+  UnknownTypeException(super.message);
 
   @override
   String toString() => 'Invalid type: $message.';
@@ -23,14 +23,14 @@ class UnknownTypeException extends StripeException {
 
 /// Invalid resource.
 class InvalidResourceException extends StripeException {
-  InvalidResourceException(String message) : super(message);
+  InvalidResourceException(super.message);
 
   @override
   String toString() => 'Invalid resource: $message.';
 }
 
 class InvalidSignatureException extends StripeException {
-  InvalidSignatureException(String message) : super(message);
+  InvalidSignatureException(super.message);
 
   @override
   String toString() => 'Invalid signature: $message.';
