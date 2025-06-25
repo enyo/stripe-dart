@@ -7,6 +7,7 @@ import 'src/resources/balance_transaction.dart';
 import 'src/resources/charge.dart';
 import 'src/resources/checkout_session.dart';
 import 'src/resources/coupon.dart';
+import 'src/resources/credit_grant.dart';
 import 'src/resources/customer.dart';
 import 'src/resources/invoice.dart';
 import 'src/resources/payment_intent.dart';
@@ -83,6 +84,9 @@ class Stripe {
   /// https://docs.stripe.com/api/invoices
   final InvoiceResource invoice;
 
+  /// https://docs.stripe.com/api/billing/credit-grant
+  final CreditGrantResource creditGrantResource;
+
   factory Stripe(String apiKey) {
     final client = DioClient(apiKey: apiKey);
     return Stripe.withClient(client);
@@ -103,5 +107,6 @@ class Stripe {
         balanceTransaction = BalanceTransactionResource(client),
         promotionCode = PromotionCodeResource(client),
         coupon = CouponResource(client),
-        invoice = InvoiceResource(client);
+        invoice = InvoiceResource(client),
+        creditGrantResource = CreditGrantResource(client);
 }
