@@ -1,6 +1,6 @@
 part of '../../messages.dart';
 
-enum _SubscriptionObject { subscription }
+enum SubscriptionObject { subscription }
 
 enum SubscriptionStatus {
   incomplete,
@@ -20,7 +20,7 @@ enum SubscriptionStatus {
 /// https://stripe.com/docs/api/subscriptions/object
 @JsonSerializable()
 class Subscription extends Message {
-  final _SubscriptionObject object;
+  final SubscriptionObject object;
 
   /// Unique identifier for the object.
   final String id;

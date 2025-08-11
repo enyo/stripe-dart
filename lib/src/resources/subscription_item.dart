@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '../client.dart';
 import '_resource.dart';
 
 class SubscriptionItemResource extends Resource<SubscriptionItem> {
-  SubscriptionItemResource(Client client) : super(client);
+  SubscriptionItemResource(super.client);
 
   Future<SubscriptionItem> retrieve(String id) async {
     final response = await get('subscription_items/$id');

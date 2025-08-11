@@ -1,5 +1,9 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - lib/*.g.dart
+
 linter:
   rules:
     avoid_print: false  # Uncomment to disable the `avoid_print` rule

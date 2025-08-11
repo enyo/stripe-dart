@@ -1,6 +1,6 @@
 part of '../../messages.dart';
 
-enum _SubListObject {
+enum SubListObject {
   list,
   @JsonValue('search_result')
   searchResult,
@@ -8,7 +8,7 @@ enum _SubListObject {
 
 @JsonSerializable()
 class DataList<T> {
-  final _SubListObject object;
+  final SubListObject object;
 
   final List<T> data;
   final bool hasMore;

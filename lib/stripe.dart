@@ -1,4 +1,4 @@
-library stripe;
+library;
 
 import 'package:meta/meta.dart';
 import 'package:stripe/src/resources/subscription_schedule.dart';

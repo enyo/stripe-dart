@@ -1,6 +1,6 @@
 part of '../../messages.dart';
 
-enum _SubscriptionScheduleObject {
+enum SubscriptionScheduleObject {
   @JsonValue('subscription_schedule')
   subscriptionSchedule,
 }
@@ -20,7 +20,7 @@ enum SubscriptionScheduleStatus {
 
 @JsonSerializable()
 class SubscriptionSchedule extends Message {
-  final _SubscriptionScheduleObject object;
+  final SubscriptionScheduleObject object;
 
   final String id;
 

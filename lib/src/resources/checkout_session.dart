@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '../client.dart';
 import '_resource.dart';
 
 class CheckoutSessionResource extends Resource<CheckoutSession> {
-  CheckoutSessionResource(Client client) : super(client);
+  CheckoutSessionResource(super.client);
 
   /// Creates a Stripe Checkout Session.
   Future<CheckoutSession> create(CreateCheckoutSessionRequest request) async {

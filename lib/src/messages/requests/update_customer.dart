@@ -9,20 +9,13 @@ class UpdateCustomerRequest extends _CustomerRequest {
 
   UpdateCustomerRequest({
     required this.id,
-    String? description,
-    String? email,
-    Map<String, String>? metadata,
-    String? name,
-    String? paymentMethod,
-    String? phoneNumber,
-  }) : super(
-          description: description,
-          email: email,
-          metadata: metadata,
-          name: name,
-          paymentMethod: paymentMethod,
-          phoneNumber: phoneNumber,
-        );
+    super.description,
+    super.email,
+    super.metadata,
+    super.name,
+    super.paymentMethod,
+    super.phoneNumber,
+  });
 
   factory UpdateCustomerRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateCustomerRequestFromJson(json);

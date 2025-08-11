@@ -39,20 +39,13 @@ abstract class _CustomerRequest {
 @JsonSerializable()
 class CreateCustomerRequest extends _CustomerRequest {
   CreateCustomerRequest({
-    String? description,
-    String? email,
-    Map<String, String>? metadata,
-    String? name,
-    String? paymentMethod,
-    String? phoneNumber,
-  }) : super(
-          description: description,
-          email: email,
-          metadata: metadata,
-          name: name,
-          paymentMethod: paymentMethod,
-          phoneNumber: phoneNumber,
-        );
+    super.description,
+    super.email,
+    super.metadata,
+    super.name,
+    super.paymentMethod,
+    super.phoneNumber,
+  });
 
   factory CreateCustomerRequest.fromJson(Map<String, dynamic> json) =>
       _$CreateCustomerRequestFromJson(json);

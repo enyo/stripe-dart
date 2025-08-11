@@ -1,9 +1,8 @@
 import '../../messages.dart';
-import '../client.dart';
 import '_resource.dart';
 
 class SubscriptionScheduleResource extends Resource {
-  SubscriptionScheduleResource(Client client) : super(client);
+  SubscriptionScheduleResource(super.client);
 
   /// https://stripe.com/docs/api/subscription_schedules/retrieve
   Future<SubscriptionSchedule> retrieve(String id) async {

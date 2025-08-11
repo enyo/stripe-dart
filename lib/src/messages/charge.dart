@@ -1,11 +1,11 @@
 part of '../../messages.dart';
 
-enum _ChargeObject { charge }
+enum ChargeObject { charge }
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
 class Charge extends Message {
-  final _ChargeObject object;
+  final ChargeObject object;
   final String id;
   final String balanceTransaction;
   final PaymentMethodDetails paymentMethodDetails;

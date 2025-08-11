@@ -1,11 +1,11 @@
 part of '../../messages.dart';
 
-enum _CustomerObject { customer }
+enum CustomerObject { customer }
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
 class Customer extends Message {
-  final _CustomerObject object;
+  final CustomerObject object;
 
   /// Unique identifier for the object.
   final String id;

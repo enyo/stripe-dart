@@ -55,8 +55,8 @@ void main() {
       expect(response.customer, 'cus_Mx8WVxMtgaJfkk');
       expect(response.description, 'some description');
       expect(response.latestCharge, 'ch_1IZI1WCQQp28cFsC3NZk4ERe');
-      expect(response.metadata, {"foo": "bar"});
-      expect(response.paymentMethod, "card");
+      expect(response.metadata, {'foo': 'bar'});
+      expect(response.paymentMethod, 'card');
       expect(response.paymentMethodTypes,
           {PaymentMethodType.card, PaymentMethodType.alipay});
       expect(response.receiptEmail, 'joe.schmoe@example.com');

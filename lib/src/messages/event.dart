@@ -1,10 +1,10 @@
 part of '../../messages.dart';
 
-enum _EventObject { event }
+enum EventObject { event }
 
 /// https://stripe.com/docs/api/events/object
 abstract class Event<T extends Message> extends Message {
-  final _EventObject object;
+  final EventObject object;
 
   /// Unique identifier for the object.
   final String id;
@@ -94,20 +94,13 @@ class EventData<T> {
 @JsonSerializable()
 class SubscriptionEvent extends Event<Subscription> {
   SubscriptionEvent({
-    required _EventObject object,
-    required String id,
-    required int created,
-    required String type,
-    required EventData<Subscription> data,
-    required bool livemode,
-  }) : super(
-          object: object,
-          id: id,
-          created: created,
-          data: data,
-          type: type,
-          livemode: livemode,
-        );
+    required super.object,
+    required super.id,
+    required super.created,
+    required super.type,
+    required super.data,
+    required super.livemode,
+  });
 
   factory SubscriptionEvent.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionEventFromJson(json);
@@ -119,20 +112,13 @@ class SubscriptionEvent extends Event<Subscription> {
 @JsonSerializable()
 class CustomerEvent extends Event<Customer> {
   CustomerEvent({
-    required _EventObject object,
-    required String id,
-    required int created,
-    required String type,
-    required EventData<Customer> data,
-    required bool livemode,
-  }) : super(
-          object: object,
-          id: id,
-          created: created,
-          data: data,
-          type: type,
-          livemode: livemode,
-        );
+    required super.object,
+    required super.id,
+    required super.created,
+    required super.type,
+    required super.data,
+    required super.livemode,
+  });
 
   factory CustomerEvent.fromJson(Map<String, dynamic> json) =>
       _$CustomerEventFromJson(json);
@@ -144,20 +130,13 @@ class CustomerEvent extends Event<Customer> {
 @JsonSerializable()
 class ChargeEvent extends Event<Charge> {
   ChargeEvent({
-    required _EventObject object,
-    required String id,
-    required int created,
-    required String type,
-    required EventData<Charge> data,
-    required bool livemode,
-  }) : super(
-          object: object,
-          id: id,
-          created: created,
-          data: data,
-          type: type,
-          livemode: livemode,
-        );
+    required super.object,
+    required super.id,
+    required super.created,
+    required super.type,
+    required super.data,
+    required super.livemode,
+  });
 
   factory ChargeEvent.fromJson(Map<String, dynamic> json) =>
       _$ChargeEventFromJson(json);
@@ -169,20 +148,13 @@ class ChargeEvent extends Event<Charge> {
 @JsonSerializable()
 class PaymentIntentEvent extends Event<PaymentIntent> {
   PaymentIntentEvent({
-    required _EventObject object,
-    required String id,
-    required int created,
-    required String type,
-    required EventData<PaymentIntent> data,
-    required bool livemode,
-  }) : super(
-          object: object,
-          id: id,
-          created: created,
-          data: data,
-          type: type,
-          livemode: livemode,
-        );
+    required super.object,
+    required super.id,
+    required super.created,
+    required super.type,
+    required super.data,
+    required super.livemode,
+  });
 
   factory PaymentIntentEvent.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentEventFromJson(json);
@@ -194,20 +166,13 @@ class PaymentIntentEvent extends Event<PaymentIntent> {
 @JsonSerializable()
 class RefundEvent extends Event<Refund> {
   RefundEvent({
-    required _EventObject object,
-    required String id,
-    required int created,
-    required String type,
-    required EventData<Refund> data,
-    required bool livemode,
-  }) : super(
-          object: object,
-          id: id,
-          created: created,
-          data: data,
-          type: type,
-          livemode: livemode,
-        );
+    required super.object,
+    required super.id,
+    required super.created,
+    required super.type,
+    required super.data,
+    required super.livemode,
+  });
 
   factory RefundEvent.fromJson(Map<String, dynamic> json) =>
       _$RefundEventFromJson(json);
@@ -219,20 +184,13 @@ class RefundEvent extends Event<Refund> {
 @JsonSerializable()
 class CheckoutSessionEvent extends Event<CheckoutSession> {
   CheckoutSessionEvent({
-    required _EventObject object,
-    required String id,
-    required int created,
-    required String type,
-    required EventData<CheckoutSession> data,
-    required bool livemode,
-  }) : super(
-          object: object,
-          id: id,
-          created: created,
-          data: data,
-          type: type,
-          livemode: livemode,
-        );
+    required super.object,
+    required super.id,
+    required super.created,
+    required super.type,
+    required super.data,
+    required super.livemode,
+  });
 
   factory CheckoutSessionEvent.fromJson(Map<String, dynamic> json) =>
       _$CheckoutSessionEventFromJson(json);
@@ -244,20 +202,13 @@ class CheckoutSessionEvent extends Event<CheckoutSession> {
 @JsonSerializable()
 class PaymentMethodEvent extends Event<PaymentMethod> {
   PaymentMethodEvent({
-    required _EventObject object,
-    required String id,
-    required int created,
-    required String type,
-    required EventData<PaymentMethod> data,
-    required bool livemode,
-  }) : super(
-          object: object,
-          id: id,
-          created: created,
-          data: data,
-          type: type,
-          livemode: livemode,
-        );
+    required super.object,
+    required super.id,
+    required super.created,
+    required super.type,
+    required super.data,
+    required super.livemode,
+  });
 
   factory PaymentMethodEvent.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodEventFromJson(json);
@@ -269,20 +220,13 @@ class PaymentMethodEvent extends Event<PaymentMethod> {
 @JsonSerializable()
 class InvoiceEvent extends Event<Invoice> {
   InvoiceEvent({
-    required _EventObject object,
-    required String id,
-    required int created,
-    required String type,
-    required EventData<Invoice> data,
-    required bool livemode,
-  }) : super(
-          object: object,
-          id: id,
-          created: created,
-          data: data,
-          type: type,
-          livemode: livemode,
-        );
+    required super.object,
+    required super.id,
+    required super.created,
+    required super.type,
+    required super.data,
+    required super.livemode,
+  });
 
   factory InvoiceEvent.fromJson(Map<String, dynamic> json) =>
       _$InvoiceEventFromJson(json);
