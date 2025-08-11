@@ -1,20 +1,18 @@
-library;
 
 import 'package:meta/meta.dart';
+import 'package:stripe/src/client.dart';
+import 'package:stripe/src/resources/balance_transaction.dart';
+import 'package:stripe/src/resources/charge.dart';
+import 'package:stripe/src/resources/checkout_session.dart';
+import 'package:stripe/src/resources/customer.dart';
+import 'package:stripe/src/resources/payment_intent.dart';
+import 'package:stripe/src/resources/portal_session.dart';
+import 'package:stripe/src/resources/price.dart';
+import 'package:stripe/src/resources/product.dart';
+import 'package:stripe/src/resources/refund.dart';
+import 'package:stripe/src/resources/subscription.dart';
+import 'package:stripe/src/resources/subscription_item.dart';
 import 'package:stripe/src/resources/subscription_schedule.dart';
-
-import 'src/client.dart';
-import 'src/resources/balance_transaction.dart';
-import 'src/resources/charge.dart';
-import 'src/resources/checkout_session.dart';
-import 'src/resources/customer.dart';
-import 'src/resources/payment_intent.dart';
-import 'src/resources/portal_session.dart';
-import 'src/resources/price.dart';
-import 'src/resources/product.dart';
-import 'src/resources/refund.dart';
-import 'src/resources/subscription.dart';
-import 'src/resources/subscription_item.dart';
 
 export 'messages.dart';
 export 'src/webhook.dart';
@@ -27,6 +25,26 @@ export 'src/webhook.dart';
 ///     final stripe = Stripe('privateApiKey');
 ///     final charge = await stripe.charge.retrieve(chargeId);
 class Stripe {
+
+  factory Stripe(String apiKey) {
+    final client = Client(apiKey: apiKey);
+    return Stripe.withClient(client);
+  }
+
+  @visibleForTesting
+  Stripe.withClient(this.client)
+      : checkoutSession = CheckoutSessionResource(client),
+        portalSession = PortalSessionResource(client),
+        customer = CustomerResource(client),
+        refund = RefundResource(client),
+        paymentIntent = PaymentIntentResource(client),
+        price = PriceResource(client),
+        product = ProductResource(client),
+        subscription = SubscriptionResource(client),
+        subscriptionItem = SubscriptionItemResource(client),
+        subscriptionSchedule = SubscriptionScheduleResource(client),
+        charge = ChargeResource(client),
+        balanceTransaction = BalanceTransactionResource(client);
   /// Our actual client implementation that communicates with Stripe.
   ///
   /// You should not need to access this, it is mostly exposed for testing, but
@@ -68,24 +86,4 @@ class Stripe {
 
   /// https://stripe.com/docs/api/balance_transactions
   final BalanceTransactionResource balanceTransaction;
-
-  factory Stripe(String apiKey) {
-    final client = Client(apiKey: apiKey);
-    return Stripe.withClient(client);
-  }
-
-  @visibleForTesting
-  Stripe.withClient(this.client)
-      : checkoutSession = CheckoutSessionResource(client),
-        portalSession = PortalSessionResource(client),
-        customer = CustomerResource(client),
-        refund = RefundResource(client),
-        paymentIntent = PaymentIntentResource(client),
-        price = PriceResource(client),
-        product = ProductResource(client),
-        subscription = SubscriptionResource(client),
-        subscriptionItem = SubscriptionItemResource(client),
-        subscriptionSchedule = SubscriptionScheduleResource(client),
-        charge = ChargeResource(client),
-        balanceTransaction = BalanceTransactionResource(client);
 }

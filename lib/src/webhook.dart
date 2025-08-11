@@ -1,6 +1,6 @@
 import 'package:logging/logging.dart';
 
-import 'signature.dart';
+import 'package:stripe/src/signature.dart';
 
 final log = Logger('Stripe Webhook');
 

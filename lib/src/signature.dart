@@ -4,9 +4,6 @@ import 'package:crypto/crypto.dart';
 import 'package:stripe/src/exceptions.dart';
 
 class Signature {
-  late int _timestamp;
-
-  late String _v1;
 
   Signature(String input) {
     if (input.isEmpty) {
@@ -17,7 +14,7 @@ class Signature {
     if (parts.length < 2) {
       throw InvalidSignatureException('Not enough parts: $input');
     }
-    for (var part in parts) {
+    for (final part in parts) {
       final partSegments = part.split('=');
       if (partSegments.length != 2) continue;
       final key = partSegments.first;
@@ -29,10 +26,8 @@ class Signature {
           } catch (e) {
             throw InvalidSignatureException('Unable to parse timestamp: $part');
           }
-          break;
         case 'v1':
           _v1 = value;
-          break;
       }
     }
     if (_timestamp == 0) {
@@ -42,6 +37,9 @@ class Signature {
       throw InvalidSignatureException('Missing v1 signature: $input');
     }
   }
+  late int _timestamp;
+
+  late String _v1;
 
   bool isCorrectlySigned(String body, String signingSecret) {
     final signatureHash = _createSignatureHash(body, signingSecret);
@@ -52,7 +50,7 @@ class Signature {
       createSignatureHash(_timestamp, body, signingSecret);
 
   bool isValidSignatureTimestamp(Duration timeTolerance) {
-    var time = DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000);
+    final time = DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000);
     if (time.add(timeTolerance).isBefore(DateTime.now())) {
       return false;
     }

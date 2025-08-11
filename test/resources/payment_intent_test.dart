@@ -80,7 +80,7 @@ void main() {
   });
 }
 
-const createSessionResponse = r'''
+const createSessionResponse = '''
 {
   "id": "pi_1EUqMaAA7oWz99nSFM4ANx6C",
   "object": "payment_intent",

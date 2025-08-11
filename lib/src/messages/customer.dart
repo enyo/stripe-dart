@@ -5,6 +5,19 @@ enum CustomerObject { customer }
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
 class Customer extends Message {
+
+  Customer({
+    required this.object,
+    required this.id,
+    required this.invoiceSettings,
+    this.description,
+    this.email,
+    this.metadata,
+    this.name,
+  });
+
+  factory Customer.fromJson(Map<String, dynamic> json) =>
+      _$CustomerFromJson(json);
   final CustomerObject object;
 
   /// Unique identifier for the object.
@@ -28,19 +41,6 @@ class Customer extends Message {
   /// The customer’s full name or business name.
   final String? name;
 
-  Customer({
-    required this.object,
-    required this.id,
-    required this.invoiceSettings,
-    this.description,
-    this.email,
-    this.metadata,
-    this.name,
-  });
-
-  factory Customer.fromJson(Map<String, dynamic> json) =>
-      _$CustomerFromJson(json);
-
   @override
   Map<String, dynamic> toJson() => _$CustomerToJson(this);
 }
@@ -49,9 +49,6 @@ class Customer extends Message {
 /// https://docs.stripe.com/api/customers/object#customer_object-invoice_settings
 @JsonSerializable()
 class InvoiceSettings {
-  /// ID of a payment method that’s attached to the customer, to be used as the
-  /// customer’s default payment method for subscriptions and invoices.
-  final String? defaultPaymentMethod;
 
   InvoiceSettings({
     this.defaultPaymentMethod,
@@ -59,6 +56,9 @@ class InvoiceSettings {
 
   factory InvoiceSettings.fromJson(Map<String, dynamic> json) =>
       _$InvoiceSettingsFromJson(json);
+  /// ID of a payment method that’s attached to the customer, to be used as the
+  /// customer’s default payment method for subscriptions and invoices.
+  final String? defaultPaymentMethod;
 
   Map<String, dynamic> toJson() => _$InvoiceSettingsToJson(this);
 }

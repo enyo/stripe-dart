@@ -28,7 +28,7 @@ void main() {
     });
 
     test('properly changes Lists to Maps', () async {
-      var options = RequestOptions(
+      final options = RequestOptions(
           path: '/',
           contentType: 'application/json',
           data: <String, dynamic>{
@@ -39,7 +39,7 @@ void main() {
     });
 
     test('goes through map recursively', () async {
-      var options = RequestOptions(
+      final options = RequestOptions(
           path: '/',
           contentType: 'application/json',
           data: <String, dynamic>{

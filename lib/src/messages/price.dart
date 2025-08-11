@@ -8,6 +8,19 @@ enum PriceType { one_time, recurring }
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
 class Price extends Message {
+
+  Price({
+    required this.object,
+    required this.id,
+    required this.active,
+    required this.currency,
+    required this.product,
+    required this.type,
+    required this.recurring,
+    required this.unitAmount,
+  });
+
+  factory Price.fromJson(Map<String, dynamic> json) => _$PriceFromJson(json);
   final PriceObject object;
 
   /// Unique identifier for the object.
@@ -33,19 +46,6 @@ class Price extends Message {
   /// The unit amount in cents to be charged, represented as a whole integer if
   /// possible. Only set if billing_scheme=per_unit.
   final int unitAmount;
-
-  Price({
-    required this.object,
-    required this.id,
-    required this.active,
-    required this.currency,
-    required this.product,
-    required this.type,
-    required this.recurring,
-    required this.unitAmount,
-  });
-
-  factory Price.fromJson(Map<String, dynamic> json) => _$PriceFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$PriceToJson(this);

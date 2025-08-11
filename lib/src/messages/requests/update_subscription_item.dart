@@ -3,6 +3,22 @@ part of '../../../messages.dart';
 /// https://docs.stripe.com/api/subscription_items/update
 @JsonSerializable(includeIfNull: false)
 class SubscriptionItemUpdate {
+
+  SubscriptionItemUpdate({
+    this.paymentBehavior,
+    this.metadata,
+    this.price,
+    this.prorationBehavior,
+    this.quantity,
+    this.billingThresholds,
+    this.offSession,
+    this.priceData,
+    this.prorationDate,
+    this.taxRates,
+  });
+
+  factory SubscriptionItemUpdate.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionItemUpdateFromJson(json);
   /// Set of key-value pairs that you can attach to an object.
   final Map<String, String>? metadata;
 
@@ -37,22 +53,6 @@ class SubscriptionItemUpdate {
   final DateTime? prorationDate;
 
   final List<String>? taxRates;
-
-  SubscriptionItemUpdate({
-    this.paymentBehavior,
-    this.metadata,
-    this.price,
-    this.prorationBehavior,
-    this.quantity,
-    this.billingThresholds,
-    this.offSession,
-    this.priceData,
-    this.prorationDate,
-    this.taxRates,
-  });
-
-  factory SubscriptionItemUpdate.fromJson(Map<String, dynamic> json) =>
-      _$SubscriptionItemUpdateFromJson(json);
 
   Map<String, dynamic> toJson() => _$SubscriptionItemUpdateToJson(this);
 }

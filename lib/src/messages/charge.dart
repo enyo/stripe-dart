@@ -5,11 +5,6 @@ enum ChargeObject { charge }
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
 class Charge extends Message {
-  final ChargeObject object;
-  final String id;
-  final String balanceTransaction;
-  final PaymentMethodDetails paymentMethodDetails;
-  final bool livemode;
 
   Charge({
     required this.object,
@@ -20,6 +15,11 @@ class Charge extends Message {
   });
 
   factory Charge.fromJson(Map<String, dynamic> json) => _$ChargeFromJson(json);
+  final ChargeObject object;
+  final String id;
+  final String balanceTransaction;
+  final PaymentMethodDetails paymentMethodDetails;
+  final bool livemode;
 
   @override
   Map<String, dynamic> toJson() => _$ChargeToJson(this);
@@ -27,7 +27,6 @@ class Charge extends Message {
 
 @JsonSerializable()
 class PaymentMethodDetails {
-  final PaymentMethodDetailsCard? card;
 
   PaymentMethodDetails({
     this.card,
@@ -35,14 +34,13 @@ class PaymentMethodDetails {
 
   factory PaymentMethodDetails.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodDetailsFromJson(json);
+  final PaymentMethodDetailsCard? card;
 
   Map<String, dynamic> toJson() => _$PaymentMethodDetailsToJson(this);
 }
 
 @JsonSerializable()
 class PaymentMethodDetailsCard {
-  final String brand;
-  final String last4;
 
   PaymentMethodDetailsCard({
     required this.brand,
@@ -51,6 +49,8 @@ class PaymentMethodDetailsCard {
 
   factory PaymentMethodDetailsCard.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodDetailsCardFromJson(json);
+  final String brand;
+  final String last4;
 
   Map<String, dynamic> toJson() => _$PaymentMethodDetailsCardToJson(this);
 }

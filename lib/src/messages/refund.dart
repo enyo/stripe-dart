@@ -5,8 +5,6 @@ enum RefundObject { refund }
 /// https://stripe.com/docs/api/refunds/object
 @JsonSerializable()
 class Refund extends Message {
-  final RefundObject object;
-  final String id;
 
   Refund({
     required this.object,
@@ -14,6 +12,8 @@ class Refund extends Message {
   });
 
   factory Refund.fromJson(Map<String, dynamic> json) => _$RefundFromJson(json);
+  final RefundObject object;
+  final String id;
 
   @override
   Map<String, dynamic> toJson() => _$RefundToJson(this);

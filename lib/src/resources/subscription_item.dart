@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '_resource.dart';
+import 'package:stripe/src/resources/_resource.dart';
 
 class SubscriptionItemResource extends Resource<SubscriptionItem> {
   SubscriptionItemResource(super.client);
@@ -21,7 +21,7 @@ class SubscriptionItemResource extends Resource<SubscriptionItem> {
     );
     return DataList<SubscriptionItem>.fromJson(
       map,
-      (value) => SubscriptionItem.fromJson(value as Map<String, dynamic>),
+      (value) => SubscriptionItem.fromJson(value! as Map<String, dynamic>),
     );
   }
 

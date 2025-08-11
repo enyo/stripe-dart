@@ -2,6 +2,15 @@ part of '../../../messages.dart';
 
 /// https://stripe.com/docs/api/checkout/customers/create
 abstract class _CustomerRequest {
+
+  _CustomerRequest({
+    this.description,
+    this.email,
+    this.metadata,
+    this.name,
+    this.paymentMethod,
+    this.phoneNumber,
+  });
   /// An arbitrary string that you can attach to a customer object. It is
   /// displayed alongside the customer in the dashboard.
   final String? description;
@@ -25,15 +34,6 @@ abstract class _CustomerRequest {
 
   /// The customer’s phone number.
   final String? phoneNumber;
-
-  _CustomerRequest({
-    this.description,
-    this.email,
-    this.metadata,
-    this.name,
-    this.paymentMethod,
-    this.phoneNumber,
-  });
 }
 
 @JsonSerializable()

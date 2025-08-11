@@ -2,12 +2,6 @@ part of '../../messages.dart';
 
 @JsonSerializable()
 class StripeApiError {
-  final StripeApiErrorType type;
-  final String? code;
-  final String? declineCode;
-  final String? message;
-  final String? param;
-  final PaymentIntent? paymentIntent;
 
   StripeApiError({
     required this.type,
@@ -20,6 +14,12 @@ class StripeApiError {
 
   factory StripeApiError.fromJson(Map<String, dynamic> json) =>
       _$StripeApiErrorFromJson(json);
+  final StripeApiErrorType type;
+  final String? code;
+  final String? declineCode;
+  final String? message;
+  final String? param;
+  final PaymentIntent? paymentIntent;
 
   Map<String, dynamic> toJson() => _$StripeApiErrorToJson(this);
 

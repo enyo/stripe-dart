@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '_resource.dart';
+import 'package:stripe/src/resources/_resource.dart';
 
 class ChargeResource extends Resource<Charge> {
   ChargeResource(super.client);

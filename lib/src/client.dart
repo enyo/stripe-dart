@@ -1,20 +1,17 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:stripe/src/exceptions.dart';
+import 'package:uuid/uuid.dart';
 
-const _defaultUrl = 'https://api.stripe.com/v1/';
-const _defaultVersion = '2020-08-27';
+const _defaultUrl = 'https://api.stripe.com/v2/';
+const _defaultVersion = '2024-09-30.acacia';
 
 /// The http client implementation that will make requests to the stripe API.
 ///
 /// Internally this uses a [Dio] http client.
 class Client {
-  final String version;
-  final String apiKey;
-
   /// Creates a [Dio] client that will make requests to [baseUrl].
   factory Client({
     required String apiKey,
@@ -30,17 +27,21 @@ class Client {
     String baseUrl = _defaultUrl,
     this.version = _defaultVersion,
   }) {
-    dio.transformer = FormDataTransformer();
+    // TODO(kali): figure out what transformation is actually still needed here
+    // dio.transformer = FormDataTransformer();
     dio.options
       ..baseUrl = baseUrl
       ..responseType = ResponseType.json
-      ..contentType = 'application/x-www-form-urlencoded'
+      ..contentType = 'application/json'
       ..headers = {
-        'Authorization': 'Basic ${base64Encode(utf8.encode('$apiKey:'))}',
+        'Authorization': 'Bearer $apiKey',
         'Stripe-Version': version,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
+        'Idempotency-Key': const Uuid().v4(),
       };
   }
+  final String version;
+  final String apiKey;
 
   /// The actual [Dio] instance that makes the request. You shouldn't need to
   /// access this.
@@ -49,14 +50,14 @@ class Client {
 
   /// Makes a post request to the Stripe API
   Future<Map<String, dynamic>> post(
-    final String path, {
-    final Map<String, dynamic>? data,
-    final String? idempotencyKey,
+    String path, {
+    Map<String, dynamic>? data,
   }) async {
     try {
-      final response = await dio.post<Map<String, dynamic>>(path,
-          data: data,
-          options: _createRequestOptions(idempotencyKey: idempotencyKey));
+      final response = await dio.post<Map<String, dynamic>>(
+        path,
+        data: data,
+      );
       return processResponse(response);
     } on DioException catch (e) {
       var message = e.message ?? '';
@@ -69,14 +70,14 @@ class Client {
 
   /// Makes a DELETE request to the Stripe API
   Future<Map<String, dynamic>> delete(
-    final String path, {
-    final Map<String, dynamic>? data,
-    final String? idempotencyKey,
+    String path, {
+    Map<String, dynamic>? data,
   }) async {
     try {
-      final response = await dio.delete<Map<String, dynamic>>(path,
-          data: data,
-          options: _createRequestOptions(idempotencyKey: idempotencyKey));
+      final response = await dio.delete<Map<String, dynamic>>(
+        path,
+        data: data,
+      );
       return processResponse(response);
     } on DioException catch (e) {
       var message = e.message ?? '';
@@ -89,22 +90,16 @@ class Client {
 
   /// Makes a get request to the Stripe API
   Future<Map<String, dynamic>> get(
-    final String path, {
+    String path, {
     String? idempotencyKey,
     Map<String, dynamic>? queryParameters,
   }) async {
     final response = await dio.get<Map<String, dynamic>>(
       path,
       queryParameters: queryParameters,
-      options: _createRequestOptions(idempotencyKey: idempotencyKey),
     );
     return processResponse(response);
   }
-
-  Options? _createRequestOptions({String? idempotencyKey}) =>
-      idempotencyKey == null
-          ? null
-          : Options(headers: {'Idempotency-Key': idempotencyKey});
 
   Map<String, dynamic> processResponse(
       Response<Map<String, dynamic>> response) {
@@ -134,32 +129,32 @@ class Client {
   }
 }
 
-/// This converter is used by Dio to convert [List] objects to [Map] so they
-/// are encoded properly for Stripe.
-///
-/// Stripe expects array to be submited like this: `some_field[0]=value` and not
-/// `some_field=[value]`.
-class FormDataTransformer extends BackgroundTransformer {
-  void fixMap(Map object) {
-    for (final key in object.keys) {
-      var value = object[key];
-      if (value is List) {
-        object[key] = Map.fromIterables(
-            List.generate(value.length, (index) => '$index'), value);
-      }
+// /// This converter is used by Dio to convert [List] objects to [Map] so they
+// /// are encoded properly for Stripe.
+// ///
+// /// Stripe expects array to be submited like this: `some_field[0]=value` and not
+// /// `some_field=[value]`.
+// class FormDataTransformer extends BackgroundTransformer {
+//   void fixMap(Map<String, dynamic> object) {
+//     for (final key in object.keys) {
+//       final value = object[key];
+//       if (value is List) {
+//         object[key] = Map.fromIterables(
+//             List.generate(value.length, (index) => '$index'), value);
+//       }
 
-      var newValue = object[key];
-      if (newValue is Map) {
-        fixMap(newValue);
-      }
-    }
-  }
+//       final newValue = object[key];
+//       if (newValue is Map<String, dynamic>) {
+//         fixMap(newValue);
+//       }
+//     }
+//   }
 
-  @override
-  Future<String> transformRequest(RequestOptions options) async {
-    if (options.data is Map) {
-      fixMap(options.data);
-    }
-    return super.transformRequest(options);
-  }
-}
+//   @override
+//   Future<String> transformRequest(RequestOptions options) async {
+//     if (options.data is Map<String, dynamic>) {
+//       fixMap(options.data);
+//     }
+//     return super.transformRequest(options);
+//   }
+// }

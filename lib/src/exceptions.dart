@@ -1,8 +1,8 @@
 /// Exceptions thrown by Stripe
 abstract class StripeException implements Exception {
-  final String message;
 
   StripeException(this.message);
+  final String message;
 }
 
 /// Invalid request errors arise when your request has invalid parameters.

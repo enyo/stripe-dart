@@ -3,6 +3,27 @@ part of '../../../messages.dart';
 /// https://stripe.com/docs/api/payment_intents/create
 @JsonSerializable()
 class CreatePaymentIntentRequest {
+
+  CreatePaymentIntentRequest({
+    required this.amount,
+    required this.currency,
+    this.automaticPaymentMethods,
+    this.confirm,
+    this.customer,
+    this.description,
+    this.metadata,
+    this.offSession,
+    this.paymentMethod,
+    this.paymentMethodTypes,
+    this.receiptEmail,
+    this.setupFutureUsage,
+    this.shipping,
+    this.statementDescriptor,
+    this.statementDescriptorSuffix,
+  });
+
+  factory CreatePaymentIntentRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreatePaymentIntentRequestFromJson(json);
   /// Amount intended to be collected by this PaymentIntent. A positive integer
   /// representing how much to charge in the smallest currency unit
   /// (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
@@ -85,27 +106,6 @@ class CreatePaymentIntentRequest {
   /// statement descriptor that’s set on the account to form the complete
   /// statement descriptor. Maximum 22 characters for the concatenated descriptor.
   final String? statementDescriptorSuffix;
-
-  CreatePaymentIntentRequest({
-    required this.amount,
-    required this.currency,
-    this.automaticPaymentMethods,
-    this.confirm,
-    this.customer,
-    this.description,
-    this.metadata,
-    this.offSession,
-    this.paymentMethod,
-    this.paymentMethodTypes,
-    this.receiptEmail,
-    this.setupFutureUsage,
-    this.shipping,
-    this.statementDescriptor,
-    this.statementDescriptorSuffix,
-  });
-
-  factory CreatePaymentIntentRequest.fromJson(Map<String, dynamic> json) =>
-      _$CreatePaymentIntentRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$CreatePaymentIntentRequestToJson(this);
 }

@@ -3,6 +3,20 @@ part of '../../../messages.dart';
 /// https://stripe.com/docs/api/prices/create
 @JsonSerializable()
 class CreatePriceRequest {
+
+  CreatePriceRequest({
+    required this.currency,
+    this.product,
+    this.unitAmount,
+    this.active,
+    this.metadata,
+    this.nickname,
+    this.recurring,
+    this.parameters,
+  });
+
+  factory CreatePriceRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreatePriceRequestFromJson(json);
   /// Three-letter ISO currency code, in lowercase. Must be a supported currency. (REQUIRED)
   final String currency;
 
@@ -27,20 +41,6 @@ class CreatePriceRequest {
 
   /// Additional parameters for the price.
   final PriceParameters? parameters;
-
-  CreatePriceRequest({
-    required this.currency,
-    this.product,
-    this.unitAmount,
-    this.active,
-    this.metadata,
-    this.nickname,
-    this.recurring,
-    this.parameters,
-  });
-
-  factory CreatePriceRequest.fromJson(Map<String, dynamic> json) =>
-      _$CreatePriceRequestFromJson(json);
 
   Map<String, dynamic> toJson() {
     final data = _$CreatePriceRequestToJson(this);
@@ -79,6 +79,16 @@ enum AggregateUsage {
 /// Recurring components of a price such as `interval` and `usage_type`.
 @JsonSerializable()
 class Recurring {
+
+  Recurring({
+    required this.interval,
+    this.aggregateUsage,
+    this.intervalCount,
+    this.usageType,
+  });
+
+  factory Recurring.fromJson(Map<String, dynamic> json) =>
+      _$RecurringFromJson(json);
   /// Specifies billing frequency. Either `day`, `week`, `month`, or `year`. (REQUIRED)
   final RecurringInterval interval;
 
@@ -101,22 +111,29 @@ class Recurring {
   /// `metered` aggregates the total usage based on usage records.
   /// Defaults to `licensed`.
   final String? usageType;
-
-  Recurring({
-    required this.interval,
-    this.aggregateUsage,
-    this.intervalCount,
-    this.usageType,
-  });
-
-  factory Recurring.fromJson(Map<String, dynamic> json) =>
-      _$RecurringFromJson(json);
   Map<String, dynamic> toJson() => _$RecurringToJson(this);
 }
 
 /// Additional parameters for the price.
 @JsonSerializable()
 class PriceParameters {
+
+  PriceParameters({
+    this.customUnitAmount,
+    this.productData,
+    this.tiers,
+    this.tiersMode,
+    this.billingScheme,
+    this.currencyOptions,
+    this.lookupKey,
+    this.taxBehavior,
+    this.transferLookupKey,
+    this.transformQuantity,
+    this.unitAmountDecimal,
+  });
+
+  factory PriceParameters.fromJson(Map<String, dynamic> json) =>
+      _$PriceParametersFromJson(json);
   /// Custom unit amount for the price. (REQUIRED UNLESS UNIT_AMOUNT IS PROVIDED)
   final int? customUnitAmount;
 
@@ -149,22 +166,5 @@ class PriceParameters {
 
   /// Optional unit amount decimal for the price.
   final double? unitAmountDecimal;
-
-  PriceParameters({
-    this.customUnitAmount,
-    this.productData,
-    this.tiers,
-    this.tiersMode,
-    this.billingScheme,
-    this.currencyOptions,
-    this.lookupKey,
-    this.taxBehavior,
-    this.transferLookupKey,
-    this.transformQuantity,
-    this.unitAmountDecimal,
-  });
-
-  factory PriceParameters.fromJson(Map<String, dynamic> json) =>
-      _$PriceParametersFromJson(json);
   Map<String, dynamic> toJson() => _$PriceParametersToJson(this);
 }

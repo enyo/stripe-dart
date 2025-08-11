@@ -55,7 +55,7 @@ void main() {
   });
 }
 
-const listSubscriptionsResponse = r'''
+const listSubscriptionsResponse = '''
 {
   "object": "list",
   "url": "/v1/subscriptions",

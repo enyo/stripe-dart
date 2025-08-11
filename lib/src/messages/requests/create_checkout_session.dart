@@ -22,6 +22,25 @@ enum BillingAddressCollection {
 /// https://stripe.com/docs/api/checkout/sessions/create
 @JsonSerializable()
 class CreateCheckoutSessionRequest {
+
+  CreateCheckoutSessionRequest({
+    required this.successUrl,
+    required this.cancelUrl,
+    required this.paymentMethodTypes,
+    this.mode,
+    this.clientReferenceId,
+    this.customerEmail,
+    this.customer,
+    this.lineItems,
+    this.billingAddressCollection,
+    this.automaticTax,
+    this.taxIdCollection,
+    this.paymentIntentData,
+    this.subscriptionData,
+  });
+
+  factory CreateCheckoutSessionRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateCheckoutSessionRequestFromJson(json);
   /// The URL to which Stripe should send customers when payment or setup is
   /// complete. If you’d like access to the Checkout Session for the successful
   /// payment, read more about it in the guide on fulfilling orders.
@@ -92,30 +111,22 @@ class CreateCheckoutSessionRequest {
   /// A subset of parameters to be passed to subscription creation for Checkout
   /// Sessions in subscription mode.
   final SubscriptionData? subscriptionData;
-
-  CreateCheckoutSessionRequest({
-    required this.successUrl,
-    required this.cancelUrl,
-    required this.paymentMethodTypes,
-    this.mode,
-    this.clientReferenceId,
-    this.customerEmail,
-    this.customer,
-    this.lineItems,
-    this.billingAddressCollection,
-    this.automaticTax,
-    this.taxIdCollection,
-    this.paymentIntentData,
-    this.subscriptionData,
-  });
-
-  factory CreateCheckoutSessionRequest.fromJson(Map<String, dynamic> json) =>
-      _$CreateCheckoutSessionRequestFromJson(json);
   Map<String, dynamic> toJson() => _$CreateCheckoutSessionRequestToJson(this);
 }
 
 @JsonSerializable()
 class LineItem {
+
+  LineItem({
+    this.images,
+    this.quantity,
+    this.description,
+    this.price,
+    this.priceData,
+  });
+
+  factory LineItem.fromJson(Map<String, dynamic> json) =>
+      _$LineItemFromJson(json);
   final List<String>? images;
 
   /// The quantity of the line item being purchased. Quantity should not be
@@ -131,22 +142,21 @@ class LineItem {
   /// The ID of the Price or Plan object. One of price, price_data or amount is
   /// required.
   final String? price;
-
-  LineItem({
-    this.images,
-    this.quantity,
-    this.description,
-    this.price,
-    this.priceData,
-  });
-
-  factory LineItem.fromJson(Map<String, dynamic> json) =>
-      _$LineItemFromJson(json);
   Map<String, dynamic> toJson() => _$LineItemToJson(this);
 }
 
 @JsonSerializable()
 class PriceData {
+
+  PriceData({
+    required this.currency,
+    this.product,
+    this.unitAmount,
+    this.productData,
+  });
+
+  factory PriceData.fromJson(Map<String, dynamic> json) =>
+      _$PriceDataFromJson(json);
   /// Three-letter ISO currency code, in lowercase. Must be a supported
   /// currency.
   final String currency;
@@ -162,21 +172,20 @@ class PriceData {
   /// Data used to generate a new product object inline. One of product or
   /// product_data is required.
   final ProductData? productData;
-
-  PriceData({
-    required this.currency,
-    this.product,
-    this.unitAmount,
-    this.productData,
-  });
-
-  factory PriceData.fromJson(Map<String, dynamic> json) =>
-      _$PriceDataFromJson(json);
   Map<String, dynamic> toJson() => _$PriceDataToJson(this);
 }
 
 @JsonSerializable()
 class ProductData {
+
+  ProductData({
+    required this.name,
+    this.description,
+    this.images,
+  });
+
+  factory ProductData.fromJson(Map<String, dynamic> json) =>
+      _$ProductDataFromJson(json);
   /// The product’s name, meant to be displayable to the customer. Whenever this
   /// product is sold via a subscription, name will show up on associated
   /// invoice line item descriptions.
@@ -190,21 +199,11 @@ class ProductData {
   /// A list of up to 8 URLs of images for this product, meant to be displayable
   /// to the customer.
   final List<String>? images;
-
-  ProductData({
-    required this.name,
-    this.description,
-    this.images,
-  });
-
-  factory ProductData.fromJson(Map<String, dynamic> json) =>
-      _$ProductDataFromJson(json);
   Map<String, dynamic> toJson() => _$ProductDataToJson(this);
 }
 
 @JsonSerializable()
 class AutomaticTax {
-  final bool enabled;
 
   AutomaticTax({
     required this.enabled,
@@ -212,12 +211,12 @@ class AutomaticTax {
 
   factory AutomaticTax.fromJson(Map<String, dynamic> json) =>
       _$AutomaticTaxFromJson(json);
+  final bool enabled;
   Map<String, dynamic> toJson() => _$AutomaticTaxToJson(this);
 }
 
 @JsonSerializable()
 class TaxIdCollection {
-  final bool enabled;
 
   TaxIdCollection({
     required this.enabled,
@@ -225,6 +224,7 @@ class TaxIdCollection {
 
   factory TaxIdCollection.fromJson(Map<String, dynamic> json) =>
       _$TaxIdCollectionFromJson(json);
+  final bool enabled;
   Map<String, dynamic> toJson() => _$TaxIdCollectionToJson(this);
 }
 
@@ -242,8 +242,6 @@ enum SetupFutureUsage {
 
 @JsonSerializable()
 class PaymentIntentData {
-  final String? receiptEmail;
-  final SetupFutureUsage? setupFutureUsage;
 
   PaymentIntentData({
     this.receiptEmail,
@@ -252,11 +250,22 @@ class PaymentIntentData {
 
   factory PaymentIntentData.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentDataFromJson(json);
+  final String? receiptEmail;
+  final SetupFutureUsage? setupFutureUsage;
   Map<String, dynamic> toJson() => _$PaymentIntentDataToJson(this);
 }
 
 @JsonSerializable()
 class SubscriptionData {
+
+  SubscriptionData({
+    this.trialEnd,
+    this.trialPeriodDays,
+    this.metadata,
+  });
+
+  factory SubscriptionData.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionDataFromJson(json);
   /// Unix timestamp representing the end of the trial period the customer will
   /// get before being charged for the first time. Has to be at least 48 hours
   /// in the future.
@@ -271,14 +280,5 @@ class SubscriptionData {
   /// format. Individual keys can be unset by posting an empty value to them.
   /// All keys can be unset by posting an empty value to metadata.
   final Map<String, dynamic>? metadata;
-
-  SubscriptionData({
-    this.trialEnd,
-    this.trialPeriodDays,
-    this.metadata,
-  });
-
-  factory SubscriptionData.fromJson(Map<String, dynamic> json) =>
-      _$SubscriptionDataFromJson(json);
   Map<String, dynamic> toJson() => _$SubscriptionDataToJson(this);
 }

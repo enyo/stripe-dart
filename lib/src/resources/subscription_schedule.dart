@@ -1,5 +1,5 @@
-import '../../messages.dart';
-import '_resource.dart';
+import 'package:stripe/messages.dart';
+import 'package:stripe/src/resources/_resource.dart';
 
 class SubscriptionScheduleResource extends Resource {
   SubscriptionScheduleResource(super.client);
@@ -22,7 +22,7 @@ class SubscriptionScheduleResource extends Resource {
 
     return DataList<SubscriptionSchedule>.fromJson(
       map,
-      (value) => SubscriptionSchedule.fromJson(value as Map<String, dynamic>),
+      (value) => SubscriptionSchedule.fromJson(value! as Map<String, dynamic>),
     );
   }
 

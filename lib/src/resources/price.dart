@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '_resource.dart';
+import 'package:stripe/src/resources/_resource.dart';
 
 class PriceResource extends Resource<Price> {
   PriceResource(super.client);
@@ -15,7 +15,7 @@ class PriceResource extends Resource<Price> {
   Future<DataList<Price>> list([ListPricesRequest? request]) async {
     final map = await get('prices', queryParameters: request?.toJson());
     return DataList<Price>.fromJson(
-        map, (value) => Price.fromJson(value as Map<String, dynamic>));
+        map, (value) => Price.fromJson(value! as Map<String, dynamic>));
   }
 
   Future<Price> create(CreatePriceRequest request) async {
@@ -27,7 +27,7 @@ class PriceResource extends Resource<Price> {
     /// https://docs.stripe.com/search#query-fields-for-prices
     required String queryString,
   }) async {
-    final Map<String, dynamic> map = await get(
+    final map = await get(
       'prices/search',
       queryParameters: {'query': queryString},
     );
@@ -35,7 +35,7 @@ class PriceResource extends Resource<Price> {
     final prices = DataList<Price>.fromJson(
       map,
       (subscriptionMap) =>
-          Price.fromJson(subscriptionMap as Map<String, dynamic>),
+          Price.fromJson(subscriptionMap! as Map<String, dynamic>),
     );
 
     return prices;

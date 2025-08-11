@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '_resource.dart';
+import 'package:stripe/src/resources/_resource.dart';
 
 class SubscriptionResource extends Resource<Subscription> {
   SubscriptionResource(super.client);
@@ -16,14 +16,14 @@ class SubscriptionResource extends Resource<Subscription> {
       [ListSubscriptionsRequest? request]) async {
     final map = await get('subscriptions', queryParameters: request?.toJson());
     return DataList<Subscription>.fromJson(
-        map, (value) => Subscription.fromJson(value as Map<String, dynamic>));
+        map, (value) => Subscription.fromJson(value! as Map<String, dynamic>));
   }
 
   Future<DataList<Subscription>> search({
     /// https://docs.stripe.com/search#query-fields-for-subscriptions
     required String queryString,
   }) async {
-    final Map<String, dynamic> map = await get(
+    final map = await get(
       'subscriptions/search',
       queryParameters: {'query': queryString},
     );
@@ -31,7 +31,7 @@ class SubscriptionResource extends Resource<Subscription> {
     final subscriptions = DataList<Subscription>.fromJson(
       map,
       (subscriptionMap) =>
-          Subscription.fromJson(subscriptionMap as Map<String, dynamic>),
+          Subscription.fromJson(subscriptionMap! as Map<String, dynamic>),
     );
 
     return subscriptions;

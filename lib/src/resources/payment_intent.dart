@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:logging/logging.dart';
 import 'package:stripe/messages.dart';
 
-import '_resource.dart';
+import 'package:stripe/src/resources/_resource.dart';
 
 final log = Logger('Stripe PaymentIntentResource');
 
@@ -35,7 +35,7 @@ class PaymentIntentResource extends Resource<PaymentIntent> {
     /// https://docs.stripe.com/search#query-fields-for-payment-intents
     required String queryString,
   }) async {
-    final Map<String, dynamic> map = await get(
+    final map = await get(
       'payment_intents/search',
       queryParameters: {'query': queryString},
     );
@@ -43,7 +43,7 @@ class PaymentIntentResource extends Resource<PaymentIntent> {
     final intents = DataList<PaymentIntent>.fromJson(
       map,
       (customerMap) =>
-          PaymentIntent.fromJson(customerMap as Map<String, dynamic>),
+          PaymentIntent.fromJson(customerMap! as Map<String, dynamic>),
     );
 
     return intents;

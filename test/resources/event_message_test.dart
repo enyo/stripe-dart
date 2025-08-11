@@ -17,7 +17,7 @@ void main() {
   });
 }
 
-const eventObject = r'''
+const eventObject = '''
 {
   "id": "evt_1Icoy4CQQp28cFsCrf6ivStg",
   "object": "event",

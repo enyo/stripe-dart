@@ -4,6 +4,15 @@ enum EventObject { event }
 
 /// https://stripe.com/docs/api/events/object
 abstract class Event<T extends Message> extends Message {
+
+  Event({
+    required this.object,
+    required this.id,
+    required this.created,
+    required this.data,
+    required this.type,
+    required this.livemode,
+  });
   final EventObject object;
 
   /// Unique identifier for the object.
@@ -21,15 +30,6 @@ abstract class Event<T extends Message> extends Message {
 
   /// Whether the event is coming from live mode.
   final bool livemode;
-
-  Event({
-    required this.object,
-    required this.id,
-    required this.created,
-    required this.data,
-    required this.type,
-    required this.livemode,
-  });
 
   static T fromJson<T extends Event>(Map<String, dynamic> json) {
     switch (
@@ -67,6 +67,15 @@ abstract class Event<T extends Message> extends Message {
 
 @JsonSerializable()
 class EventData<T> {
+
+  EventData({
+    required this.object,
+    this.previousAttributes,
+  });
+
+  factory EventData.fromJson(
+          Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
+      _$EventDataFromJson<T>(json, fromJsonT);
   final T object;
 
   /// Object containing the names of the updated attributes and their values
@@ -77,15 +86,6 @@ class EventData<T> {
   /// In Stripe API versions 2017-04-06 or earlier, an updated array attribute
   /// in this object includes only the updated array elements.
   final Map<String, dynamic>? previousAttributes;
-
-  EventData({
-    required this.object,
-    this.previousAttributes,
-  });
-
-  factory EventData.fromJson(
-          Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
-      _$EventDataFromJson<T>(json, fromJsonT);
 
   Map<String, dynamic> toJson(Object Function(T value) toJsonT) =>
       _$EventDataToJson(this, toJsonT);

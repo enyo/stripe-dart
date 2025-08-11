@@ -41,7 +41,7 @@ void main() {
   });
 }
 
-const createCustomerResponse = r'''
+const createCustomerResponse = '''
 {
   "id": "cus_JC3alB0zcgmLbY",
   "object": "customer",

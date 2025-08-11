@@ -62,7 +62,7 @@ void main() {
   });
 }
 
-const createSessionResponse = r'''
+const createSessionResponse = '''
 {
   "id": "cs_test_TkmJFX7eEMan6f0W3q5n21sRgRraVzKf0BPTTmb0kn9yPBT9lr0ZJBVy",
   "object": "checkout.session",

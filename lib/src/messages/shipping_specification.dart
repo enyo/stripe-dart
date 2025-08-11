@@ -3,6 +3,17 @@ part of '../../messages.dart';
 /// https://stripe.com/docs/api/payment_intents/create#create_payment_intent-shipping
 @JsonSerializable()
 class ShippingSpecification {
+
+  ShippingSpecification({
+    required this.address,
+    required this.name,
+    this.carrier,
+    this.phone,
+    this.trackingNumber,
+  });
+
+  factory ShippingSpecification.fromJson(Map<String, dynamic> json) =>
+      _$ShippingSpecificationFromJson(json);
   /// Shipping [Address]
   final Address address;
 
@@ -19,17 +30,6 @@ class ShippingSpecification {
   /// If multiple tracking numbers were generated for this purchase, please separate
   /// them with commas
   final String? trackingNumber;
-
-  ShippingSpecification({
-    required this.address,
-    required this.name,
-    this.carrier,
-    this.phone,
-    this.trackingNumber,
-  });
-
-  factory ShippingSpecification.fromJson(Map<String, dynamic> json) =>
-      _$ShippingSpecificationFromJson(json);
 
   Map<String, dynamic> toJson() => _$ShippingSpecificationToJson(this);
 }

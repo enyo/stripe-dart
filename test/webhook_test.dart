@@ -24,7 +24,7 @@ void main() {
       body = '{"foo": "bar"}';
       signingSecret = 'secret';
       signature = getStripeSignature(timestamp, body, signingSecret);
-      timeTolerance = Duration(minutes: 5);
+      timeTolerance = const Duration(minutes: 5);
     });
 
     test('should return false if the signature is empty', () async {
@@ -57,7 +57,7 @@ void main() {
         () async {
       signature = getStripeSignature(
           DateTime.now()
-                  .subtract(Duration(minutes: 6))
+                  .subtract(const Duration(minutes: 6))
                   .millisecondsSinceEpoch ~/
               1000,
           body,

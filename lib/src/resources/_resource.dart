@@ -1,13 +1,13 @@
 import 'package:meta/meta.dart';
 
-import '../../messages.dart';
-import '../client.dart';
+import 'package:stripe/messages.dart';
+import 'package:stripe/src/client.dart';
 
 abstract class Resource<T extends Message> {
-  @protected
-  final Client _client;
 
   Resource(this._client);
+  @protected
+  final Client _client;
 
   @protected
   @visibleForOverriding

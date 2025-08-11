@@ -3,6 +3,16 @@ part of '../../../messages.dart';
 /// https://docs.stripe.com/api/subscription_items/list
 @JsonSerializable()
 class ListSubscriptionItemsRequest {
+
+  ListSubscriptionItemsRequest({
+    this.subscription,
+    this.endingBefore,
+    this.limit,
+    this.startingAfter,
+  });
+
+  factory ListSubscriptionItemsRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListSubscriptionItemsRequestFromJson(json);
   /// The ID of the subscription whose items will be retrieved.
   final String? subscription;
 
@@ -23,15 +33,5 @@ class ListSubscriptionItemsRequest {
   /// ending with obj_foo, your subsequent call can include starting_after=obj_foo
   /// in order to fetch the next page of the list.
   final String? startingAfter;
-
-  ListSubscriptionItemsRequest({
-    this.subscription,
-    this.endingBefore,
-    this.limit,
-    this.startingAfter,
-  });
-
-  factory ListSubscriptionItemsRequest.fromJson(Map<String, dynamic> json) =>
-      _$ListSubscriptionItemsRequestFromJson(json);
   Map<String, dynamic> toJson() => _$ListSubscriptionItemsRequestToJson(this);
 }

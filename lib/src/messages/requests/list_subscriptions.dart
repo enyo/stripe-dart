@@ -3,6 +3,15 @@ part of '../../../messages.dart';
 /// https://stripe.com/docs/api/checkout/sessions/create
 @JsonSerializable()
 class ListSubscriptionsRequest {
+
+  ListSubscriptionsRequest({
+    this.customer,
+    this.price,
+    this.status,
+  });
+
+  factory ListSubscriptionsRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListSubscriptionsRequestFromJson(json);
   /// The ID of the customer whose subscriptions will be retrieved.
   final String? customer;
 
@@ -15,14 +24,5 @@ class ListSubscriptionsRequest {
   /// and subscriptions that are expired due to incomplete payment. Passing in a
   /// value of all will return subscriptions of all statuses.
   final SubscriptionStatus? status;
-
-  ListSubscriptionsRequest({
-    this.customer,
-    this.price,
-    this.status,
-  });
-
-  factory ListSubscriptionsRequest.fromJson(Map<String, dynamic> json) =>
-      _$ListSubscriptionsRequestFromJson(json);
   Map<String, dynamic> toJson() => _$ListSubscriptionsRequestToJson(this);
 }

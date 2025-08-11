@@ -8,11 +8,6 @@ enum SubListObject {
 
 @JsonSerializable()
 class DataList<T> {
-  final SubListObject object;
-
-  final List<T> data;
-  final bool hasMore;
-  final String url;
 
   DataList({
     required this.object,
@@ -24,6 +19,11 @@ class DataList<T> {
   factory DataList.fromJson(
           Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
       _$DataListFromJson<T>(json, fromJsonT);
+  final SubListObject object;
+
+  final List<T> data;
+  final bool hasMore;
+  final String url;
 
   Map<String, dynamic> toJson(Object Function(T value) toJsonT) =>
       _$DataListToJson(this, toJsonT);

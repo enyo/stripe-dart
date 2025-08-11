@@ -20,6 +20,27 @@ enum SubscriptionStatus {
 /// https://stripe.com/docs/api/subscriptions/object
 @JsonSerializable()
 class Subscription extends Message {
+
+  Subscription({
+    required this.object,
+    required this.id,
+    required this.created,
+    required this.customer,
+    required this.status,
+    required this.items,
+    required this.currentPeriodStart,
+    required this.currentPeriodEnd,
+    required this.startDate,
+    required this.billingCycleAnchor,
+    this.cancelAt,
+    this.cancelAtPeriodEnd = false,
+    this.endedAt,
+    this.metadata,
+    this.latestInvoice,
+  });
+
+  factory Subscription.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionFromJson(json);
   final SubscriptionObject object;
 
   /// Unique identifier for the object.
@@ -107,27 +128,6 @@ class Subscription extends Message {
 
   /// The most recent invoice this subscription has generated.
   final String? latestInvoice;
-
-  Subscription({
-    required this.object,
-    required this.id,
-    required this.created,
-    required this.customer,
-    required this.status,
-    required this.items,
-    required this.currentPeriodStart,
-    required this.currentPeriodEnd,
-    required this.startDate,
-    required this.billingCycleAnchor,
-    this.cancelAt,
-    this.cancelAtPeriodEnd = false,
-    this.endedAt,
-    this.metadata,
-    this.latestInvoice,
-  });
-
-  factory Subscription.fromJson(Map<String, dynamic> json) =>
-      _$SubscriptionFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$SubscriptionToJson(this);

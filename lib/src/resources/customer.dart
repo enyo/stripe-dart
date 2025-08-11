@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '_resource.dart';
+import 'package:stripe/src/resources/_resource.dart';
 
 class CustomerResource extends Resource<Customer> {
   CustomerResource(super.client);
@@ -27,14 +27,14 @@ class CustomerResource extends Resource<Customer> {
     /// https://docs.stripe.com/search#query-fields-for-customers
     required String queryString,
   }) async {
-    final Map<String, dynamic> map = await get(
+    final map = await get(
       'customers/search',
       queryParameters: {'query': queryString},
     );
 
     final customer = DataList<Customer>.fromJson(
       map,
-      (customerMap) => Customer.fromJson(customerMap as Map<String, dynamic>),
+      (customerMap) => Customer.fromJson(customerMap! as Map<String, dynamic>),
     );
 
     return customer;

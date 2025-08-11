@@ -2,9 +2,6 @@ part of '../../../messages.dart';
 
 @JsonSerializable()
 class ListSubscriptionSchedulesRequest extends Message {
-  final String? customer;
-
-  final int? limit;
 
   const ListSubscriptionSchedulesRequest({
     this.customer,
@@ -14,6 +11,9 @@ class ListSubscriptionSchedulesRequest extends Message {
   factory ListSubscriptionSchedulesRequest.fromJson(
           Map<String, dynamic> json) =>
       _$ListSubscriptionSchedulesRequestFromJson(json);
+  final String? customer;
+
+  final int? limit;
 
   @override
   Map<String, dynamic> toJson() =>

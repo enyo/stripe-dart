@@ -4,8 +4,6 @@ part of '../../../messages.dart';
 
 @JsonSerializable()
 class UpdateCustomerRequest extends _CustomerRequest {
-  /// Unique identifier for the object.
-  final String id;
 
   UpdateCustomerRequest({
     required this.id,
@@ -19,6 +17,8 @@ class UpdateCustomerRequest extends _CustomerRequest {
 
   factory UpdateCustomerRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateCustomerRequestFromJson(json);
+  /// Unique identifier for the object.
+  final String id;
 
   Map<String, dynamic> toJson() =>
       _$UpdateCustomerRequestToJson(this)..remove('id');

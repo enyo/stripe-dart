@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:stripe/messages.dart';
 
-import '_resource.dart';
+import 'package:stripe/src/resources/_resource.dart';
 
 class BalanceTransactionResource extends Resource<BalanceTransaction> {
   BalanceTransactionResource(super.client);

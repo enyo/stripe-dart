@@ -55,7 +55,7 @@ void main() {
   });
 }
 
-const balanceTransactionResponse = r'''
+const balanceTransactionResponse = '''
 {
   "id": "txn_1IZI1WCQQp28cFsCCDFNDOhL",
   "object": "balance_transaction",

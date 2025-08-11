@@ -6,30 +6,6 @@ enum PaymentIntentObject { payment_intent }
 /// https://stripe.com/docs/api/payment_intents/object
 @JsonSerializable()
 class PaymentIntent extends Message {
-  final PaymentIntentObject object;
-
-  final String id;
-  final int amount;
-  final int amountReceived;
-  final AutomaticPaymentMethods automaticPaymentMethods;
-  final String clientSecret;
-  final String currency;
-  final String status;
-  @TimestampConverter()
-  final DateTime? canceledAt;
-  @TimestampConverter()
-  final DateTime? created;
-  final String? customer;
-  final String? description;
-  final String? latestCharge;
-  final Map<String, String>? metadata;
-  final String? paymentMethod;
-  final Set<PaymentMethodType>? paymentMethodTypes;
-  final String? receiptEmail;
-  final SetupFutureUsage? setupFutureUsage;
-  final ShippingSpecification? shipping;
-  final String? statementDescriptor;
-  final String? statementDescriptorSuffix;
 
   PaymentIntent({
     required this.object,
@@ -57,6 +33,30 @@ class PaymentIntent extends Message {
 
   factory PaymentIntent.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentFromJson(json);
+  final PaymentIntentObject object;
+
+  final String id;
+  final int amount;
+  final int amountReceived;
+  final AutomaticPaymentMethods automaticPaymentMethods;
+  final String clientSecret;
+  final String currency;
+  final String status;
+  @TimestampConverter()
+  final DateTime? canceledAt;
+  @TimestampConverter()
+  final DateTime? created;
+  final String? customer;
+  final String? description;
+  final String? latestCharge;
+  final Map<String, String>? metadata;
+  final String? paymentMethod;
+  final Set<PaymentMethodType>? paymentMethodTypes;
+  final String? receiptEmail;
+  final SetupFutureUsage? setupFutureUsage;
+  final ShippingSpecification? shipping;
+  final String? statementDescriptor;
+  final String? statementDescriptorSuffix;
 
   @override
   Map<String, dynamic> toJson() => _$PaymentIntentToJson(this);
@@ -64,12 +64,12 @@ class PaymentIntent extends Message {
 
 @JsonSerializable()
 class AutomaticPaymentMethods {
-  final bool enabled;
 
   const AutomaticPaymentMethods({this.enabled = false});
 
   factory AutomaticPaymentMethods.fromJson(Map<String, dynamic> json) =>
       _$AutomaticPaymentMethodsFromJson(json);
+  final bool enabled;
 
   Map<String, dynamic> toJson() => _$AutomaticPaymentMethodsToJson(this);
 }

@@ -7,6 +7,19 @@ part of '../../messages.dart';
 /// https://docs.stripe.com/api/payment_methods/object
 @JsonSerializable()
 class PaymentMethod extends Message {
+
+  PaymentMethod({
+    required this.id,
+    required this.livemode,
+    required this.type,
+    required this.billingDetails,
+    this.customer,
+    this.card,
+    this.usBankAccount,
+  });
+
+  factory PaymentMethod.fromJson(Map<String, dynamic> json) =>
+      _$PaymentMethodFromJson(json);
   /// Unique identifier for the object.
   final String id;
 
@@ -35,19 +48,6 @@ class PaymentMethod extends Message {
   /// about the US bank account payment method.
   final PaymentMethodUsBankAccount? usBankAccount;
 
-  PaymentMethod({
-    required this.id,
-    required this.livemode,
-    required this.type,
-    required this.billingDetails,
-    this.customer,
-    this.card,
-    this.usBankAccount,
-  });
-
-  factory PaymentMethod.fromJson(Map<String, dynamic> json) =>
-      _$PaymentMethodFromJson(json);
-
   @override
   Map<String, dynamic> toJson() => _$PaymentMethodToJson(this);
 }
@@ -55,6 +55,19 @@ class PaymentMethod extends Message {
 /// https://docs.stripe.com/api/payment_methods/object#payment_method_object-card
 @JsonSerializable()
 class PaymentMethodCard {
+
+  PaymentMethodCard({
+    required this.brand,
+    required this.last4,
+    required this.expMonth,
+    required this.expYear,
+    this.wallet,
+    this.displayBrand,
+    this.fingerprint,
+  });
+
+  factory PaymentMethodCard.fromJson(Map<String, dynamic> json) =>
+      _$PaymentMethodCardFromJson(json);
   /// Card brand.
   final String brand;
 
@@ -82,25 +95,19 @@ class PaymentMethodCard {
   /// provided instead of the underlying card number.
   final String? fingerprint;
 
-  PaymentMethodCard({
-    required this.brand,
-    required this.last4,
-    required this.expMonth,
-    required this.expYear,
-    this.wallet,
-    this.displayBrand,
-    this.fingerprint,
-  });
-
-  factory PaymentMethodCard.fromJson(Map<String, dynamic> json) =>
-      _$PaymentMethodCardFromJson(json);
-
   Map<String, dynamic> toJson() => _$PaymentMethodCardToJson(this);
 }
 
 /// https://docs.stripe.com/api/payment_methods/object#payment_method_object-card-wallet
 @JsonSerializable()
 class Wallet {
+
+  Wallet({
+    required this.type,
+    this.dynamicLast4,
+  });
+
+  factory Wallet.fromJson(Map<String, dynamic> json) => _$WalletFromJson(json);
   /// The type of the card wallet. An additional hash is included on the Wallet
   /// subhash with a name matching this value. It contains additional
   /// information specific to the card wallet type.
@@ -110,19 +117,22 @@ class Wallet {
   /// only.
   final String? dynamicLast4;
 
-  Wallet({
-    required this.type,
-    this.dynamicLast4,
-  });
-
-  factory Wallet.fromJson(Map<String, dynamic> json) => _$WalletFromJson(json);
-
   Map<String, dynamic> toJson() => _$WalletToJson(this);
 }
 
 /// https://docs.stripe.com/api/payment_methods/object#payment_method_object-us_bank_account
 @JsonSerializable()
 class PaymentMethodUsBankAccount {
+
+  PaymentMethodUsBankAccount({
+    this.bankName,
+    this.fingerprint,
+    this.last4,
+    this.routingNumber,
+  });
+
+  factory PaymentMethodUsBankAccount.fromJson(Map<String, dynamic> json) =>
+      _$PaymentMethodUsBankAccountFromJson(json);
   /// The name of the bank.
   final String? bankName;
 
@@ -135,16 +145,6 @@ class PaymentMethodUsBankAccount {
 
   /// Routing number of the bank account.
   final String? routingNumber;
-
-  PaymentMethodUsBankAccount({
-    this.bankName,
-    this.fingerprint,
-    this.last4,
-    this.routingNumber,
-  });
-
-  factory PaymentMethodUsBankAccount.fromJson(Map<String, dynamic> json) =>
-      _$PaymentMethodUsBankAccountFromJson(json);
 
   Map<String, dynamic> toJson() => _$PaymentMethodUsBankAccountToJson(this);
 }

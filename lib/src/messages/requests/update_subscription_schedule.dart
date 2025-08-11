@@ -9,9 +9,6 @@ enum SubscriptionScheduleEndBehavior {
 
 @JsonSerializable()
 class UpdateSubscriptionScheduleRequest extends Message {
-  final List<UpdateSubscriptionSchedulePhase> phases;
-
-  final SubscriptionScheduleEndBehavior? endBehavior;
 
   const UpdateSubscriptionScheduleRequest({
     required this.phases,
@@ -21,6 +18,9 @@ class UpdateSubscriptionScheduleRequest extends Message {
   factory UpdateSubscriptionScheduleRequest.fromJson(
           Map<String, dynamic> json) =>
       _$UpdateSubscriptionScheduleRequestFromJson(json);
+  final List<UpdateSubscriptionSchedulePhase> phases;
+
+  final SubscriptionScheduleEndBehavior? endBehavior;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -29,6 +29,14 @@ class UpdateSubscriptionScheduleRequest extends Message {
 
 @JsonSerializable()
 class UpdateSubscriptionSchedulePhase extends Message {
+
+  const UpdateSubscriptionSchedulePhase({
+    required this.items, this.startDate,
+    this.endDate,
+  });
+
+  factory UpdateSubscriptionSchedulePhase.fromJson(Map<String, dynamic> json) =>
+      _$UpdateSubscriptionSchedulePhaseFromJson(json);
   @TimestampConverter()
   final DateTime? startDate;
 
@@ -37,15 +45,6 @@ class UpdateSubscriptionSchedulePhase extends Message {
 
   final List<UpdateSubscriptionSchedulePhaseItem> items;
 
-  const UpdateSubscriptionSchedulePhase({
-    this.startDate,
-    this.endDate,
-    required this.items,
-  });
-
-  factory UpdateSubscriptionSchedulePhase.fromJson(Map<String, dynamic> json) =>
-      _$UpdateSubscriptionSchedulePhaseFromJson(json);
-
   @override
   Map<String, dynamic> toJson() =>
       _$UpdateSubscriptionSchedulePhaseToJson(this);
@@ -53,9 +52,6 @@ class UpdateSubscriptionSchedulePhase extends Message {
 
 @JsonSerializable()
 class UpdateSubscriptionSchedulePhaseItem extends Message {
-  final String price;
-
-  final int quantity;
 
   const UpdateSubscriptionSchedulePhaseItem({
     required this.price,
@@ -65,6 +61,9 @@ class UpdateSubscriptionSchedulePhaseItem extends Message {
   factory UpdateSubscriptionSchedulePhaseItem.fromJson(
           Map<String, dynamic> json) =>
       _$UpdateSubscriptionSchedulePhaseItemFromJson(json);
+  final String price;
+
+  final int quantity;
 
   @override
   Map<String, dynamic> toJson() =>

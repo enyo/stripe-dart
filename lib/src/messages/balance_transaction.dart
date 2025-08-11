@@ -6,13 +6,6 @@ enum BalanceTransactionObject { balance_transaction }
 /// https://stripe.com/docs/api/balance_transactions/object
 @JsonSerializable()
 class BalanceTransaction extends Message {
-  final BalanceTransactionObject object;
-  final String id;
-  final int amount;
-  final int fee;
-  final List<FeeDetails> feeDetails;
-  final int net;
-  final String currency;
 
   BalanceTransaction({
     required this.object,
@@ -26,6 +19,13 @@ class BalanceTransaction extends Message {
 
   factory BalanceTransaction.fromJson(Map<String, dynamic> json) =>
       _$BalanceTransactionFromJson(json);
+  final BalanceTransactionObject object;
+  final String id;
+  final int amount;
+  final int fee;
+  final List<FeeDetails> feeDetails;
+  final int net;
+  final String currency;
 
   @override
   Map<String, dynamic> toJson() => _$BalanceTransactionToJson(this);
@@ -33,11 +33,6 @@ class BalanceTransaction extends Message {
 
 @JsonSerializable()
 class FeeDetails {
-  final int amount;
-  final String? application;
-  final String currency;
-  final String description;
-  final String type;
 
   FeeDetails({
     required this.amount,
@@ -49,6 +44,11 @@ class FeeDetails {
 
   factory FeeDetails.fromJson(Map<String, dynamic> json) =>
       _$FeeDetailsFromJson(json);
+  final int amount;
+  final String? application;
+  final String currency;
+  final String description;
+  final String type;
 
   Map<String, dynamic> toJson() => _$FeeDetailsToJson(this);
 }
