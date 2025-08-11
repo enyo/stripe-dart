@@ -1,57 +1,56 @@
-// import 'package:dio/dio.dart';
-// import 'package:stripe/src/client.dart';
-// import 'package:test/test.dart';
+import 'package:dio/dio.dart';
+import 'package:stripe/src/client.dart';
+import 'package:test/test.dart';
 
-// void main() {
-//   group('FormDataTransformer', () {
-//     late FormDataTransformer transformer;
+void main() {
+  group('Client', () {
+    late Client client;
+    const testApiKey = 'sk_test_example_key';
 
-//     setUp(() {
-//       transformer = FormDataTransformer();
-//     });
+    setUp(() {
+      client = Client(apiKey: testApiKey);
+    });
 
-//     test('properly encodes objects without lists', () async {
-//       var options = RequestOptions(
-//           path: '/', contentType: 'application/json', data: {'foo': 'bar'});
-//       expect(await transformer.transformRequest(options), '{"foo":"bar"}');
+    test('should create client with correct configuration', () {
+      expect(client.apiKey, equals(testApiKey));
+      expect(client.version, equals('2024-09-30.acacia'));
+    });
 
-//       options =
-//           RequestOptions(path: '/', contentType: 'application/json', data: {
-//         'foo': {'foo2': 'bar'}
-//       });
-//       expect(await transformer.transformRequest(options),
-//           '{"foo":{"foo2":"bar"}}');
+    test('should configure dio instance correctly', () {
+      expect(client.dio.options.baseUrl, equals('https://api.stripe.com/v2/'));
+      expect(client.dio.options.contentType, equals('application/json'));
+      expect(client.dio.options.responseType, equals(ResponseType.json));
+      expect(
+        client.dio.options.headers['Authorization'], 
+        equals('Bearer $testApiKey'),
+      );
+      expect(
+        client.dio.options.headers['Stripe-Version'], 
+        equals('2024-09-30.acacia'),
+      );
+      expect(
+        client.dio.options.headers['Content-Type'], 
+        equals('application/json'),
+      );
+      expect(client.dio.options.headers['Idempotency-Key'], isNotNull);
+    });
 
-//       options = RequestOptions(
-//           path: '/', contentType: 'application/json', data: {'foo': 3});
-//       expect(await transformer.transformRequest(options), '{"foo":3}');
-//     });
-
-//     test('properly changes Lists to Maps', () async {
-//       final options = RequestOptions(
-//           path: '/',
-//           contentType: 'application/json',
-//           data: <String, dynamic>{
-//             'foo': ['bar1', 'bar2']
-//           });
-//       expect(await transformer.transformRequest(options),
-//           '{"foo":{"0":"bar1","1":"bar2"}}');
-//     });
-
-//     test('goes through map recursively', () async {
-//       final options = RequestOptions(
-//           path: '/',
-//           contentType: 'application/json',
-//           data: <String, dynamic>{
-//             'foo': [
-//               'bar1',
-//               <String, dynamic>{
-//                 'bar2': ['bb1', 'bb2']
-//               }
-//             ]
-//           });
-//       expect(await transformer.transformRequest(options),
-//           '{"foo":{"0":"bar1","1":{"bar2":{"0":"bb1","1":"bb2"}}}}');
-//     });
-//   });
-// }
+    test('should allow custom base URL and version', () {
+      const customUrl = 'https://custom.stripe.com/v1/';
+      const customVersion = '2023-10-16';
+      
+      final customClient = Client(
+        apiKey: testApiKey,
+        baseUrl: customUrl,
+        version: customVersion,
+      );
+      
+      expect(customClient.dio.options.baseUrl, equals(customUrl));
+      expect(customClient.version, equals(customVersion));
+      expect(
+        customClient.dio.options.headers['Stripe-Version'], 
+        equals(customVersion),
+      );
+    });
+  });
+}

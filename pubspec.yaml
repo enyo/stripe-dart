@@ -4,7 +4,7 @@ description: A simple Stripe API wrapper, that is meant to be used on the server
 homepage: https://github.com/enyo/stripe-dart
 documentation: https://github.com/enyo/stripe-dart/blob/main/README.md
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.8.0 <4.0.0'
 dependencies:
   crypto: ^3.0.0
   dio: ^5.9.0
