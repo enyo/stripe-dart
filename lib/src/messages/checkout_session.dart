@@ -1,25 +1,25 @@
 part of '../../messages.dart';
 
 enum PaymentMethodType {
-  // ignore: constant_identifier_names
-  acss_debit,
+  @JsonValue('acss_debit')
+  acssDebit,
   affirm,
-  // ignore: constant_identifier_names
-  afterpay_clearpay,
+  @JsonValue('afterpay_clearpay')
+  afterpayClearpay,
   alipay,
-  // ignore: constant_identifier_names
-  amazon_pay,
-  // ignore: constant_identifier_names
-  au_becs_debit,
-  // ignore: constant_identifier_names
-  bacs_debit,
+  @JsonValue('amazon_pay')
+  amazonPay,
+  @JsonValue('au_becs_debit')
+  auBecsDebit,
+  @JsonValue('bacs_debit')
+  bacsDebit,
   bancontact,
   blik,
   boleto,
   card,
   cashapp,
-  // ignore: constant_identifier_names
-  customer_balance,
+  @JsonValue('customer_balance')
+  customerBalance,
   eps,
   fpx,
   giropay,
@@ -33,19 +33,18 @@ enum PaymentMethodType {
   paynow,
   pix,
   promptpay,
-  // ignore: constant_identifier_names
-  sepa_debit,
+  @JsonValue('sepa_debit')
+  sepaDebit,
   sofort,
-  // ignore: constant_identifier_names
-  us_bank_account,
-  // ignore: constant_identifier_names
-  wechat_pay,
+  @JsonValue('us_bank_account')
+  usBankAccount,
+  @JsonValue('wechat_pay')
+  wechatPay,
 }
 
 /// https://stripe.com/docs/api/checkout/sessions/object
 @JsonSerializable()
-class CheckoutSession extends Message {
-
+class CheckoutSession {
   CheckoutSession({
     required this.object,
     required this.id,
@@ -59,6 +58,7 @@ class CheckoutSession extends Message {
 
   factory CheckoutSession.fromJson(Map<String, dynamic> json) =>
       _$CheckoutSessionFromJson(json);
+
   /// Doesn't work with enum because there is a dot in it.
   final String object;
   final String id;
@@ -69,6 +69,5 @@ class CheckoutSession extends Message {
   final String? status;
   final String? url;
 
-  @override
   Map<String, dynamic> toJson() => _$CheckoutSessionToJson(this);
 }

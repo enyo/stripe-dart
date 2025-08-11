@@ -3,7 +3,6 @@ part of '../../../messages.dart';
 /// https://docs.stripe.com/api/subscription_items/update
 @JsonSerializable(includeIfNull: false)
 class SubscriptionItemUpdate {
-
   SubscriptionItemUpdate({
     this.paymentBehavior,
     this.metadata,
@@ -19,6 +18,7 @@ class SubscriptionItemUpdate {
 
   factory SubscriptionItemUpdate.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionItemUpdateFromJson(json);
+
   /// Set of key-value pairs that you can attach to an object.
   final Map<String, String>? metadata;
 
@@ -39,17 +39,21 @@ class SubscriptionItemUpdate {
 
   /// Define thresholds at which an invoice will be sent,
   /// and the subscription advanced to a new billing period.
-  /// When updating, pass an empty string to remove previously-defined thresholds.
+  /// When updating, pass an empty string to remove previously-defined
+  /// thresholds.
   final Map<String, Object?>? billingThresholds;
 
-  /// Indicates if a customer is on or off-session while an invoice payment is attempted.
+  /// Indicates if a customer is on or off-session while an invoice payment is
+  /// attempted.
   final bool? offSession;
 
   /// Data used to generate a new Price object inline.
   final Map<String, Object?>? priceData;
 
-  /// If set, the proration will be calculated as though the subscription was updated at the given time.
-  /// This can be used to apply the same proration that was previewed with the upcoming invoice endpoint.
+  /// If set, the proration will be calculated as though the subscription was
+  /// updated at the given time.
+  /// This can be used to apply the same proration that was previewed with the
+  /// upcoming invoice endpoint.
   final DateTime? prorationDate;
 
   final List<String>? taxRates;

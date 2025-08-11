@@ -23,7 +23,7 @@ void main() {
         cancelUrl: 'https://cancel',
         paymentMethodTypes: [
           PaymentMethodType.card,
-          PaymentMethodType.afterpay_clearpay
+          PaymentMethodType.afterpayClearpay
         ],
         customer: 'cus_JBeWftkPvAhbsN',
         lineItems: [

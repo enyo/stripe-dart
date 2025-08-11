@@ -4,7 +4,7 @@ import 'package:stripe/messages.dart';
 
 import 'package:stripe/src/resources/_resource.dart';
 
-class SubscriptionItemResource extends Resource<SubscriptionItem> {
+class SubscriptionItemResource extends Resource {
   SubscriptionItemResource(super.client);
 
   Future<SubscriptionItem> retrieve(String id) async {

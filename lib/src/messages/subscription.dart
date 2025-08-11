@@ -4,12 +4,12 @@ enum SubscriptionObject { subscription }
 
 enum SubscriptionStatus {
   incomplete,
-  // ignore: constant_identifier_names
-  incomplete_expired,
+  @JsonValue('incomplete_expired')
+  incompleteExpired,
   trialing,
   active,
-  // ignore: constant_identifier_names
-  past_due,
+  @JsonValue('past_due')
+  pastDue,
   canceled,
   unpaid,
   // Only available for requests:
@@ -19,8 +19,7 @@ enum SubscriptionStatus {
 
 /// https://stripe.com/docs/api/subscriptions/object
 @JsonSerializable()
-class Subscription extends Message {
-
+class Subscription {
   Subscription({
     required this.object,
     required this.id,
@@ -129,6 +128,5 @@ class Subscription extends Message {
   /// The most recent invoice this subscription has generated.
   final String? latestInvoice;
 
-  @override
   Map<String, dynamic> toJson() => _$SubscriptionToJson(this);
 }

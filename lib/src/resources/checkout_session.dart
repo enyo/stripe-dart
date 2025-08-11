@@ -4,7 +4,7 @@ import 'package:stripe/messages.dart';
 
 import 'package:stripe/src/resources/_resource.dart';
 
-class CheckoutSessionResource extends Resource<CheckoutSession> {
+class CheckoutSessionResource extends Resource {
   CheckoutSessionResource(super.client);
 
   /// Creates a Stripe Checkout Session.

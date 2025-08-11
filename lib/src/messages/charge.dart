@@ -4,8 +4,7 @@ enum ChargeObject { charge }
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
-class Charge extends Message {
-
+class Charge {
   Charge({
     required this.object,
     required this.id,
@@ -21,13 +20,11 @@ class Charge extends Message {
   final PaymentMethodDetails paymentMethodDetails;
   final bool livemode;
 
-  @override
   Map<String, dynamic> toJson() => _$ChargeToJson(this);
 }
 
 @JsonSerializable()
 class PaymentMethodDetails {
-
   PaymentMethodDetails({
     this.card,
   });
@@ -41,7 +38,6 @@ class PaymentMethodDetails {
 
 @JsonSerializable()
 class PaymentMethodDetailsCard {
-
   PaymentMethodDetailsCard({
     required this.brand,
     required this.last4,

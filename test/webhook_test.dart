@@ -92,6 +92,8 @@ String getStripeSignature(int timestamp, String body, String signingSecret) =>
 
 String getTestStripeSignature(
         int timestamp, String body, String signingSecret) =>
+    // this has to be this long
+    // ignore: lines_longer_than_80_chars
     '[t=$timestamp,v1=${createSignatureHash(timestamp, body, signingSecret)},v0=0]';
 
 String getShuffledSignature(int timestamp, String body, String signingSecret) =>

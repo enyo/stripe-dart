@@ -4,7 +4,7 @@ import 'package:stripe/messages.dart';
 
 import 'package:stripe/src/resources/_resource.dart';
 
-class ChargeResource extends Resource<Charge> {
+class ChargeResource extends Resource {
   ChargeResource(super.client);
 
   Future<Charge> retrieve(String chargeId) async {

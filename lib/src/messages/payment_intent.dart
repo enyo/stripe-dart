@@ -1,12 +1,13 @@
 part of '../../messages.dart';
 
-// ignore: constant_identifier_names
-enum PaymentIntentObject { payment_intent }
+enum PaymentIntentObject {
+  @JsonValue('payment_intent')
+  paymentIntent,
+}
 
 /// https://stripe.com/docs/api/payment_intents/object
 @JsonSerializable()
-class PaymentIntent extends Message {
-
+class PaymentIntent {
   PaymentIntent({
     required this.object,
     required this.id,
@@ -58,13 +59,11 @@ class PaymentIntent extends Message {
   final String? statementDescriptor;
   final String? statementDescriptorSuffix;
 
-  @override
   Map<String, dynamic> toJson() => _$PaymentIntentToJson(this);
 }
 
 @JsonSerializable()
 class AutomaticPaymentMethods {
-
   const AutomaticPaymentMethods({this.enabled = false});
 
   factory AutomaticPaymentMethods.fromJson(Map<String, dynamic> json) =>

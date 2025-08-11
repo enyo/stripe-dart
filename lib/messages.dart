@@ -7,7 +7,6 @@ import 'package:stripe/stripe.dart' show Customer;
 export 'package:stripe/src/messages/enums.dart';
 
 part 'messages.g.dart';
-part 'src/messages/_message.dart';
 part 'src/messages/address.dart';
 part 'src/messages/balance_transaction.dart';
 part 'src/messages/billing_details.dart';

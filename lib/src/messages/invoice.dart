@@ -2,8 +2,7 @@ part of '../../messages.dart';
 
 /// https://docs.stripe.com/api/invoices/object
 @JsonSerializable()
-class Invoice extends Message {
-
+class Invoice {
   Invoice({
     required this.id,
     required this.currency,
@@ -20,6 +19,7 @@ class Invoice extends Message {
 
   factory Invoice.fromJson(Map<String, dynamic> json) =>
       _$InvoiceFromJson(json);
+
   /// Unique identifier for the object. This property is always present unless
   /// the invoice is an upcoming invoice.
   final String id;
@@ -63,6 +63,5 @@ class Invoice extends Message {
   /// the business creating the invoice.
   final String? accountName;
 
-  @override
   Map<String, dynamic> toJson() => _$InvoiceToJson(this);
 }

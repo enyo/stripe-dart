@@ -6,8 +6,7 @@ part of '../../messages.dart';
 ///
 /// https://docs.stripe.com/api/payment_methods/object
 @JsonSerializable()
-class PaymentMethod extends Message {
-
+class PaymentMethod {
   PaymentMethod({
     required this.id,
     required this.livemode,
@@ -20,6 +19,7 @@ class PaymentMethod extends Message {
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodFromJson(json);
+
   /// Unique identifier for the object.
   final String id;
 
@@ -32,8 +32,8 @@ class PaymentMethod extends Message {
   /// information specific to the [PaymentMethod] type.
   final String type;
 
-  /// Billing information associated with the [PaymentMethod] that may be used or
-  /// required by particular types of payment methods.
+  /// Billing information associated with the [PaymentMethod] that may be used
+  /// or required by particular types of payment methods.
   final BillingDetails billingDetails;
 
   /// The ID of the Customer to which this [PaymentMethod] is saved. This will
@@ -48,14 +48,12 @@ class PaymentMethod extends Message {
   /// about the US bank account payment method.
   final PaymentMethodUsBankAccount? usBankAccount;
 
-  @override
   Map<String, dynamic> toJson() => _$PaymentMethodToJson(this);
 }
 
 /// https://docs.stripe.com/api/payment_methods/object#payment_method_object-card
 @JsonSerializable()
 class PaymentMethodCard {
-
   PaymentMethodCard({
     required this.brand,
     required this.last4,
@@ -68,6 +66,7 @@ class PaymentMethodCard {
 
   factory PaymentMethodCard.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodCardFromJson(json);
+
   /// Card brand.
   final String brand;
 
@@ -101,13 +100,13 @@ class PaymentMethodCard {
 /// https://docs.stripe.com/api/payment_methods/object#payment_method_object-card-wallet
 @JsonSerializable()
 class Wallet {
-
   Wallet({
     required this.type,
     this.dynamicLast4,
   });
 
   factory Wallet.fromJson(Map<String, dynamic> json) => _$WalletFromJson(json);
+
   /// The type of the card wallet. An additional hash is included on the Wallet
   /// subhash with a name matching this value. It contains additional
   /// information specific to the card wallet type.
@@ -123,7 +122,6 @@ class Wallet {
 /// https://docs.stripe.com/api/payment_methods/object#payment_method_object-us_bank_account
 @JsonSerializable()
 class PaymentMethodUsBankAccount {
-
   PaymentMethodUsBankAccount({
     this.bankName,
     this.fingerprint,
@@ -133,6 +131,7 @@ class PaymentMethodUsBankAccount {
 
   factory PaymentMethodUsBankAccount.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodUsBankAccountFromJson(json);
+
   /// The name of the bank.
   final String? bankName;
 

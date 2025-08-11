@@ -1,12 +1,13 @@
 part of '../../messages.dart';
 
-// ignore: constant_identifier_names
-enum BalanceTransactionObject { balance_transaction }
+enum BalanceTransactionObject {
+  @JsonValue('balance_transaction')
+  balanceTransaction,
+}
 
 /// https://stripe.com/docs/api/balance_transactions/object
 @JsonSerializable()
-class BalanceTransaction extends Message {
-
+class BalanceTransaction {
   BalanceTransaction({
     required this.object,
     required this.id,
@@ -27,13 +28,11 @@ class BalanceTransaction extends Message {
   final int net;
   final String currency;
 
-  @override
   Map<String, dynamic> toJson() => _$BalanceTransactionToJson(this);
 }
 
 @JsonSerializable()
 class FeeDetails {
-
   FeeDetails({
     required this.amount,
     required this.application,

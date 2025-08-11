@@ -4,13 +4,13 @@ enum ProductObject { product }
 
 /// https://stripe.com/docs/api/products/object
 @JsonSerializable()
-class Product extends Message {
-
+class Product {
   Product({
     required this.object,
     required this.id,
     required this.active,
-    required this.name, this.description,
+    required this.name,
+    this.description,
     this.metadata,
     this.defaultPrice,
   });
@@ -43,6 +43,5 @@ class Product extends Message {
   /// The ID of the Price object that is the default price for this product.
   final String? defaultPrice;
 
-  @override
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 }

@@ -2,8 +2,7 @@ part of '../../messages.dart';
 
 /// https://stripe.com/docs/api/customer_portal/session
 @JsonSerializable()
-class PortalSession extends Message {
-
+class PortalSession {
   PortalSession({
     required this.object,
     required this.id,
@@ -14,6 +13,7 @@ class PortalSession extends Message {
 
   factory PortalSession.fromJson(Map<String, dynamic> json) =>
       _$PortalSessionFromJson(json);
+
   /// Doesn't work with enum because there is a dot in it.
   final String object;
   final String id;
@@ -25,9 +25,9 @@ class PortalSession extends Message {
   /// the object exists in test mode.
   final bool livemode;
 
-  /// The short-lived URL of the session that gives customers access to the customer portal.
+  /// The short-lived URL of the session that gives
+  /// customers access to the customer portal.
   final String url;
 
-  @override
   Map<String, dynamic> toJson() => _$PortalSessionToJson(this);
 }

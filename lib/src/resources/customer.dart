@@ -4,7 +4,7 @@ import 'package:stripe/messages.dart';
 
 import 'package:stripe/src/resources/_resource.dart';
 
-class CustomerResource extends Resource<Customer> {
+class CustomerResource extends Resource {
   CustomerResource(super.client);
 
   Future<Customer> create(CreateCustomerRequest request) async {

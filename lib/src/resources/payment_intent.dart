@@ -7,7 +7,7 @@ import 'package:stripe/src/resources/_resource.dart';
 
 final log = Logger('Stripe PaymentIntentResource');
 
-class PaymentIntentResource extends Resource<PaymentIntent> {
+class PaymentIntentResource extends Resource {
   PaymentIntentResource(super.client);
 
   Future<PaymentIntent> create(CreatePaymentIntentRequest request) async {

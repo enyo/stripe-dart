@@ -8,8 +8,7 @@ enum SubscriptionScheduleEndBehavior {
 }
 
 @JsonSerializable()
-class UpdateSubscriptionScheduleRequest extends Message {
-
+class UpdateSubscriptionScheduleRequest {
   const UpdateSubscriptionScheduleRequest({
     required this.phases,
     this.endBehavior,
@@ -22,16 +21,15 @@ class UpdateSubscriptionScheduleRequest extends Message {
 
   final SubscriptionScheduleEndBehavior? endBehavior;
 
-  @override
   Map<String, dynamic> toJson() =>
       _$UpdateSubscriptionScheduleRequestToJson(this);
 }
 
 @JsonSerializable()
-class UpdateSubscriptionSchedulePhase extends Message {
-
+class UpdateSubscriptionSchedulePhase {
   const UpdateSubscriptionSchedulePhase({
-    required this.items, this.startDate,
+    required this.items,
+    this.startDate,
     this.endDate,
   });
 
@@ -45,14 +43,12 @@ class UpdateSubscriptionSchedulePhase extends Message {
 
   final List<UpdateSubscriptionSchedulePhaseItem> items;
 
-  @override
   Map<String, dynamic> toJson() =>
       _$UpdateSubscriptionSchedulePhaseToJson(this);
 }
 
 @JsonSerializable()
-class UpdateSubscriptionSchedulePhaseItem extends Message {
-
+class UpdateSubscriptionSchedulePhaseItem {
   const UpdateSubscriptionSchedulePhaseItem({
     required this.price,
     required this.quantity,
@@ -65,7 +61,6 @@ class UpdateSubscriptionSchedulePhaseItem extends Message {
 
   final int quantity;
 
-  @override
   Map<String, dynamic> toJson() =>
       _$UpdateSubscriptionSchedulePhaseItemToJson(this);
 }

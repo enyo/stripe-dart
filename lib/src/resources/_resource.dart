@@ -1,10 +1,8 @@
 import 'package:meta/meta.dart';
 
-import 'package:stripe/messages.dart';
 import 'package:stripe/src/client.dart';
 
-abstract class Resource<T extends Message> {
-
+abstract class Resource {
   Resource(this._client);
   @protected
   final Client _client;
@@ -16,17 +14,17 @@ abstract class Resource<T extends Message> {
   }
 
   @protected
-  Future<Map<String, dynamic>> get(final String path,
+  Future<Map<String, dynamic>> get(String path,
           {Map<String, dynamic>? queryParameters}) =>
       _client.get(makeUrl(path), queryParameters: queryParameters);
 
   @protected
-  Future<Map<String, dynamic>> post(final String path,
-          {final Map<String, dynamic>? data}) =>
+  Future<Map<String, dynamic>> post(String path,
+          {Map<String, dynamic>? data}) =>
       _client.post(makeUrl(path), data: data);
 
   @protected
-  Future<Map<String, dynamic>> delete(final String path,
-          {final Map<String, dynamic>? data}) =>
+  Future<Map<String, dynamic>> delete(String path,
+          {Map<String, dynamic>? data}) =>
       _client.delete(makeUrl(path), data: data);
 }

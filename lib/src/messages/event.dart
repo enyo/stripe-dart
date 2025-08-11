@@ -3,8 +3,7 @@ part of '../../messages.dart';
 enum EventObject { event }
 
 /// https://stripe.com/docs/api/events/object
-abstract class Event<T extends Message> extends Message {
-
+abstract class Event<T> {
   Event({
     required this.object,
     required this.id,
@@ -31,7 +30,7 @@ abstract class Event<T extends Message> extends Message {
   /// Whether the event is coming from live mode.
   final bool livemode;
 
-  static T fromJson<T extends Event>(Map<String, dynamic> json) {
+  static T fromJson<T extends Event<T>>(Map<String, dynamic> json) {
     switch (
         (json['data']['object']['object'] as String?)?.trim().toLowerCase()) {
       // case 'balance_transaction':
@@ -67,7 +66,6 @@ abstract class Event<T extends Message> extends Message {
 
 @JsonSerializable()
 class EventData<T> {
-
   EventData({
     required this.object,
     this.previousAttributes,
@@ -105,7 +103,6 @@ class SubscriptionEvent extends Event<Subscription> {
   factory SubscriptionEvent.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionEventFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$SubscriptionEventToJson(this);
 }
 
@@ -123,7 +120,6 @@ class CustomerEvent extends Event<Customer> {
   factory CustomerEvent.fromJson(Map<String, dynamic> json) =>
       _$CustomerEventFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$CustomerEventToJson(this);
 }
 
@@ -141,7 +137,6 @@ class ChargeEvent extends Event<Charge> {
   factory ChargeEvent.fromJson(Map<String, dynamic> json) =>
       _$ChargeEventFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$ChargeEventToJson(this);
 }
 
@@ -159,7 +154,6 @@ class PaymentIntentEvent extends Event<PaymentIntent> {
   factory PaymentIntentEvent.fromJson(Map<String, dynamic> json) =>
       _$PaymentIntentEventFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$PaymentIntentEventToJson(this);
 }
 
@@ -177,7 +171,6 @@ class RefundEvent extends Event<Refund> {
   factory RefundEvent.fromJson(Map<String, dynamic> json) =>
       _$RefundEventFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$RefundEventToJson(this);
 }
 
@@ -195,7 +188,6 @@ class CheckoutSessionEvent extends Event<CheckoutSession> {
   factory CheckoutSessionEvent.fromJson(Map<String, dynamic> json) =>
       _$CheckoutSessionEventFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$CheckoutSessionEventToJson(this);
 }
 
@@ -213,7 +205,6 @@ class PaymentMethodEvent extends Event<PaymentMethod> {
   factory PaymentMethodEvent.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodEventFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$PaymentMethodEventToJson(this);
 }
 
@@ -231,6 +222,5 @@ class InvoiceEvent extends Event<Invoice> {
   factory InvoiceEvent.fromJson(Map<String, dynamic> json) =>
       _$InvoiceEventFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$InvoiceEventToJson(this);
 }

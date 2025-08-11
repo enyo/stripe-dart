@@ -2,13 +2,15 @@ part of '../../messages.dart';
 
 enum PriceObject { price }
 
-// ignore: constant_identifier_names
-enum PriceType { one_time, recurring }
+enum PriceType {
+  @JsonValue('one_time')
+  oneTime,
+  recurring,
+}
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
-class Price extends Message {
-
+class Price {
   Price({
     required this.object,
     required this.id,
@@ -47,6 +49,5 @@ class Price extends Message {
   /// possible. Only set if billing_scheme=per_unit.
   final int unitAmount;
 
-  @override
   Map<String, dynamic> toJson() => _$PriceToJson(this);
 }

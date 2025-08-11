@@ -110,7 +110,7 @@ class Client {
     if (responseStatusCode != 200) {
       if (data == null || data['error'] == null) {
         throw InvalidRequestException(
-            'The status code returned was $responseStatusCode but no error was provided.');
+            'Status code: $responseStatusCode, no error provided.');
       }
       final error = data['error'] as Map;
       switch (error['type'].toString()) {
@@ -118,7 +118,7 @@ class Client {
           throw InvalidRequestException(error['message'].toString());
         default:
           throw UnknownTypeException(
-              'The status code returned was $responseStatusCode but the error type is unknown.');
+              'Status code: $responseStatusCode, error type unknown.');
       }
     }
     if (data == null) {

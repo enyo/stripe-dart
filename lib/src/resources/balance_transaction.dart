@@ -4,7 +4,7 @@ import 'package:stripe/messages.dart';
 
 import 'package:stripe/src/resources/_resource.dart';
 
-class BalanceTransactionResource extends Resource<BalanceTransaction> {
+class BalanceTransactionResource extends Resource {
   BalanceTransactionResource(super.client);
 
   Future<BalanceTransaction> retrieve(String balanceTransactionId) async {

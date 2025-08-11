@@ -1,12 +1,13 @@
 part of '../../messages.dart';
 
-// ignore: constant_identifier_names
-enum SubscriptionItemObject { subscription_item }
+enum SubscriptionItemObject {
+  @JsonValue('subscription_item')
+  subscriptionItem,
+}
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
-class SubscriptionItem extends Message {
-
+class SubscriptionItem {
   SubscriptionItem({
     required this.object,
     required this.id,
@@ -31,6 +32,5 @@ class SubscriptionItem extends Message {
   /// The quantity of the plan to which the customer should be subscribed.
   final int quantity;
 
-  @override
   Map<String, dynamic> toJson() => _$SubscriptionItemToJson(this);
 }

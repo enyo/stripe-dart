@@ -4,8 +4,7 @@ enum CustomerObject { customer }
 
 /// https://stripe.com/docs/api/charges/object
 @JsonSerializable()
-class Customer extends Message {
-
+class Customer {
   Customer({
     required this.object,
     required this.id,
@@ -41,7 +40,6 @@ class Customer extends Message {
   /// The customer’s full name or business name.
   final String? name;
 
-  @override
   Map<String, dynamic> toJson() => _$CustomerToJson(this);
 }
 
@@ -49,13 +47,13 @@ class Customer extends Message {
 /// https://docs.stripe.com/api/customers/object#customer_object-invoice_settings
 @JsonSerializable()
 class InvoiceSettings {
-
   InvoiceSettings({
     this.defaultPaymentMethod,
   });
 
   factory InvoiceSettings.fromJson(Map<String, dynamic> json) =>
       _$InvoiceSettingsFromJson(json);
+
   /// ID of a payment method that’s attached to the customer, to be used as the
   /// customer’s default payment method for subscriptions and invoices.
   final String? defaultPaymentMethod;

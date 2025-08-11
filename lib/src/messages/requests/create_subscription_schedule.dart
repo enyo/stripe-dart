@@ -1,8 +1,7 @@
 part of '../../../messages.dart';
 
 @JsonSerializable()
-class CreateSubscriptionScheduleRequest extends Message {
-
+class CreateSubscriptionScheduleRequest {
   const CreateSubscriptionScheduleRequest({
     this.fromSubscription,
   });
@@ -12,7 +11,6 @@ class CreateSubscriptionScheduleRequest extends Message {
       _$CreateSubscriptionScheduleRequestFromJson(json);
   final String? fromSubscription;
 
-  @override
   Map<String, dynamic> toJson() =>
       _$CreateSubscriptionScheduleRequestToJson(this);
 }

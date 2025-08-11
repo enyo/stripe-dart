@@ -1,8 +1,7 @@
 part of '../../../messages.dart';
 
 @JsonSerializable()
-class ListSubscriptionSchedulesRequest extends Message {
-
+class ListSubscriptionSchedulesRequest {
   const ListSubscriptionSchedulesRequest({
     this.customer,
     this.limit,
@@ -15,7 +14,6 @@ class ListSubscriptionSchedulesRequest extends Message {
 
   final int? limit;
 
-  @override
   Map<String, dynamic> toJson() =>
       _$ListSubscriptionSchedulesRequestToJson(this);
 }

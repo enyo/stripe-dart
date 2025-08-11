@@ -4,7 +4,7 @@ import 'package:stripe/messages.dart';
 
 import 'package:stripe/src/resources/_resource.dart';
 
-class PriceResource extends Resource<Price> {
+class PriceResource extends Resource {
   PriceResource(super.client);
 
   Future<Price> retrieve(String id) async {
